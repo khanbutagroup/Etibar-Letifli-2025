@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Fancybox CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fancybox.min.css' %}" />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+
+{% block main %}
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">{{ book.title }}</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li><a href="{% url 'book' %}" title="Course">{% trans 'Kitablar' %}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li><a href="{% url 'book' %}" title="Course">{{ book.category.title }}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>{{ book.title }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Course Detail Info Start -->
+    <section class="course-detail-sec sec-space">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5 col-lg-5">
+            <div class="course-detail-box">
+              <div
+                class="course-detail-image wow fadeup-animation book-detail-image"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.2s"
+              >
+                <img
+                  src="{{ book.image.url }}"
+                  width="830"
+                  height="500"
+                  alt="Course Image"
+                />
+              </div>
+              <div
+                class="course-detail-content wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.3s"
+              >
+                <div class="course-detail-title book-title">
+                  <h3 class="h3-title">{% trans 'Kitab haqqında məlumat' %}</h3>
+                </div>
+
+                <div class="course-detail-description-text">
+                  <p>
+                    {{ book.description|safe }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7 col-lg-7">
+            <div class="course-detail-sidebar">
+              <div
+                class="course-fees-info-box wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.2s"
+              >
+                <div class="course-video-box-wp">
+                  <div class="course-video-description">
+                    <div class="course-detail-title book-title">
+                      <h3 class="h3-title">{{ book.title }}</h3>
+                    </div>
+                    <div class="course-fees">
+                      <h4 class="h4-title">{{ book.price }}₼</h4>
+                      {% if book.old_price %}
+                      <h4 class="h4-title prev-price">{{ book.old_price }}₼</h4>
+                      {% endif %}
+                    </div>
+                    <div class="btn-flex">
+                    <div class="course-join-btn book-btn">
+                      <a href="{% url 'cart_add' book.id %}" class="sec-btn">
+                        <span>Səbətə at</span>
+                      </a>
+                    </div>
+
+                      <!-- <div class="course-join-btn book-btn btn-fav">
+                        <i class="fa-solid fa-heart"></i>
+                      </div> -->
+                    </div>
+                    <div class="btn-flex">
+                      <div class="course-join-btn book-btn">
+                        <a
+                          href="{{ book.sample_pages.url }}"
+                          target="_blank"
+                          class="sec-btn"
+                                    title="Join Now"
+                        >
+                          <span>{% trans 'Nümunə səhifələr' %}</span>
+                        </a>
+                      </div>
+                      <div class="course-join-btn book-btn">
+                        <a
+                          href="{{ book.answers.url }}"
+                          target="_blank"
+                          class="sec-btn"
+                                              title="Join Now"
+                        >
+                          <span>{% trans 'Cavablar' %}</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="course-detail-feature-box common-list-style">
+                      <ul>
+                        <li>{% trans 'Kateqoriya:' %} {{ book.category.title }}</li>
+                        <li>{% trans 'Baxış:' %} {{ book.views_count }}</li>
+                        <li>{% trans 'Etiket:'%}  {{ book.ticket }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="share-now-wp">
+                  <h4 class="h4-title">Sosial şəbəkələrimiz:</h4>
+             <div class="footer-social-icons">
+                {% if sosial %}
+                  {% if sosial.facebook %}
+                    <a href="{{ sosial.facebook }}" target="_blank" title="Facebook">
+                      <i class="fa-brands fa-facebook"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.instagram %}
+                    <a href="{{ sosial.instagram }}" target="_blank" title="Instagram">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.linkedin %}
+                    <a href="{{ sosial.linkedin }}" target="_blank" title="LinkedIn">
+                      <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.whatsapp %}
+                    <a href="https://wa.me/{{ sosial.whatsapp }}" target="_blank" title="WhatsApp">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.tiktok %}
+                    <a href="{{ sosial.tiktok }}" target="_blank" title="TikTok">
+                      <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.telegram %}
+                    <a href="{{ sosial.telegram }}" target="_blank" title="Telegram">
+                      <i class="fa-brands fa-telegram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.youtube %}
+                    <a href="{{ sosial.youtube }}" target="_blank" title="YouTube">
+                      <i class="fa-brands fa-youtube"></i>
+                    </a>
+                  {% endif %}
+                {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Course Detail Info End -->
+{% endblock %}
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Fancybox JS Link -->
+    <script src="{% static 'assets/js/fancybox.min.js' %}"></script>
+    <script src="{% static 'assets/js/custom-fancybox.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+{% endblock %}

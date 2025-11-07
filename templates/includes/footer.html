@@ -1,0 +1,364 @@
+{% load static %}
+{% load i18n %}
+
+
+        <!-- Apply Now Start -->
+    <section class="apply-now-sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              class="apply-now-box wow fadeup-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="apply-now-shape animate-this">
+                <img
+                  src="{% static 'assets/images/newsletter-bg-shape.svg' %}"
+                  width="838"
+                  height="488"
+                  alt=""
+                />
+              </div>
+              <div class="apply-now-content">
+                <div class="apply-now-image-box">
+                  <img
+                    src="{% static 'assets/images/apply-now-image.png' %}"
+                    width="305"
+                    height="287"
+                    alt=""
+                  />
+                </div>
+                <div class="apply-now-text">
+                  <div class="sec-title">
+                    <span class="sub-title">{% trans 'Abone' %}</span>
+                    <h3 class="h3-title">{% trans 'Yeniliklərdən xəbərdar ol !' %}</h3>
+                  </div>
+                  <div class="newsletter-form">
+                    <form method="post" action="{% url 'subscribe' %}">
+                      {% csrf_token %}
+                      <div class="form-element">
+                        <input
+                          type="email"
+                          class="form-input"
+                          name="email"
+                          placeholder="{% trans 'Email...' %}"
+                          required=""
+                        />
+                        <button
+                          type="submit"
+                          class="sec-btn"
+                          title="Submit Now"
+                        >
+                          <span>{% trans 'Təsdiqlə' %}</span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Apply Now End -->
+
+    <!-- Footer Start -->
+    <footer class="site-footer">
+      <div class="top-footer">
+        <div class="footer-bg-aliment-wp">
+          <div class="bg-aliment-1 rotate-animation">
+            <img
+              src="{% static 'assets/images/aliment-01.svg' %}"
+              width="30"
+              height="30"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-2 rotate-animation">
+            <img
+              src="{% static 'assets/images/aliment-05.svg' %}"
+              width="30"
+              height="30"
+              alt="Aliment"
+            />
+          </div>
+
+          <div class="bg-aliment-4 animate-this">
+            <img
+              src="{% static 'assets/images/aliment-07.svg' %}"
+              width="38"
+              height="32"
+              alt="Aliment"
+            />
+          </div>
+
+          <div class="bg-aliment-6 zoom-fade-animation">
+            <img
+              src="{% static 'assets/images/aliment-03.svg' %}"
+              width="29"
+              height="29"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-7 zoom-fade-animation">
+            <img
+              src="{% static 'assets/images/aliment-03.svg' %}"
+              width="29"
+              height="29"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-8 animate-this">
+            <img
+              src="{% static 'assets/images/aliment-08.svg' %}"
+              width="34"
+              height="34"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-9 zoom-fade-animation">
+            <img
+              src="{% static 'assets/images/aliment-03.svg' %}"
+              width="58"
+              height="58"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-10 rotate-animation">
+            <img
+              src="{% static 'assets/images/aliment-11.svg' %}"
+              width="30"
+              height="30"
+              alt="Aliment"
+            />
+          </div>
+          <div class="bg-aliment-11 animate-this">
+            <img
+              src="{% static 'assets/images/aliment-10.svg' %}"
+              width="26"
+              height="22"
+              alt="Aliment"
+            />
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-about">
+                <div class="footer-logo">
+                  <a href="{% url 'index' %}" title="Courseshub">
+                    <img
+                      src="{{ logo.footer_logo.url }}"
+                      width="201"
+                      height="36"
+                      alt="Courseshub"
+                    />
+                  </a>
+                </div>
+                <div class="footer-logo-about-text">
+                  <p>
+                    {{ logo.footer_description }}
+                  </p>
+                </div>
+                <div class="social-info">
+                  <h4 class="underline-title">Bizi izlə</h4>
+                  <div class="footer-social-icons">
+                {% if sosial %}
+                  {% if sosial.facebook %}
+                    <a href="{{ sosial.facebook }}" target="_blank" title="Facebook">
+                      <i class="fa-brands fa-facebook"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.instagram %}
+                    <a href="{{ sosial.instagram }}" target="_blank" title="Instagram">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.linkedin %}
+                    <a href="{{ sosial.linkedin }}" target="_blank" title="LinkedIn">
+                      <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.whatsapp %}
+                    <a href="https://wa.me/{{ sosial.whatsapp }}" target="_blank" title="WhatsApp">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.tiktok %}
+                    <a href="{{ sosial.tiktok }}" target="_blank" title="TikTok">
+                      <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.telegram %}
+                    <a href="{{ sosial.telegram }}" target="_blank" title="Telegram">
+                      <i class="fa-brands fa-telegram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.youtube %}
+                    <a href="{{ sosial.youtube }}" target="_blank" title="YouTube">
+                      <i class="fa-brands fa-youtube"></i>
+                    </a>
+                  {% endif %}
+                {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="our-link-box">
+                <div class="our-link-content">
+                  <h4 class="underline-title">{% trans 'Keçidlər' %}</h4>
+                  <ul>
+                    <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+                    <li>
+                      <a href="{% url 'about' %}" title="About Us">{% trans 'Haqqımızda' %}</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'book' %}" title="Courses">{% trans 'Kitablar' %}</a>
+                    </li>
+                    <li><a href="exams.html" title="FAQ">İmtahanlar</a></li>
+                    <li>
+                      <a href="videoLessons.html" title="FAQ">Video dərslər</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'pdf' %}" target="_blank" title="FAQ"
+                        >{% trans 'Pd yüklə' %}</a
+                      >
+                    </li>
+                    <li><a href="{% url 'news' %}" title="Blog">{% trans 'Xəbərlər' %}</a></li>
+                    <li>
+                      <a href="{% url 'contact' %}" title="Contact Us">{% trans 'Əlaqə' %}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="our-link-box">
+                <div class="our-link-content">
+                  <h4 class="underline-title">Video dərslər</h4>
+                  <ul>
+                    <li>
+                      <a href="courses-list.html" title="Məntiq">Məntiq</a>
+                    </li>
+                    <li>
+                      <a href="courses-list.html" title="Riyaziyyat"
+                        >Riyaziyyat</a
+                      >
+                    </li>
+                    <li>
+                      <a href="courses-list.html" title="Ödənişsiz videolar"
+                        >Ödənişsiz videolar</a
+                      >
+                    </li>
+                    <li>
+                      <a href="courses-list.html" title="Learn Marketing"
+                        >Digər</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="contact-info-box">
+                <h4 class="underline-title">{% trans 'Əlaqə' %}</h4>
+                <ul>
+                  <!-- Ünvan -->
+                  <li>
+                    <span class="contact-icon">
+                      <img
+                        src="{% static 'assets/images/location-icon-2.svg' %}"
+                        width="16"
+                        height="18"
+                        alt="Location Icon"
+                      />
+                    </span>
+                    <span class="contact-text">
+                      <a
+                        href="https://maps.app.goo.gl/w1bz1cFsFyuKoFb38"
+                        title="{{ contact.location }}"
+                        target="_blank"
+                      >
+                        {{ contact.location }}
+                      </a>
+                    </span>
+                  </li>
+
+                  <!-- Telefon -->
+                  <li>
+                    <span class="contact-icon">
+                      <img
+                        src="{% static 'assets/images/phone-icon.svg' %}"
+                        width="19"
+                        height="19"
+                        alt="Phone Icon"
+                      />
+                    </span>
+                    <span class="contact-text">
+                      {% if contact.phone_1 %}
+                        <a href="tel:{{ contact.phone_1 }}" title="{{ contact.phone_1 }}">{{ contact.phone_1 }}</a>
+                      {% endif %}
+                      {% if contact.phone_2 %}
+                        <a href="tel:{{ contact.phone_2 }}" title="{{ contact.phone_2 }}">{{ contact.phone_2 }}</a>
+                      {% endif %}
+                    </span>
+                  </li>
+
+                  <!-- Email -->
+                  <li>
+                    <span class="contact-icon">
+                      <img
+                        src="{% static 'assets/images/mail-icon.svg' %}"
+                        width="19"
+                        height="13"
+                        alt="Mail Icon"
+                      />
+                    </span>
+                    <span class="contact-text">
+                      {% if contact.email_1 %}
+                        <a href="mailto:{{ contact.email_1 }}" title="{{ contact.email_1 }}">{{ contact.email_1 }}</a>
+                      {% endif %}
+                      {% if contact.email_2 %}
+                        <a href="mailto:{{ contact.email_2 }}" title="{{ contact.email_2 }}">{{ contact.email_2 }}</a>
+                      {% endif %}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="bottom-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="footer-bottom-box">
+                <div class="copy-right">
+                  <p>
+                    {% trans 'Developed' %}
+                    <a href="https://khanbutagroup.az/" target="_blank" title="1 s">Khan Buta Group</a>
+                  </p>
+                  <p>
+                    {% trans 'Copyright' %} © <span id="copy-right-year"></span>
+                    <a href="" target="_blank" title="1 s">Etibar Latifli</a>.
+                    <span>{% trans 'All rights reserved.' %}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->

@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+{% block main %}
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">{% trans 'İmtahanlar' %}</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>{% trans 'İmtahanlar' %}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Exams Start -->
+    <div class="exams-page">
+      <div class="container">
+        <div class="row sec-space">
+          <!-- Sidebar -->
+          <button class="button-show">Filtr</button>
+          <div class="sidebar">
+            <h3>Filter</h3>
+            <nav class="exams-nav menu">
+              <!-- Azərbaycan bölməsi -->
+              {% for category in all_categories %}
+                <a href="{% url 'exam_list' %}?category={{ category.id }}" class="exam-language">{{ category.title }}</a>
+                <div class="sub-menu">
+                  {% for subcat in category.subcategory_set.all %}
+                    <a href="{% url 'exam_list' %}?subcategory={{ subcat.id }}" class="parent">{{ subcat.title }}</a>
+                    <div class="sub-menu">
+                      {% for subsub in subcat.subsubcategory_set.all %}
+                        <a href="{% url 'exam_list' %}?subsubcategory={{ subsub.id }}" class="parent">{{ subsub.title }}</a>
+                        <div class="sub-menu">
+                          {% for subsubsub in subsub.subsubsubcategory_set.all %}
+                            <a href="{% url 'exam_list' %}?subsubsubcategory={{ subsubsub.id }}">{{ subsubsub.title }}</a>
+                          {% endfor %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+
+      
+            </nav>
+          </div>
+
+          <!-- Products -->
+          <div class="products" id="exams-products">
+            {% for i in exams %}
+            <div class="card">
+              <h4>{{ i.title }}</h4>
+              <p>
+                {{ i.description }}
+              </p>
+              <div class="comments-div">
+                <a href="comments.html" class="comment-a">Rəylər</a>
+              </div>
+              {% if i.price %}
+                <div class="price">{{ i.price}} AZN</div>
+              {% endif %}
+              <div class="grades">
+                {% if i.sub_sub_sub_category %}
+                <span>{{ i.sub_sub_sub_category.title }}</span>
+                {% endif %}
+                <a href="{% url 'buy_exam' i.id %}" class="buy-btn">Al</a>
+              </div>
+            </div>
+            {% endfor %}
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exams End -->
+{% endblock %}
+{% block js %}
+
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+    <script>
+      $('.button-show').on('click', function () {
+        $('.sidebar').toggleClass('active')
+      })
+    </script>
+{% endblock %}

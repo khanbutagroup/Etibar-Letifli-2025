@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/bootstrap.min.css"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/swiper-bundle.min.css"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/fontawesome.min.css"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
+{% endblock %}
+
+
+{% block main %}
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">Məlumat və təlimatlar</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>Məlumat və təlimatlar</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+    <!-- Top Course Start -->
+    <section class="sec-space sec-bg info-page">
+      <div class="main-box container">
+        <!-- Sol tərəf (Ödənişsiz badge) -->
+        <div class="left-badge">
+          <img src="assets/images/logo.svg" alt="Ödənişsiz" />
+        </div>
+
+        <!-- Sağ tərəf -->
+        <div class="right-content">
+          <h2>
+            Riyaziyyat toplu (I Hissə) (İnteraktiv test toplusu)
+          </h2>
+
+          <div class="highlight-box">
+            Xidmətdəm istifadə etmək üçün sistemə daxil olub
+            ekranda sol tərəfdə yerləşən
+            <b>Hesabınızdan imtahanlarım</b> bölməsində imtahanın adı üzərində
+            vurun.
+          </div>
+
+          <table class="info-table">
+            <tr>
+              <td>Aktiv olma müddəti</td>
+              <td>
+                <span class="special-text">1 ay</span><br />
+                Xidmətə yazıldığınız gündən etibarən 1 ay ərzində xidmətin adı
+                "Yazıldığım xidmətlər" menyusunda qalacaq. Bu müddət ərzində
+                xidmətin adı üzərində vurmaqla siz öz nəticənizə, imtahan
+                suallarına, sualların düzgün cavablarına baxa biləcəksiniz.
+                <br /><span class="red"
+                  >İmtahanlara 1 cəhd verilir (mövzular üzrə sınaqlarda hər bir
+                  mövzu üzrə imtahana 1 cəhd verilir).</span
+                >
+              </td>
+            </tr>
+            <tr>
+                       <td>Davam etmə vaxtı</td>
+              <td class="green time-green">2 saat 30dəq</td>
+            </tr>
+            <tr>
+              <td>Yazılış sayı</td>
+              <td>
+                Bu xidmətə (imtahana) ödəniş edib bir neçə dəfə yazıla
+                bilirsiniz. Bu sizə eyni bir imtahanı müxtəlif vaxtlarda verib
+                nəticələrinizi müqayisə etməyə imkan verir. Bundan əlavə, 1
+                istifadəçi öz hesabı ilə eyni imtahana 2 dəfə yazıla bilər.
+                Həmin imtahanları eyni hesabdan istifadə etməklə 2 müxtəlif şəxs
+                imtahan verə bilər.
+              </td>
+            </tr>
+            <tr>
+              <td>Qiymət</td>
+              <td class="price">20 manat</td>
+            </tr>
+          </table>
+
+          <div class="note-box">
+            <span>Təlimatlar:</span> "Abituriyent" jurnalının nəşr etdiyi fənlər
+            üzrə test toplularının interaktiv versiyasına yazılmaqla siz
+            toplusda olan test tapşırıqlarını onlayn imtahan formatında işləməyi
+            əldə edirsiniz. Əldə etdiyiniz interaktiv toplu 1 il aktiv olur. Bu
+            müddət ərzində siz testlərə, öz cavablarınıza və testlərin düzgün
+            cavablarına baxa bilirsiniz. Açıq tipli test tapşırıqlarının
+            meyarları təqdim edilir.
+            Test toplusunda hər bir bölmə üzrə test tapşırıqlarının sayı çox
+            olduğundan bölmə üzrə test tapşırıqlarını hissə-hissə bir neçə gün
+            ərzində işləyə bilirsiniz (vaxt məhdudiyyəti yoxdur). Hər bir test
+            tapşırığını işlədikdə cavabınızın düzgün olub-olmamağını anında
+            yoxlamaq üçün tapşırığın altında "Yoxla" düyməsini vurun.
+            <br /><br />
+            Bütün test tapşırıqlarını hansısa bir neçə gün ərzində
+            işləyəcəksinizsə imtahana başladıqdan sonra ekranın sağ tərəfində
+            "Testin sonu" düyməsini vurmağınız vacibdir.
+          </div>
+
+          <div class="info-page-btn">
+            <a href="info.html" class="buy-btn">Ödəniş et</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Top Course End -->
+
+    <!-- Apply Now Start -->
+    <section class="apply-now-sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              class="apply-now-box wow fadeup-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="apply-now-shape animate-this">
+                <img
+                  src="assets/images/newsletter-bg-shape.svg"
+                  width="838"
+                  height="488"
+                  alt=""
+                />
+              </div>
+              <div class="apply-now-content">
+                <div class="apply-now-image-box">
+                  <img
+                    src="assets/images/apply-now-image.png"
+                    width="305"
+                    height="287"
+                    alt=""
+                  />
+                </div>
+                <div class="apply-now-text">
+                  <div class="sec-title">
+                    <span class="sub-title">Abone</span>
+                    <h3 class="h3-title">Yeniliklərdən xəbərdar ol !</h3>
+                  </div>
+                  <div class="newsletter-form">
+                    <form>
+                      <div class="form-element">
+                        <input
+                          type="email"
+                          class="form-input"
+                          placeholder="Email..."
+                          required=""
+                        />
+                        <button
+                          type="submit"
+                          class="sec-btn"
+                          title="Submit Now"
+                        >
+                          <span>Təsdiqlə</span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Apply Now End -->
+{% endblock %}
+
+{% block js %}
+
+
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="assets/js/bg-moving.js"></script>
+
+    <!-- Isotope JS Link -->
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="assets/js/wow.min.js"></script>
+
+    <!-- Custom JS Link -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/custom-scroll-count.js"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="assets/js/back-to-top.js"></script>
+{% endblock %}

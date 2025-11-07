@@ -1,0 +1,573 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+{% block main %}
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">Hesabım</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>Hesabım</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Contact Us Start -->
+
+    <div class="main_content_area mt-30 mb-50">
+      <div class="container">
+        <div class="account_dashboard">
+          <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+              <!-- Nav tabs -->
+              <div class="dashboard_tab_button">
+                <ul role="tablist" class="nav flex-column dashboard-list">
+                  <li>
+                    <a
+                      href="#account-details"
+                      data-bs-toggle="tab"
+                      class="nav-link active"
+                      aria-selected="true"
+                      role="tab"
+                      >Hesabım
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a
+                      href="#orders"
+                      data-bs-toggle="tab"
+                      class="nav-link"
+                      aria-selected="false"
+                      role="tab"
+                      >Sifarişlərim
+                    </a>
+                  </li> -->
+                  <li>
+                    <a
+                      href="#videos"
+                      data-bs-toggle="tab"
+                      class="nav-link"
+                      aria-selected="false"
+                      role="tab"
+                      >Video dərslərim
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#exams"
+                      data-bs-toggle="tab"
+                      class="nav-link"
+                      aria-selected="false"
+                      role="tab"
+                      >İmtahanlarım
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#results"
+                      data-bs-toggle="tab"
+                      class="nav-link"
+                      aria-selected="false"
+                      role="tab"
+                      >Nəticələrim
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="{% url 'logout' %}"
+                      class="nav-link"
+                      aria-selected="false"
+                      role="tab"
+                      >Çıxış et</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <!-- Tab panes -->
+              <div class="tab-content dashboard_content">
+                <!-- Videos -->
+                <div class="tab-pane fade" id="videos" role="tabpanel">
+                  <h3>Video dərslərim</h3>
+                  <div class="orders-600">
+                    <div class="row video-area">
+                      
+                      {% for i in videos %}
+                        <div class="col-lg-6 mb-3">
+                          <div class="common-post-card">
+                            <div
+                              class="post-image-box-wp video-layer"
+                              data-video="{{ i.video.url }}"
+                            >
+                              <div class="post-image pdf-image">
+                                <img
+                                  src="{{ i.image.url }}"
+                                  width="356"
+                                  height="230"
+                                  alt="Course Image"
+                                />
+                              </div>
+                              <div class="post-tag video-tag">
+                                <span><i class="fa fa-play"></i></span>
+                              </div>
+                            </div>
+                            <div class="common-post-content">
+                              <div class="post-content-title">
+                                <span>
+                                  <h4 class="h4-title">{{ i.title }}</h4>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- Exams -->
+                <div class="tab-pane fade" id="exams" role="tabpanel">
+                  <h3>İmtahanlarım</h3>
+                  <div class="orders-600">
+                    <table
+                      class="table first-table order-table"
+                      cellspacing="0"
+                    >
+                      <thead>
+                        <tr>
+                          <th class="product-name order-product-name">
+                            İmtahan adı
+                          </th>
+                          <th class="product-price order-procut-price">
+                            Qiymət
+                          </th>
+
+                          <th class="order-date">Tarix</th>
+                          <th class="product-subtotal order-product-subtotal">
+                            <a href="startExam.html"> İmtahana başla </a>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in purchased_exams %}
+                            <tr class="product-box-container">
+                              <td class="product-name-container">
+                                <a
+                                  href="#"
+                                  class="text-gray-90 card-text order-text-name order-text-width"
+                                >
+                                  {{ i.exam.title }}
+                                </a>
+                              </td>
+                              <td class="product-price order-product-price">
+                                <span>
+                                 
+                                  {{ i.exam.price }}<span class="azn">₼</span>
+                                </span>
+                              </td>
+
+                              <td class="order-date"><span>{{ i.purchased_at|date:" d.m.Y H:i" }}</span></td>
+                              <td class="order-date">
+                                {% if i.exam.is_available %}
+                                <a href="{% url 'start_exam' i.exam.id %}" class="start-btn sec-btn"
+                                  >İmtahana başla</a
+                                >
+                                {% else %}
+                                <p style="color: gray;">İmtahan {{ i.start_date|date:"d.m.Y H:i" }} tarixində açılacaq</p>
+                                {% endif %}
+                              </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- RESULTS -->
+                <div class="tab-pane fade" id="results" role="tabpanel">
+                  <h3>Nəticələrim</h3>
+                  <div class="orders-600">
+                    <table
+                      class="table first-table order-table"
+                      cellspacing="0"
+                    >
+                      <thead>
+                        <tr>
+                          <th class="product-name order-product-name">
+                            İmtahan adı
+                          </th>
+                          <th class="product-price order-procut-price">
+                            Qiymət
+                          </th>
+
+                          <th class="order-date">Tarix</th>
+                          <th class="product-subtotal order-product-subtotal">
+                            <a href="startExam.html"> Nəticələrimə bax </a>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="product-box-container">
+                          <td class="product-name-container">
+                            <a
+                              href="#"
+                              class="text-gray-90 card-text order-text-name order-text-width"
+                            >
+                              SASMO Sınaq İmtahanı - 01 (Categoria D)
+                            </a>
+                          </td>
+                          <td class="product-price order-product-price">
+                            <span>
+                              <small
+                                ><del>60 <span class="azn">₼</span></del></small
+                              >
+                              45.00 <span class="azn">₼</span>
+                            </span>
+                          </td>
+
+                          <td class="order-date"><span>01.05.2025</span></td>
+                          <td class="order-date">
+                            <a href="result.html" class="start-btn sec-btn"
+                              >Nəticənə bax</a
+                            >
+                          </td>
+                        </tr>
+                        <tr class="product-box-container">
+                          <td class="product-name-container">
+                            <a
+                              href="#"
+                              class="text-gray-90 card-text order-text-name order-text-width"
+                            >
+                              RFM Riyaziyyat Sınaq 01 - C
+                            </a>
+                          </td>
+                          <td class="product-price order-product-price">
+                            <span> 45.00 <span class="azn">₼</span> </span>
+                          </td>
+
+                          <td class="order-date"><span>01.05.2025</span></td>
+                          <td class="order-date">
+                            <a href="result.html" class="start-btn sec-btn"
+                              >Nəticənə bax</a
+                            >
+                          </td>
+                        </tr>
+                        <tr class="product-box-container">
+                          <td class="product-name-container">
+                            <a
+                              href="#"
+                              class="text-gray-90 card-text order-text-name order-text-width"
+                            >
+                              SASMO Sınaq İmtahanı - 01 (Categoria D)
+                            </a>
+                          </td>
+                          <td class="product-price order-product-price">
+                            <span> 45.00 <span class="azn">₼</span> </span>
+                          </td>
+
+                          <td class="order-date"><span>01.05.2025</span></td>
+                          <td class="order-date">
+                            <a href="result.html" class="start-btn sec-btn"
+                              >Nəticənə bax</a
+                            >
+                          </td>
+                        </tr>
+                        <tr class="product-box-container">
+                          <td class="product-name-container">
+                            <a
+                              href="#"
+                              class="text-gray-90 card-text order-text-name order-text-width"
+                            >
+                              Kenquru BRM - Sınaq İmtahanı 01 / Categoria B
+                            </a>
+                          </td>
+                          <td class="product-price order-product-price">
+                            <span> 45.00 <span class="azn">₼</span> </span>
+                          </td>
+
+                          <td class="order-date"><span>01.05.2025</span></td>
+                          <td class="order-date">
+                            <a href="result.html" class="start-btn sec-btn"
+                              >Nəticənə bax</a
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- Account details -->
+                <div
+                  class="tab-pane fade show active"
+                  id="account-details"
+                  role="tabpanel"
+                >
+                  <h3 class="fz-product-details__title">Hesab detalları</h3>
+                  <div class="login">
+                    <div class="login_form_container">
+                      <div class="account_login_form">
+                        <form action="#">
+                          <div class="account_content">
+                            <div class="row">
+                              <div class="col-6">
+                                <label>Ad</label>
+                                <input
+                                  type="text"
+                                  name="first_name"
+                                  value="Türkan"
+                                />
+                              </div>
+                              <div class="col-6">
+                                <label>Soyad</label>
+                                <input
+                                  type="text"
+                                  name="last_name"
+                                  value="Alakbarova"
+                                />
+                              </div>
+                              <div class="col-6 phone-div">
+                                <label>Əlaqə nömrəsi</label>
+                                <div class="input-group">
+                                  <span class="countrycode">+994</span>
+                                  <input
+                                    type="text"
+                                    class="form-input"
+                                    placeholder="(55) 555-55-55"
+                                    id="phone"
+                                    name="phone"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div class="save_button col-6">
+                                <button type="submit">Yadda saxla</button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="account_reset_password ml-0 mt-4 mb-4">
+                            <h3 class="fz-product-details__title">
+                              Şifrəni dəyişdir
+                            </h3>
+                            <div class="col-md-6 col-12 pass-area">
+                              <input
+                                type="password"
+                                name="register-password"
+                                id="register-password"
+                                placeholder="Şifrə"
+                              />
+                              <div class="icon-holder">
+                                <i
+                                  class="fa fa-eye-slash"
+                                  aria-hidden="true"
+                                ></i>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-12 pass-area">
+                              <input
+                                type="password"
+                                name="register-repeat-password"
+                                id="register-repeat-password"
+                                placeholder="Təkrar şifrə"
+                              />
+                              <div class="icon-holder">
+                                <i
+                                  class="fa fa-eye-slash"
+                                  aria-hidden="true"
+                                ></i>
+                              </div>
+                            </div>
+
+                            <div class="col-6 save_button">
+                              <button type="submit">Yadda saxla</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Contact Us End -->
+
+
+    <!-- Modal -->
+    <div class="video-modal-area">
+      <div id="videoModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+          <!-- <iframe
+            id="modalVideo"
+            width="100%"
+            height="450"
+            src=""
+            frameborder="0"
+            allowfullscreen
+          ></iframe> -->
+          <video src="{% static 'assets/video.mp4" controls autoplay muted loop></video>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+    <script>
+      const modal = document.getElementById('videoModal')
+      const modalVideo = document.getElementById('modalVideo')
+      const closeBtn = document.querySelector('.close')
+
+      // Bütün kartları seçirik
+      document.querySelectorAll('.post-image-box-wp').forEach(item => {
+        item.addEventListener('click', function () {
+          const videoUrl = this.getAttribute('data-video')
+          modal.style.display = 'flex'
+          modalVideo.src = videoUrl + '?autoplay=1'
+        })
+      })
+
+      // X düyməsinə klik edəndə bağla
+      closeBtn.addEventListener('click', function () {
+        closeModal()
+      })
+
+      // Refresh zamanı modal və video sıfırlansın
+      window.addEventListener('load', () => {
+        closeModal()
+      })
+
+      // Modal bağlama funksiyası
+      function closeModal() {
+        modal.style.display = 'none'
+        modalVideo.src = '' // video linkini təmizlə
+      }
+    </script>
+{% endblock %}

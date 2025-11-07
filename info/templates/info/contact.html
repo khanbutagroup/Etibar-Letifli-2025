@@ -1,0 +1,393 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+{% block main %}
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">{% trans 'Əlaqə' %}</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>{% trans 'Əlaqə' %}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Contact Us Start -->
+    <section class="contact-us-sec sec-space">
+      <div class="container">
+        <div class="contact-us-links-row sec-space-bottom">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+              <div
+                class="contact-us-link-box wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.2s"
+              >
+                <div class="contact-us-link-icon">
+                  <img
+                    src="{% static 'assets/images/contact-us-location-icon.svg' %}"
+                    width="50"
+                    height="50"
+                    alt="Location Icon"
+                  />
+                </div>
+                <div class="contact-us-text">
+                  <h4 class="h4-title">{% trans 'Ünvan' %}</h4>
+                  <div class="contact-us-link-text">
+                    <a
+                      href=""
+                      title="1247/Plot No. 39, 15th Phase, Colony, Kukatpally, Hyderabad"
+                      target="_blank"
+                      >{{ contact.location }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div
+                class="contact-us-link-box wow fadedown-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.3s"
+              >
+                <div class="contact-us-link-icon">
+                  <img
+                    src="{% static 'assets/images/contact-us-phone-icon.svg' %}"
+                    width="50"
+                    height="50"
+                    alt="Phone Icon"
+                  />
+                </div>
+                <div class="contact-us-text">
+                  <h4 class="h4-title">{% trans 'Telefon' %}</h4>
+                  <div class="contact-us-link-text">
+                    <a href="tel:9873654987" title="{{ contact.phone_1 }}"
+                      >{{ contact.phone_1 }}</a
+                    >
+                    <a href="tel:9875621254" title="{{ contact.phone_2 }}"
+                      >{{ contact.phone_2 }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div
+                class="contact-us-link-box wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.4s"
+              >
+                <div class="contact-us-link-icon">
+                  <img
+                    src="{% static 'assets/images/contact-us-mail-icon.svg' %}"
+                    width="50"
+                    height="50"
+                    alt="Mail Icon"
+                  />
+                </div>
+                <div class="contact-us-text">
+                  <h4 class="h4-title">{% trans 'Email' %}</h4>
+                  <div class="contact-us-link-text">
+                    <a href="mailto:" title="{{ contact.email_1 }}"
+                      ><span
+                        class="__cf_email__"
+                        data-cfemail="026b6c646d42616d77707167716a77602c616d6f"
+                        >{{ contact.email_1 }}</span
+                      ></a
+                    >
+                    <a href="mailto:" title="{{ contact.email_2 }}"
+                      ><span
+                        class="__cf_email__"
+                        data-cfemail="8bf8fefbfbe4f9ffcbe8e4fef9f8eef8e3fee9a5e8e4e6"
+                        >{{ contact.email_2 }}</span
+                      ></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div
+              class="contact-us-map-box wow left-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <iframe
+                src="{{ contact.location_url }}"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div
+              class="contact-us-box wow right-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="share-now-wp">
+                <div class="sec-title">
+                  <h2 class="h2-title">{% trans 'Sosial şəbəkələrimiz:' %}</h2>
+                </div>
+                <div class="footer-social-icons">
+                {% if sosial %}
+                  {% if sosial.facebook %}
+                    <a href="{{ sosial.facebook }}" target="_blank" title="Facebook">
+                      <i class="fa-brands fa-facebook"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.instagram %}
+                    <a href="{{ sosial.instagram }}" target="_blank" title="Instagram">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.linkedin %}
+                    <a href="{{ sosial.linkedin }}" target="_blank" title="LinkedIn">
+                      <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.whatsapp %}
+                    <a href="https://wa.me/{{ sosial.whatsapp }}" target="_blank" title="WhatsApp">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.tiktok %}
+                    <a href="{{ sosial.tiktok }}" target="_blank" title="TikTok">
+                      <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.telegram %}
+                    <a href="{{ sosial.telegram }}" target="_blank" title="Telegram">
+                      <i class="fa-brands fa-telegram"></i>
+                    </a>
+                  {% endif %}
+
+                  {% if sosial.youtube %}
+                    <a href="{{ sosial.youtube }}" target="_blank" title="YouTube">
+                      <i class="fa-brands fa-youtube"></i>
+                    </a>
+                  {% endif %}
+                {% endif %}
+
+                </div>
+              </div>
+              <div class="sec-title">
+                <h2 class="h2-title">{% trans 'Əlaqə formu' %}</h2>
+              </div>
+              <div class="form-box">
+                <form action="{% url 'contact' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-input-wp">
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="first_name"
+                          placeholder="{% trans 'Ad' %}"
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-input-wp">
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="last_name"
+                          placeholder="{% trans 'Soyad' %}"
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-input-wp">
+                        <input
+                          type="email"
+                          class="form-input"
+                          name="email"
+                          placeholder="{% trans 'Email' %} "
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-input-wp">
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="phone"
+                          placeholder="{% trans 'Telefon' %}"
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-input-wp">
+                        <textarea
+                          class="form-input"
+                          name="messages"
+                          placeholder="{% trans 'Mesajınız...' %}"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-input-wp mb-0">
+                        <button
+                          name="submit"
+                          type="submit"
+                          value="Submit"
+                          class="sec-btn"
+                        >
+                          <span>{% trans 'Göndər' %} </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Us End -->
+{% endblock %}
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,503 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/Bundle.css' %}" />
+  </head>
+{% endblock %}
+
+
+
+{% block main %}
+<section class="inner-banner">
+  <div class="main-banner-bg-shape"><div class="shape-1"></div><div class="shape-2"></div></div>
+  <div class="container text-center">
+    <h1 class="h1-title">{{ exam.title }}</h1>
+    <div class="banner-breadcrum">
+      <ul>
+        <li><a href="{% url 'index' %}">{% trans 'Ana səhifə' %}</a></li>
+        <li><i class="fa-solid fa-angle-right"></i></li>
+        <li>{{ exam.title }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="sec-space single-exam">
+  <div class="container">
+    <div class="exam-title"><span>İmtahan:</span> {{ exam.title }}</div>
+    <div class="row">
+      <!-- SOL BLOK -->
+      <div class="col-xl-9 col-lg-8">
+        <div class="m-portlet m-portlet--full-height">
+          <div class="m-portlet__body">
+            <div class="m-card-profile__pic col-md-12">
+              <ul class="user-area">
+                <li class="user_name">{{ user.get_full_name }}</li>
+                <li class="user_id"><span>Sual sayı: </span>{{ total }}</li>
+              </ul>
+            </div>
+
+            <form method="POST">
+              {% csrf_token %}
+              <div class="questions-area m-scrollable">
+                {% for q in exam.questions_answers.all %}
+                <div class="customQuestionList {% if forloop.first %}questionShow{% else %}questionHide{% endif %}" data-question-list-count="{{ forloop.counter }}">
+                  <div data-test-id="{{ q.id }}" class="questions">
+                    <div class="questions_number"><span>{{ forloop.counter }}</span></div>
+                    <div class="questions_block">
+                      <div class="questions-inner" style="padding-bottom:0">
+                        {% if q.image_quest %}
+                          <img src="{{ q.image_quest.url }}" class="img-fluid mb-2" alt="Sual şəkli">
+                        {% endif %}
+                        <span>{{ q.title_quest|safe }}</span>
+                      </div>
+
+                      <div class="clearfix" style="border-bottom:1px dashed #b2b2b2; padding:0 0 15px 0;"></div>
+
+                      <div class="questions_answers">
+                        <div class="m-radio-list">
+                          <table class="tblAnswers">
+
+                            {% if q.title_a or q.image_a %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">A)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="A" style="display:none;">
+                                    {% if q.image_a %}<img src="{{ q.image_a.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_a|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if q.title_b or q.image_b %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">B)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="B" style="display:none;">
+                                    {% if q.image_b %}<img src="{{ q.image_b.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_b|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if q.title_c or q.image_c %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">C)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="C" style="display:none;">
+                                    {% if q.image_c %}<img src="{{ q.image_c.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_c|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if q.title_d or q.image_d %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">D)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="D" style="display:none;">
+                                    {% if q.image_d %}<img src="{{ q.image_d.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_d|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if q.title_e or q.image_e %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">E)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="E" style="display:none;">
+                                    {% if q.image_e %}<img src="{{ q.image_e.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_e|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                            {% if q.title_f or q.image_f %}
+                            <tr>
+                              <td class="tdAnswers"><div class="divAnswer">F)</div></td>
+                              <td class="tdAnswers">
+                                <div class="choice_body">
+                                  <label>
+                                    <input type="radio" name="question_{{ q.id }}" value="F" style="display:none;">
+                                    {% if q.image_f %}<img src="{{ q.image_f.url }}" class="img-fluid">{% endif %}
+                                    {{ q.title_f|safe }}
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                            {% endif %}
+
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+
+              <div class="bottom_bar text-center mt-3">
+                <button type="submit" class="sec-btn download" id="finishExam"><span>İmtahanı bitir</span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAĞ BLOK -->
+      <div class="col-xl-3 col-lg-4" id="divRight">
+        <div class="m-portlet m-portlet--full-height m-portlet--tabs" id="divSubjectRight">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-tools">
+              <span class="timer_quiz spnTime">
+                Qalan vaxt: <span id="examTimer" data-seconds="{{ total_seconds }}"></span>
+              </span>
+            </div>
+          </div>
+
+          <div class="tab-content" id="divSubjectList">
+            <div class="subject_list">
+              {% for q in exam.questions_answers.all %}
+              <div class="inline-list" data-test-id="{{ q.id }}">
+                <div class="subject_list_number {% if forloop.first %}active_questions{% endif %}">
+                  <span><a class="testCount">{{ forloop.counter }}</a></span>
+                </div>
+                <ul>
+                  {% if q.title_a or q.image_a %}<li><a>A</a></li>{% endif %}
+                  {% if q.title_b or q.image_b %}<li><a>B</a></li>{% endif %}
+                  {% if q.title_c or q.image_c %}<li><a>C</a></li>{% endif %}
+                  {% if q.title_d or q.image_d %}<li><a>D</a></li>{% endif %}
+                  {% if q.title_e or q.image_e %}<li><a>E</a></li>{% endif %}
+                  {% if q.title_f or q.image_f %}<li><a>F</a></li>{% endif %}
+                </ul>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/bg-moving.js' %}"></script>
+<script src="{% static 'assets/js/wow.min.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
+<script src="{% static 'assets/js/back-to-top.js' %}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const questions = document.querySelectorAll('.customQuestionList');
+  const subjectNumbers = document.querySelectorAll('.subject_list_number');
+  let currentIndex = 0;
+  const total = questions.length;
+
+  // === SUAL DƏYİŞMƏ ===
+  function showQuestion(index) {
+    questions.forEach((q, i) => {
+      q.classList.toggle('questionShow', i === index);
+      q.classList.toggle('questionHide', i !== index);
+    });
+    subjectNumbers.forEach((num, i) => {
+      num.classList.toggle('active_questions', i === index);
+    });
+  }
+
+  // Sağdakı sual nömrəsinə klikləmə
+  subjectNumbers.forEach((num, i) => {
+    num.addEventListener('click', () => {
+      currentIndex = i;
+      showQuestion(currentIndex);
+    });
+  });
+
+  // === Cavab seçimi (kliklə radio seçimi) ===
+  const allRows = document.querySelectorAll('.tblAnswers tr');
+  allRows.forEach(row => {
+    row.addEventListener('click', function () {
+      const input = this.querySelector("input[type='radio']");
+      if (!input) return;
+
+      input.checked = true;
+
+      const questionId = input.name.split('_')[1];
+      const selectedOpt = input.value;
+
+      // Sol tərəfdə vizual seçim
+      const table = input.closest('.tblAnswers');
+      table.querySelectorAll('tr').forEach(tr => tr.classList.remove('selected-answer'));
+      this.classList.add('selected-answer');
+
+      // Sağ tərəfdə cavabı işarələ
+      const rightBlock = document.querySelector(`.inline-list[data-test-id='${questionId}']`);
+      if (rightBlock) {
+        rightBlock.querySelectorAll('li').forEach(li => li.classList.remove('answered'));
+        const targetLi = Array.from(rightBlock.querySelectorAll('li')).find(
+          li => li.innerText.trim().toUpperCase() === selectedOpt.toUpperCase()
+        );
+        if (targetLi) targetLi.classList.add('answered');
+      }
+
+      // Sağdakı sual nömrəsini də cavablandılmış kimi işarələ
+      const subjectNum = document.querySelector(
+        `.inline-list[data-test-id='${questionId}'] .subject_list_number`
+      );
+      if (subjectNum) subjectNum.classList.add('answered-question');
+    });
+  });
+
+  // İlk sualı göstər
+  showQuestion(currentIndex);
+});
+</script>
+
+
+<!-- TIMER və MODAL hissəsini saxlayırıq -->
+<script>
+  // TIMER
+const timerEl = document.getElementById('examTimer');
+let totalSeconds = parseInt(timerEl?.dataset.seconds || 0, 10);
+
+function updateTimer() {
+  let hours = Math.floor(totalSeconds / 3600);
+  let minutes = Math.floor((totalSeconds % 3600) / 60);
+  let seconds = totalSeconds % 60;
+
+  let timeString =
+    (hours < 10 ? '0' : '') +
+    hours +
+    ':' +
+    (minutes < 10 ? '0' : '') +
+    minutes +
+    ':' +
+    (seconds < 10 ? '0' : '') +
+    seconds;
+
+  if (timerEl) timerEl.innerText = timeString;
+
+  if (totalSeconds <= 0) {
+    clearInterval(timerInterval);
+    alert('Vaxt bitdi! Nəticə səhifəsinə yönləndirilirsiniz.');
+    window.location.href = 'result.html';
+  }
+
+  totalSeconds--;
+}
+
+updateTimer();
+let timerInterval = setInterval(updateTimer, 1000);
+</script>
+
+<script>
+  // İmtahanı bitir modalı
+  const finishBtn = document.getElementById('finishExam');
+  const modal = document.getElementById('examModal');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+
+  if (finishBtn && modal && yesBtn && noBtn) {
+    finishBtn.addEventListener('click', () => (modal.style.display = 'flex'));
+    yesBtn.addEventListener('click', () => (window.location.href = 'result.html'));
+    noBtn.addEventListener('click', () => (modal.style.display = 'none'));
+  }
+</script>
+
+<style>
+.questionHide { display: none; }
+.questionShow { display: block; }
+
+/* Seçilmiş cavab üçün sol tərəf effekti */
+.tblAnswers tr.selected-answer .divAnswer {
+  background: linear-gradient(135deg, #a56dff, #d16fff);
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* Seçilməmiş hal */
+.divAnswer {
+  border: 2px solid #a56dff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+ {
+  background-color: #f0f0ff;
+  border-left: 3px solid #a56dff;
+}
+
+/* Sağ tərəfdə aktiv sual */
+.subject_list_number.active_questions span a {
+  background-color: #a56dff;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* Sağ tərəfdə seçilmiş cavab */
+.inline-list li.answered a {
+  background-color: #a56dff;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+}
+</style>
+<style>
+.questionHide { display: none; }
+.questionShow { display: block; }
+
+/* Solda seçilmiş cavab */
+.tblAnswers tr.selected-answer .divAnswer {
+  background: linear-gradient(135deg, #a56dff, #d16fff);
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+/* Seçilməmiş hal */
+.divAnswer {
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+ {
+  background-color: #f0f0ff;
+  border-left: 3px solid #a56dff;
+}
+
+/* Sağda aktiv sual */
+.subject_list_number.active_questions span a {
+  background-color: #a56dff;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* Sağda cavabı seçilmiş sual */
+.inline-list li.answered a {
+  background-color: #a56dff;
+  color: #fff;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  text-align: center;
+  line-height: 22px;
+}
+
+/* Sağda sual cavablandıqdan sonra nömrə rəngi dəyişsin */
+.subject_list_number.answered-question span a {
+  background-color: #00b894;
+  color: #fff;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/bootstrap.min.css"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/swiper-bundle.min.css"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/fontawesome.min.css"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
+{% endblock %}
+{% block main %}
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">Rəylər</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>Rəylər</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Contact Us Start -->
+    <section class="contact-us-sec sec-space">
+      <div class="container write-comments">
+        <form action="">
+          <div class="rating-box">
+            <h2>İmtahanı qiymətləndirin</h2>
+            <div class="stars">
+              <i class="fas fa-star" data-index="1"></i>
+              <i class="fas fa-star" data-index="2"></i>
+              <i class="fas fa-star" data-index="3"></i>
+              <i class="fas fa-star" data-index="4"></i>
+              <i class="fas fa-star" data-index="5"></i>
+            </div>
+            <div class="comment-box">
+              <textarea placeholder="İmtahan haqqında düşüncəniz..."></textarea>
+            </div>
+            <button class="send-btn">Göndər</button>
+          </div>
+        </form>
+
+        <script>
+          const stars = document.querySelectorAll('.stars i')
+          stars.forEach((star, index1) => {
+            star.addEventListener('click', () => {
+              stars.forEach((star, index2) => {
+                if (index1 >= index2) {
+                  star.classList.add('active')
+                } else {
+                  star.classList.remove('active')
+                }
+              })
+            })
+          })
+        </script>
+      </div>
+    </section>
+    <!-- Contact Us End -->
+{% endblock %}
+
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="assets/js/bg-moving.js"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="assets/js/wow.min.js"></script>
+
+    <!-- Custom JS Link -->
+    <script src="assets/js/custom.js"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="assets/js/back-to-top.js"></script>
+{% endblock %}

@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+
+{% block main %}
+
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">{% trans 'Səbət' %}</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>{% trans 'Səbət' %}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Contact Us Start -->
+    <div class="container">
+      <div class="cart-container">
+        <!-- Məhsullar -->
+        <div class="cart-items">
+          <table>
+            <thead>
+              <tr>
+                <th>{% trans 'Məhsul' %}</th>
+                <th>{% trans 'Qiyməti' %}</th>
+                <th>{% trans 'Sayı' %}</th>
+                <th>{% trans 'Ümumi' %}</th>
+                <th>{% trans 'Sil' %}</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+              <tr>
+                <td class="product">
+                  <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" />
+                  <span>{{ item.book.title }}</span>
+                </td>
+                <td>
+                  <span class="price">{{ item.price }}₼</span>
+                </td>
+                <td>
+                  <div class="qty">
+                    <button class="minus">-</button>
+                    <input type="text" value="{{ item.quantity }}" data-book-id="{{ item.book.id }}" />
+                    <button class="plus">+</button>
+                  </div>
+                </td>
+                <td class="item-total">{{ item.total_price }}₼</td>
+                <td>
+                  <a href="{% url 'cart_remove' item.book.id %}" class="remove">×</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="5">{% trans 'Səbət boşdur.' %}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+
+          </table>
+        </div>
+
+        <!-- Ödəniş paneli -->
+        <div class="cart-summary">
+          <h3>{% trans 'Ödəniləcək məbləğ' %}</h3>
+          <div class="summary-item">
+            <span>{% trans 'Qiymət' %}</span><span id="subtotal">{{ cart.get_total_price }}₼</span>
+          </div>
+          <div class="summary-item">
+            <span>{% trans 'Çatdırılma' %}</span><span id="delivery">2.00₼</span>
+          </div>
+          <hr />
+          <div class="summary-item total">
+            <span>{% trans 'Yekun məbləğ' %}</span><span id="grandtotal">{{ cart.get_total_price|add:2 }}₼</span>
+          </div>
+
+          <button id="whatsappOrder" class="whatsapp-btn">{% trans 'Sifariş et' %}</button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Us End -->
+
+
+{% endblock %}
+
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+    <script>
+      document.querySelectorAll(".qty").forEach((box) => {
+        const minusBtn = box.querySelector(".minus");
+        const plusBtn = box.querySelector(".plus");
+        const input = box.querySelector("input");
+        const row = box.closest("tr");
+        const price = parseFloat(row.querySelector(".price").innerText);
+
+        // CSRF token üçün funksiya
+        const getCookie = (name) => {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === name + "=") {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        };
+
+        // Backend-ə göndər (say dəyişəndə sessiyada da yenilə)
+        const updateBackend = (bookId, qty) => {
+          fetch("{% url 'cart_update' %}", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: new URLSearchParams({
+              book_id: bookId,
+              quantity: qty
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              updateCartTotal();
+            }
+          });
+        };
+
+        // Hər sətrin ümumi qiymətini yenilə
+        const updateRow = () => {
+          const qty = parseInt(input.value);
+          const total = (price * qty).toFixed(2);
+          row.querySelector(".item-total").innerText = total + "₼";
+        };
+
+        // Bütün məhsulların cəmini və yekunu yenilə
+        const updateCartTotal = () => {
+          let subtotal = 0;
+          document.querySelectorAll(".item-total").forEach(el => {
+            subtotal += parseFloat(el.innerText);
+          });
+
+          const delivery = parseFloat(document.getElementById("delivery").innerText);
+          const grandtotal = (subtotal + delivery).toFixed(2);
+
+          document.getElementById("subtotal").innerText = subtotal.toFixed(2) + "₼";
+          document.getElementById("grandtotal").innerText = grandtotal + "₼";
+        };
+
+        plusBtn.addEventListener("click", () => {
+          const newQty = parseInt(input.value) + 1;
+          input.value = newQty;
+          updateRow();
+          updateBackend(input.dataset.bookId, newQty);
+        });
+
+        minusBtn.addEventListener("click", () => {
+          const newQty = parseInt(input.value) - 1;
+          if (newQty >= 1) {
+            input.value = newQty;
+            updateRow();
+            updateBackend(input.dataset.bookId, newQty);
+          }
+        });
+      });
+    </script>
+<script>
+  document.getElementById("whatsappOrder").addEventListener("click", () => {
+    const products = [];
+    document.querySelectorAll(".cart-items tbody tr").forEach(row => {
+      const title = row.querySelector(".product span")?.innerText;
+      const quantity = row.querySelector(".qty input")?.value;
+      const price = row.querySelector(".price")?.innerText;
+      const total = row.querySelector(".item-total")?.innerText;
+
+      if (title && quantity && price) {
+        products.push(`${title} — ${quantity} ədəd × ${price} = ${total}`);
+      }
+    });
+
+    const subtotal = document.getElementById("subtotal").innerText;
+    const delivery = document.getElementById("delivery").innerText;
+    const grandtotal = document.getElementById("grandtotal").innerText;
+
+    // WhatsApp mesajı mətni
+    const message = 
+      `🛒 Yeni sifariş:\n\n` +
+      products.join("\n") +
+      `\n\n📦 Qiymət: ${subtotal}` +
+      `\n🚚 Çatdırılma: ${delivery}` +
+      `\n💰 Yekun məbləğ: ${grandtotal}`;
+
+
+    const phone = "{{ sosial.whatsapp }}"; // 
+
+  
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  });
+</script>
+
+
+
+    
+{% endblock %}

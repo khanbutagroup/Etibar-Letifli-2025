@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/bootstrap.min.css"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/swiper-bundle.min.css"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/fontawesome.min.css"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  </head>
+{% endblock %}
+
+{% block main %}
+
+
+    <!-- Banner Start -->
+    <section class="inner-banner">
+      <div class="main-banner-bg-shape">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+      </div>
+      <div class="inner-banner-bg-aliment-wp">
+        <div class="bg-aliment-3 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+
+        <div class="bg-aliment-9 zoom-fade-animation">
+          <img
+            src="assets/images/aliment-03.svg"
+            width="29"
+            height="29"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="banner-content text-center">
+              <h1 class="h1-title">Rəylər</h1>
+              <div class="banner-breadcrum">
+                <ul>
+                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><i class="fa-solid fa-angle-right"></i></li>
+                  <li>Rəylər</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+
+    <!-- Contact Us Start -->
+    <section class="contact-us-sec sec-space all-comments">
+      <div class="container">
+        <div class="header col-sm-7 text-center mx-auto ">
+          <div class="rating">
+            <div class="stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span
+              ><span>☆</span>
+            </div>
+            <h1>4.7</h1>
+            <p>1943 nəfər</p>
+          </div>
+
+          <div class="bars">
+            <div class="bar">
+              <label>5</label>
+              <div class="bar-line">
+                <div
+                  class="bar-fill"
+                  style="width: 85%; background: #4caf50"
+                ></div>
+              </div>
+            </div>
+            <div class="bar">
+              <label>4</label>
+              <div class="bar-line">
+                <div
+                  class="bar-fill"
+                  style="width: 10%; background: #8bc34a"
+                ></div>
+              </div>
+            </div>
+            <div class="bar">
+              <label>3</label>
+              <div class="bar-line">
+                <div
+                  class="bar-fill"
+                  style="width: 4%; background: #fbc02d"
+                ></div>
+              </div>
+            </div>
+            <div class="bar">
+              <label>2</label>
+              <div class="bar-line">
+                <div
+                  class="bar-fill"
+                  style="width: 2%; background: #ff9800"
+                ></div>
+              </div>
+            </div>
+            <div class="bar">
+              <label>1</label>
+              <div class="bar-line">
+                <div
+                  class="bar-fill"
+                  style="width: 3%; background: #f44336"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews">
+          <div class="review">
+            <h3>Aliyə Qocayeva</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+              </div>
+              <span>2 dəqiqə əvvəl</span>
+            </div>
+            <p>
+              Çox asan idi. Amma sualda konkret, ad bildirən söz kimi ifadələrin
+              işlənməsi maraqlı idi
+            </p>
+          </div>
+          <div class="review">
+            <h3>dəniz</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>18 saat əvvəl</span>
+            </div>
+            <p>Mən 6-cı sinifə amma əladı</p>
+          </div>
+          <div class="review">
+            <h3>şəlalə</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>bir gün əvvəl</span>
+            </div>
+            <p>Maraqlı və əyləncəlidir</p>
+          </div>
+          <div class="review">
+            <h3>Aysu Babayeva</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span>
+              </div>
+              <span>2 gün əvvəl</span>
+            </div>
+            <p>
+              Çox asan idi imtahana bu qədər asan düşmür 10/10 yazdım amma
+              çətinləşdirin
+            </p>
+          </div>
+          <div class="review">
+            <h3>Medine</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span>
+              </div>
+              <span>3 gün əvvəl</span>
+            </div>
+            <p>Çox asandı idi</p>
+          </div>
+          <div class="review">
+            <h3>Həqiqət Zeynalzadə</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>4 gün əvvəl</span>
+            </div>
+            <p>Superrr</p>
+          </div>
+          <div class="review">
+            <h3>Nurlan Əliyev</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>4 gün əvvəl</span>
+            </div>
+            <p>Çox gözəl idi</p>
+          </div>
+          <div class="review">
+            <h3>Orxan Abdullayev48</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>5 gün əvvəl</span>
+            </div>
+            <p>Çox gözəl imtahandı 👍</p>
+          </div>
+          <div class="review">
+            <h3>Ayla Aliyeva</h3>
+            <div class="meta">
+              <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span
+                ><span>★</span>
+              </div>
+              <span>6 gün əvvəl</span>
+            </div>
+            <p>Çox xoşuma gəldi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Us End -->
+
+    <!-- Apply Now Start -->
+    <section class="apply-now-sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              class="apply-now-box wow fadeup-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="apply-now-shape animate-this">
+                <img
+                  src="assets/images/newsletter-bg-shape.svg"
+                  width="838"
+                  height="488"
+                  alt=""
+                />
+              </div>
+              <div class="apply-now-content">
+                <div class="apply-now-image-box">
+                  <img
+                    src="assets/images/apply-now-image.png"
+                    width="305"
+                    height="287"
+                    alt=""
+                  />
+                </div>
+                <div class="apply-now-text">
+                  <div class="sec-title">
+                    <span class="sub-title">Abone</span>
+                    <h3 class="h3-title">Yeniliklərdən xəbərdar ol !</h3>
+                  </div>
+                  <div class="newsletter-form">
+                    <form>
+                      <div class="form-element">
+                        <input
+                          type="email"
+                          class="form-input"
+                          placeholder="Email..."
+                          required=""
+                        />
+                        <button
+                          type="submit"
+                          class="sec-btn"
+                          title="Submit Now"
+                        >
+                          <span>Təsdiqlə</span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Apply Now End -->
+{% endblock %}
+
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="assets/js/bg-moving.js"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="assets/js/wow.min.js"></script>
+
+    <!-- Custom JS Link -->
+    <script src="assets/js/custom.js"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="assets/js/back-to-top.js"></script>
+{% endblock %}

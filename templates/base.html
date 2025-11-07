@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    {% block meta %} {% endblock %}
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="Kurs, imtahanlar, kitablar" />
+    <meta name="description" content="Etibar Letifli" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FavIcon Link -->
+    <link rel="shortcut icon" href="{{ logo.favicon.url }}" type="image/gif" sizes="16x16" />
+
+{% block css %}   {% endblock %}
+
+{% include 'includes/header.html' %}
+
+{% block main %}   {% endblock %}
+
+{% include 'includes/footer.html' %}
+
+{% block js %}   {% endblock %}
+{% if messages %}
+  <div class="messages-container">
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<style>
+/* Konteyner: ekranın ortasında horizontal */
+.messages-container {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+}
+
+/* Mesaj: Gün eynəyi effekti (iki lens + oval) */
+.message {
+  display: inline-block;
+  padding: 20px 60px;        /* lens ölçüsü üçün geniş */
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  border-radius: 50px / 50%; /* horizontal oval */
+  background: linear-gradient(135deg, #FFD700, #FFC107); /* gün eynəyi linzası */
+  box-shadow:
+    -25px 0 15px rgba(0,0,0,0.3), /* sol lens kölgəsi */
+    25px 0 15px rgba(0,0,0,0.3),  /* sağ lens kölgəsi */
+    inset 0 -4px 10px rgba(255,255,255,0.25); /* linza effekti */
+  pointer-events: all;
+  position: relative;
+  animation: fastEnterUp 3s ease forwards; /* 3 saniyə sürətli animasiya */
+}
+
+/* Mesaj növləri üçün gradientlər */
+.message.success { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+.message.error   { background: linear-gradient(135deg, #F44336, #C62828); }
+.message.warning { background: linear-gradient(135deg, #FF9800, #EF6C00); }
+.message.info    { background: linear-gradient(135deg, #2196F3, #1565C0); }
+
+/* Tez ekrana girib, yuxarı çıxan animasiya */
+@keyframes fastEnterUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-150px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* ekrana tez girir */
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* dayanmır, qısa müddət */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300px) scale(0.8); /* sürətlə yuxarı çıxır */
+  }
+}
+</style>
+
+
+</body>
+
+</html>

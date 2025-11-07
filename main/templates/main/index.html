@@ -1,0 +1,1034 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+<!-- {% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %} -->
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+
+{% block main %}
+
+    <!-- Banner Start -->
+    <section class="main-banner">
+      <div class="main-banner-bg-aliment-wp">
+        <div class="bg-aliment-6 zoom-fade-animation">
+          <img
+            src="{% static 'assets/images/aliment-03.svg' %}"
+            width="44"
+            height="44"
+            alt="Aliment"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="banner-content">
+              <span
+                class="sub-title wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.2s"
+                >{{ index_slider.title_1 }}
+              </span>
+              <h1
+                class="h1-title wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.3s"
+              >
+                {{ index_slider.title_2 }}
+              </h1>
+              <div
+                class="banner-description-wp wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.4s"
+              >
+                <div class="banner-description-text">
+                  <p>
+                    {{ index_slider.description }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="banner-btn wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.5s"
+              >
+                <a href="{{ idnex_slider.url }}" class="sec-btn" title="Get Started">
+                  <span>{{ index_slider.url_title }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div
+              class="banner-image-content wow fadeup-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.4s"
+            >
+              <div class="banner-image-shape">
+                <img
+                  src="{% static 'assets/images/arrow-aliment.svg' %}"
+                  class="move-element-animation-1"
+                  width="123"
+                  height="142"
+                  alt="Arrow Aliment"
+                />
+              </div>
+              <div class="banner-image-box">
+                <div class="banner-image">
+                  <img
+                    src="{{ index_slider.image.url }}"
+                    width="510"
+                    height="697"
+                    alt="Banner Image"
+                  />
+                </div>
+              </div>
+              <div class="congra-box move-element-animation-2">
+                <div class="congra-icon">
+                  <img
+                    src="{{ index_slider.image_2.url }}"
+                    width="24"
+                    height="30"
+                    alt="Note Icon"
+                  />
+                </div>
+                <div class="congra-text">
+                  <a href="kurs">
+                    <h5 class="h5-title">{{ index_slider.image_2_title}}</h5>
+                    <p>{{ index_slider.image_2_title_2 }}</p>
+                  </a>
+                </div>
+              </div>
+              <div class="certification-box-wp">
+                <div class="certification-icon">
+                  <img
+                    src="{% static 'assets/images/right-big-icon.svg' %}"
+                    width="30"
+                    height="15"
+                    alt="Right Icon"
+                  />
+                </div>
+                <div class="certification-box">
+                  <div class="certification-text">
+                    <p>{{ index_slider.image_3_title }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Main Partners Start -->
+    <!-- <div class="main-partners">
+      <div class="container-fluid">
+        <div class="swiper partners-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-1.png"
+                width="144"
+                height="43"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-2.png"
+                width="150"
+                height="26"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-3.png"
+                width="150"
+                height="30"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-4.png"
+                width="150"
+                height="52"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-5.png"
+                width="150"
+                height="19"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-6.png"
+                width="150"
+                height="34"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-7.png"
+                width="150"
+                height="44"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-8.png"
+                width="150"
+                height="41"
+                alt="Partner Logo"
+              />
+            </div>
+            <div class="swiper-slide partners-slide">
+              <img
+                src="{% static 'assets/images/partners-logo-4.png"
+                width="150"
+                height="52"
+                alt="Partner Logo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- Main Partners End -->
+
+    <!-- Top Category List Start -->
+    <section class="top-category-list-sec sec-space">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="sec-title text-center">
+              {% for i in index_books %}
+
+                  <span class="sub-title">{{ i.title_1 }}</span>
+                  <h2 class="h2-title">{{ i.title_2 }}</h2>
+
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="courses-list-box-row">
+          <div class="row">
+
+
+            {% for i in index_books %}
+
+                {% for book in i.books.all %}
+                  <div class="col-lg-4 col-md-6">
+                    <div
+                      class="common-post-card wow fadeup-animation"
+                      data-wow-duration="0.8s"
+                      data-wow-delay="0.2s"
+                      style="
+                        visibility: visible;
+                        animation-duration: 0.8s;
+                        animation-delay: 0.2s;
+                        animation-name: fadeup-animation;
+                      "
+                    >
+                      <div class="post-image-box-wp">
+                        <div class="post-image">
+                          <a href="{% url 'book_details' book.id %}">
+                            <img
+                              src="{{ book.image.url }}"
+                              width="356"
+                              height="230"
+                              alt="Course Image"
+                            />
+                          </a>
+                        </div>
+                        <div class="post-tag">
+                          <span>{{ book.category.title }}</span>
+                        </div>
+                      </div>
+                      <div class="common-post-content">
+                        <div class="post-content-title">
+                          <a
+                            href="{% url 'book_details' i.id %}"
+                            title="{{ i.sub_category.title }}"
+                          >
+                            <h4 class="h4-title">{{ book.sub_category.title }}</h4>
+                          </a>
+                        </div>
+                        <div class="course-price">
+                          <h4 class="h4-title">{{ book.price }}₼</h4>
+                          {% if book.old_price %}
+                          <h4 class="h4-title prev-price">{{ book.old_price }}₼</h4>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Top Category List End -->
+
+    <!-- Top Course Start -->
+    <section class="top-course-sec sec-space-top sec-bg">
+      <div class="container">
+        <div class="top-course-title">
+          <div class="row">
+            <div class="col-xl-6">
+              <div class="sec-title">
+                <span class="sub-title">Əsas imtahanlar</span>
+                <h2 class="h2-title">İmtahanlarda iştirak et</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="grid wow fadeup-animation"
+          data-wow-duration="0.8s"
+          data-wow-delay="0.4s"
+        >
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-1.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>Məntiq Olimpiadası</span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">20.25.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">2 s 30 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="How to Market Yourself as Coach or Consultant Market"
+                  >
+                    <h4 class="h4-title">
+                      Lütfi Zadə Riyaziyyat-Məntiq Olimpiadası
+                    </h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">32.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-2.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>BA</span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">10.12.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">1 s 15 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="How to Write the Ultimate 1 Page Strategic Business"
+                  >
+                    <h4 class="h4-title">Dövlət Qulluğu</h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">10.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-3.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>Fənn Müsabiqələri</span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">30.12.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">5 s 30 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="How to Write the Ultimate 1 Page Strategic Business"
+                  >
+                    <h4 class="h4-title">
+                      Respublika Riyaziyyat Fənn Müsabiqələri
+                    </h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">87.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-4.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>İbtidai sinif</span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">23.02.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">1 s 30 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="Data Course To Under Stand About Solution"
+                  >
+                    <h4 class="h4-title">
+                      İbtidai sinif riyaziyyat 3-ci sinif
+                    </h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">40.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-5.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>İbtidai sinif </span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">18.12.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">2 s 30 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="100 Days Of Code – 2024 Web Development Bootcamp"
+                  >
+                    <h4 class="h4-title">İbtidai sinif məntiq</h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">91.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid-item">
+            <div class="common-post-card">
+              <div class="post-image-box-wp">
+                <div class="post-image">
+                  <a href="info.html">
+                    <img
+                      src="{% static 'assets/images/course-image-6.jpg"
+                      width="356"
+                      height="230"
+                      alt="Course Image"
+                    />
+                  </a>
+                </div>
+                <div class="post-tag">
+                  <span>Dövlət Vergi Xidməti</span>
+                </div>
+              </div>
+              <div class="common-post-content">
+                <div class="post-lessons-info">
+                  <ul>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/date-icon.svg"
+                          width="26"
+                          height="18"
+                          alt="Book Icon"
+                        />
+                      </span>
+                      <span class="post-info-text">30.09.2025</span>
+                    </li>
+                    <li>
+                      <span class="post-info-icon">
+                        <img
+                          src="{% static 'assets/images/clock-icon.svg"
+                          width="20"
+                          height="20"
+                          alt=""
+                        />
+                      </span>
+                      <span class="post-info-text">2 s 30 dəq</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="post-content-title">
+                  <a
+                    href="info.html"
+                    title="How To Run Truly Productive In Meetings And Add Value"
+                  >
+                    <h4 class="h4-title">Dövlət Vergi Xidməti</h4>
+                  </a>
+                </div>
+                <div class="course-price">
+                  <h4 class="h4-title">55.00₼</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="about-content-btn text-center mx-auto">
+          <a href="about.html" class="sec-btn" title="Read More"
+            ><span>Hamısı</span></a
+          >
+        </div> -->
+      </div>
+    </section>
+    <!-- Top Course End -->
+
+    <!-- About Us Start -->
+    <section class="about-sec">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div
+              class="about-image-content wow left-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="about-image-box-wp">
+                <div class="about-image-box-bg">
+                  <div class="about-image-bg-shape"></div>
+                </div>
+                <div class="about-image">
+                  <img
+                    src="{{ about.image.url }}"
+                    width="444"
+                    height="557"
+                    alt="About Us Image"
+                  />
+                </div>
+                <div class="about-image-icon-wp">
+                  <div class="about-image-icon top-icon">
+                    <img
+                      src="{{ about.image_3.url }}"
+                      width="56"
+                      height="56"
+                      alt="About Image Icon"
+                    />
+                  </div>
+                  <div class="about-image-icon bottom-icon">
+                    <img
+                      src="{{ about.image_4.url }}"
+                      width="56"
+                      height="56"
+                      alt="About Image Icon"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="students-endroll-box move-element-animation-2">
+                <div class="students-endroll-title">
+                  <h5 class="h5-title">{{ about.image_2_title_1 }}</h5>
+                </div>
+                <div class="students-endroll-image">
+                  <img
+                    src="{{ about.image_2.url }}"
+                    width="217"
+                    height="80"
+                    alt="Graph Image"
+                  />
+                </div>
+                <div class="students-endroll-text">
+                  <p>{{ about.image_2_title_2 }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 align-self-center">
+            <div
+              class="about-content wow right-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+            >
+              <div class="sec-title">
+                <span class="sub-title">{% trans 'Haqqımızda' %}</span>
+                <h2 class="h2-title">{{ about.title }}</h2>
+              </div>
+              <div class="about-text">
+                <p>
+                  {{ about.description|safe }}
+                </p>
+   
+              </div>
+              <div class="about-feature-info">
+                <div class="about-feature-box">
+                  <div class="about-feature-icon">
+                    <img
+                      src="{{ about.statistic_1_icon.url }}"
+                      width="25"
+                      height="25"
+                      alt="Learn The Best Image"
+                    />
+                  </div>
+                  <div class="about-feature-text">
+                    <h4 class="h4-title">{{ about.statistic_1_title }}</h4>
+                    <p>{{ about.statistic_1_description }}</p>
+                  </div>
+                </div>
+                <div class="about-feature-box">
+                  <div class="about-feature-icon">
+                    <img
+                      src="{{ about.statistic_2_icon.url }}"
+                      width="29"
+                      height="20"
+                      alt="Expert Instructors Image"
+                    />
+                  </div>
+                  <div class="about-feature-text">
+                    <h4 class="h4-title">{{ about.statistic_2_title }}</h4>
+                    <p>{{ about.statistic_2_description }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="about-content-btn">
+                <a href="{% url 'about' %}" class="sec-btn" title="Read More"
+                  ><span>{% trans 'Ətraflı' %}</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div
+              class="about-counter-row wow fadeup-animation"
+              data-wow-duration="0.8s"
+              data-wow-delay="0.2s"
+              id="about_counter"
+            >
+              {% for i in statistic %}
+                <div class="about-counter-box-wp">
+                  <div class="about-counter-box">
+                    <h3 class="h3-title">
+                      <span class="counting" data-count="{{ i.digit }}">0</span>+
+                    </h3>
+                    <div class="about-counter-text">
+                      <p>{{ i.title }}</p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Us End -->
+
+    <!-- Our Event Start -->
+    <section class="pdf-books our-event-sec sec-space">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="our-event-content">
+              <div class="sec-title text-center">
+                {% for i in index_pdf %}
+
+                    <span class="sub-title">{{ i.title_1 }}</span>
+                    <h2 class="h2-title">{{ i.title_2 }}</h2>
+
+                {% endfor %}
+              </div>
+              <div class="our-event-box-wp">
+              {% for i in index_pdf %}
+
+                  {% for book in i.books.all %}
+                    <div
+                      class="our-event-box wow fadeup-animation"
+                      data-wow-duration="0.8s"
+                      data-wow-delay="0.2s"
+                    >
+                      <div class="our-event-image-text">
+                        <div class="our-event-image">
+                          <img
+                            src="{{ book.image.url }}"
+                            width="270"
+                            height="150"
+                            alt="Event Image"
+                          />
+                        </div>
+                        <div class="our-event-text">
+                          <div class="our-event-title">
+                            <a
+                              href="{{ book.pdf.url }}"
+                              target="_blank"
+                              title="Kitabın adı"
+                            >
+                              <h4 class="h4-title">{{ book.title }}</h4>
+                            </a>
+                          </div>
+                          <div class="our-event-btn">
+                            <a
+                              href="{{ book.pdf.url }}"
+                              target="_blank"
+                              class="sec-btn"
+                              download="{{ book.pdf.url }}"
+                              title=""
+                              ><span>{% trans 'Yüklə' %}</span></a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+
+              {% endfor %}
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Our Event End -->
+    <section class="our-blog-sec sec-space">
+      <div class="container">
+        <div class="col-xl-6">
+          <div class="sec-title">
+            <span class="sub-title">{% trans 'Xəbərlərimiz' %}</span>
+            <h2 class="h2-title">{% trans 'Ən son xəbərlər' %}</h2>
+          </div>
+        </div>
+        <div class="row our-blog-row justify-content-center">
+
+          {% for i in news %}
+            <div class="col-lg-4 col-md-6">
+              <div
+                class="common-post-card blog-card wow fadeup-animation"
+                data-wow-duration="0.8s"
+                data-wow-delay="0.2s"
+              >
+                <div class="post-image-box-wp">
+                  <div class="post-image">
+                    <a href="{% url 'news_details' i.id %}">
+                      <img
+                        src="{{ i.image.url }}"
+                        width="356"
+                        height="266"
+                        alt="Blog Image"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div class="common-post-content">
+                  <div class="post-lessons-info">
+                    <ul>
+                      <li>
+                        <span class="post-info-icon">
+                          <img
+                            src="{% static 'assets/images/date-icon.svg' %}"
+                            width="20"
+                            height="17"
+                            alt="Book Icon"
+                          />
+                        </span>
+                        <span class="post-info-text">{{ i.created_at|date:" d M, Y" }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="post-content-title">
+                    <a
+                      href="{% url 'news_details' i.id %}"
+                      title="{{ i.title }}"
+                    >
+                      <h4 class="h4-title line-2">
+                        {{ i.title }}
+                      </h4>
+                    </a>
+                  </div>
+                  <div class="post-content-description-text line-2">
+                    <p>
+                      {{ i.description|safe }}
+                    </p>
+                  </div>
+                  <div class="post-content-btn">
+                    <a
+                      href="{% url 'news_details' i.id %}"
+                      class="read-more-btn"
+                      title="Read More"
+                      ><span>{% trans 'Daha çox' %}</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+{% endblock %}
+{% block js %}
+    <!-- Back To Top Start -->
+    <div class="scroll-to-top">
+      <svg
+        class="progress-circle svg-content"
+        width="100%"
+        height="100%"
+        viewBox="-1 -1 102 102"
+      >
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+      </svg>
+    </div>
+    <!-- Back To Top End -->
+
+    <!-- Jquery JS Link -->
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Isotope JS Link -->
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+{% endblock %}
