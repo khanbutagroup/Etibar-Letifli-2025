@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{% load time_filters %}
 
 <!-- {% block meta %}
 
@@ -345,360 +346,71 @@
           data-wow-duration="0.8s"
           data-wow-delay="0.4s"
         >
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-1.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>Məntiq Olimpiadası</span>
+            {% for i in exam %}
+              <div class="grid-item">
+                <div class="common-post-card">
+                  <div class="post-image-box-wp">
+                    <div class="post-image">
+                      <a href="{% url 'exam_detail' i.id %}">
+                        {% if i.image %}
+                        <img
+                          src="{{ i.image.url }}"
+                          width="356"
+                          height="230"
+                          alt="{{ i.title }}"
+                        />
+                        {% endif %}
+                      </a>
+                    </div>
+                    <div class="post-tag">
+                      <span>{{ i.sub_sub_sub_category.title }}</span>
+                    </div>
+                  </div>
+                  <div class="common-post-content">
+                    <div class="post-lessons-info">
+                      <ul>
+                        <li>
+                          <span class="post-info-icon">
+                            <img
+                              src="{% static 'assets/images/date-icon.svg' %}"
+                              width="26"
+                              height="18"
+                              alt="Book Icon"
+                            />
+                          </span>
+                          <span class="post-info-text">{{ i.start_date|date:"d.m.Y" }}</span>
+                        </li>
+                        <li>
+                          <span class="post-info-icon">
+                            <img
+                              src="{% static 'assets/images/clock-icon.svg' %}"
+                              width="20"
+                              height="20"
+                              alt=""
+                            />  
+                          </span>
+                          <span class="post-info-text">{{ i.duration_minutes|format_duration }}</span>
+
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="post-content-title">
+                      <a
+                        href="{% url 'exam_detail' i.id %}"
+                        title="How to Market Yourself as Coach or Consultant Market"
+                      >
+                        <h4 class="h4-title">
+                          {{ i.title }}
+                        </h4>
+                      </a>
+                    </div>
+                    <div class="course-price">
+                      <h4 class="h4-title">{{ i.price }}₼</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">20.25.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">2 s 30 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="How to Market Yourself as Coach or Consultant Market"
-                  >
-                    <h4 class="h4-title">
-                      Lütfi Zadə Riyaziyyat-Məntiq Olimpiadası
-                    </h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">32.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-2.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>BA</span>
-                </div>
-              </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">10.12.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">1 s 15 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="How to Write the Ultimate 1 Page Strategic Business"
-                  >
-                    <h4 class="h4-title">Dövlət Qulluğu</h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">10.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-3.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>Fənn Müsabiqələri</span>
-                </div>
-              </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">30.12.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">5 s 30 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="How to Write the Ultimate 1 Page Strategic Business"
-                  >
-                    <h4 class="h4-title">
-                      Respublika Riyaziyyat Fənn Müsabiqələri
-                    </h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">87.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-4.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>İbtidai sinif</span>
-                </div>
-              </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">23.02.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">1 s 30 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="Data Course To Under Stand About Solution"
-                  >
-                    <h4 class="h4-title">
-                      İbtidai sinif riyaziyyat 3-ci sinif
-                    </h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">40.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-5.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>İbtidai sinif </span>
-                </div>
-              </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">18.12.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">2 s 30 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="100 Days Of Code – 2024 Web Development Bootcamp"
-                  >
-                    <h4 class="h4-title">İbtidai sinif məntiq</h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">91.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid-item">
-            <div class="common-post-card">
-              <div class="post-image-box-wp">
-                <div class="post-image">
-                  <a href="info.html">
-                    <img
-                      src="{% static 'assets/images/course-image-6.jpg"
-                      width="356"
-                      height="230"
-                      alt="Course Image"
-                    />
-                  </a>
-                </div>
-                <div class="post-tag">
-                  <span>Dövlət Vergi Xidməti</span>
-                </div>
-              </div>
-              <div class="common-post-content">
-                <div class="post-lessons-info">
-                  <ul>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/date-icon.svg"
-                          width="26"
-                          height="18"
-                          alt="Book Icon"
-                        />
-                      </span>
-                      <span class="post-info-text">30.09.2025</span>
-                    </li>
-                    <li>
-                      <span class="post-info-icon">
-                        <img
-                          src="{% static 'assets/images/clock-icon.svg"
-                          width="20"
-                          height="20"
-                          alt=""
-                        />
-                      </span>
-                      <span class="post-info-text">2 s 30 dəq</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="post-content-title">
-                  <a
-                    href="info.html"
-                    title="How To Run Truly Productive In Meetings And Add Value"
-                  >
-                    <h4 class="h4-title">Dövlət Vergi Xidməti</h4>
-                  </a>
-                </div>
-                <div class="course-price">
-                  <h4 class="h4-title">55.00₼</h4>
-                </div>
-              </div>
-            </div>
-          </div>
+            {% endfor %}
         </div>
         <!-- <div class="about-content-btn text-center mx-auto">
           <a href="about.html" class="sec-btn" title="Read More"

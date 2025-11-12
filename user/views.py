@@ -175,12 +175,17 @@ def account_views(request):
     exams = Exam.objects.filter(purchases__user=request.user)
     videos = Video.objects.filter(purchases__user=request.user)
     purchased_exams = PurchasedExam.objects.filter(user=request.user)
-    
+    sessions = UserExamSession.objects.filter(
+        user=request.user
+    ).select_related('exam').order_by('-finished_at')
+
+
     context={
         'profile': profile,
         'exams': exams,
         'videos': videos,
-        "purchased_exams": purchased_exams,
+        'purchased_exams': purchased_exams,
+        'sessions': sessions,
     }
     return render(request, 'user/account.html', context)
 

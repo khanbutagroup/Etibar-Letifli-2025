@@ -88,3 +88,7 @@ class PurchasedVideo(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.video.title}"
+
+    class Meta:
+        verbose_name = "Alınmış video"
+        verbose_name_plural = "Alınmış videolar"

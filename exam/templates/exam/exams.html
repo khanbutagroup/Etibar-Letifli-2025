@@ -143,7 +143,7 @@
                 {{ i.description }}
               </p>
               <div class="comments-div">
-                <a href="comments.html" class="comment-a">Rəylər</a>
+                <a href="{% url 'exam_comments' i.id %}" class="comment-a">Rəylər</a>
               </div>
               {% if i.price %}
                 <div class="price">{{ i.price}} AZN</div>
@@ -152,7 +152,7 @@
                 {% if i.sub_sub_sub_category %}
                 <span>{{ i.sub_sub_sub_category.title }}</span>
                 {% endif %}
-                <a href="{% url 'buy_exam' i.id %}" class="buy-btn">Al</a>
+                <a href="{% url 'exam_detail' i.id %}" class="buy-btn">Al</a>
               </div>
             </div>
             {% endfor %}

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
+{% load exam_extras %}
+
 
 <!-- {% block meta %}
 
@@ -23,470 +25,172 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/bootstrap.min.css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
     />
 
     <!-- Swiper Slider CSS Link -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/swiper-bundle.min.css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
     />
 
     <!-- Font Awesome CSS Link -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/fontawesome.min.css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
     />
 
     <!-- Wow Animation CSS Link -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
 
     <!-- Main Style CSS Link -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
 
-    <link rel="stylesheet" href="assets/css/Bundle.css" />
+    <link rel="stylesheet" href="{% static 'assets/css/Bundle.css' %}" />
   </head>
 {% endblock %}
 
 {% block main %}
- 
-    <!-- Banner Start -->
-    <section class="inner-banner">
-      <div class="main-banner-bg-shape">
-        <div class="shape-1"></div>
-        <div class="shape-2"></div>
-      </div>
-      <div class="inner-banner-bg-aliment-wp">
-        <div class="bg-aliment-3 zoom-fade-animation">
-          <img
-            src="assets/images/aliment-03.svg"
-            width="44"
-            height="44"
-            alt="Aliment"
-          />
-        </div>
-
-        <div class="bg-aliment-6 zoom-fade-animation">
-          <img
-            src="assets/images/aliment-03.svg"
-            width="44"
-            height="44"
-            alt="Aliment"
-          />
-        </div>
-
-        <div class="bg-aliment-9 zoom-fade-animation">
-          <img
-            src="assets/images/aliment-03.svg"
-            width="29"
-            height="29"
-            alt="Aliment"
-          />
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="banner-content text-center">
-              <h1 class="h1-title">İmtahanın adı</h1>
-              <div class="banner-breadcrum">
-                <ul>
-                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
-                  <li><i class="fa-solid fa-angle-right"></i></li>
-                  <li>İmtahanın adı</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Banner End -->
-
-    <!-- Exams Start -->
-    <div class="sec-space single-exam">
-      <div
-        class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body"
-      >
-        <div class="container">
-          <div class="row">
-            <div class="text-center mb-3">
-              <a href="writeComments.html" class="sec-btn"> Rəy yaz </a>
-            </div>
-            <div class="row col-lg-12">
-              <div class="result-box">
-                <h2>İmtahanın nəticəsi</h2>
-
-                <div class="info-row">
-                  <div class="label">İmtahan:</div>
-                  <div class="value">
-                    3-cü sinif "Sınaq imtahanı" - Sertifikatlı
-                  </div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label">Ad, soyad:</div>
-                  <div class="value">Turkan Ganbarova</div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label">Başlama vaxtı:</div>
-                  <div class="value">01 oktyabr 2025, 12:05</div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label">Bitmə vaxtı:</div>
-                  <div class="value">01 oktyabr 2025, 12:05</div>
-                </div>
-              </div>
-
-              <div class="result-box">
-                <div class="info-row">
-                  <div class="label green">Sual sayı:</div>
-                  <div class="value green">50</div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label gray">Cavab verilməmiş:</div>
-                  <div class="value gray">49</div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label green">Doğru cavab sayı:</div>
-                  <div class="value green">0</div>
-                </div>
-
-                <div class="info-row">
-                  <div class="label red">Yanlış cavab sayı:</div>
-                  <div class="value red">1</div>
-                </div>
-
-                <div class="info-row blue">
-                  <div class="label">Toplanmış bal:</div>
-                  <div class="value blue">360</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Suallar -->
-            <div class="result-question col-lg-6">
-              <h3>
-                1. <img src="assets/images/sual.jpg" alt="" /> HTML nədir?
-              </h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab:
-                <img src="assets/images/imtahan2.jpg" alt="" />✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>
-                2. <img src="assets/images/imtahan2.jpg" alt="" /> CSS nə
-                üçündür?
-              </h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab:
-                <img src="assets/images/imtahan2.jpg" alt="" /> ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: <img src="assets/images/imtahan3.png" alt="" />
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> CSS məzmunun rəngini, ölçüsünü və
-                yerləşməsini idarə edir.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>3. JavaScript hansı məqsədlə istifadə olunur?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Veb səhifələrə interaktivlik əlavə etmək ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>4. SQL nə üçündür?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Şəkillərin dizaynını dəyişmək ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Verilənlər bazası ilə işləmək üçün istifadə olunur
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> SQL məlumatların əlavə edilməsi,
-                silinməsi və axtarılması üçün istifadə olunur.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>5. HTTP nədir?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Vebdə məlumat ötürülməsi protokolu ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>6. Git nədir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Proqramlaşdırma dili ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Versiya nəzarət sistemidir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> Git kod dəyişikliklərini izləmək və
-                komanda ilə işləmək üçün istifadə olunur.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>7. API nə üçündür?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Sistemlərin bir-biri ilə ünsiyyətini təmin etmək
-                ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>8. Python daha çox hansı məqsədlə istifadə olunur?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Yalnız dizayn üçün ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Məlumat emalı, veb və süni intellekt layihələri
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> Python geniş istifadə sahəsinə malik
-                yüksək səviyyəli dildir.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>9. CSS-də "color" nə üçündür?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Mətnin rəngini təyin etmək ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>10. JavaScript-də "alert()" funksiyası nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Konsolda məlumat çap edir ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: İstifadəçiyə xəbərdarlıq pəncərəsi göstərir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> alert() brauzerdə popup pəncərə açır.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>11. HTML-də &lt;title&gt; tagı nə iş görür?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Brauzerin tab başlığını göstərir ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>12. CSS-də "margin" nədir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Mətnin qalınlığı ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Elementin xarici boşluqları
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> Margin elementlə digər obyektlər
-                arasındakı məsafəni təyin edir.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>
-                13. JavaScript-də dəyişən təyin etmək üçün hansı açar söz
-                istifadə olunur?
-              </h3>
-              <div class="result-answer correct">Seçilmiş cavab: let ✅</div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>14. SQL-də "SELECT" əmri nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Məlumat silir ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Verilənləri seçir və göstərir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> SELECT əmri verilənlər bazasında
-                məlumatları əldə etmək üçündür.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>15. HTML-də link yaratmaq üçün hansı tag istifadə olunur?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: &lt;a&gt; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>16. CSS-də "font-size" nə üçündür?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Mətnin ölçüsünü dəyişmək ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>17. JavaScript-də "console.log()" nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Alert pəncərəsi açır ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Konsolda məlumat çap edir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> console.log() debugging üçün istifadə
-                olunur.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>18. CSS-də "background-color" nə edir?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Elementin arxa fon rəngini dəyişir ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>
-                19. HTML-də şəkil göstərmək üçün hansı tag istifadə olunur?
-              </h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: &lt;img&gt; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>20. SQL-də "DELETE" əmri nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Yeni məlumat əlavə edir ❌
-              </div>
-              <div class="true-result-answer">Doğru cavab: Məlumatı silir</div>
-              <div class="note">
-                <strong>İzahi:</strong> DELETE verilənlər bazasında məlumatı
-                silmək üçün istifadə olunur.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>21. HTML-də sıralı siyahı üçün hansı tag istifadə olunur?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: &lt;ol&gt; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>22. CSS-də "padding" nədir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Xarici boşluq ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Elementin daxili boşluğu
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> Padding elementin içindəki məzmunla
-                sərhəd arasındakı məsafədir.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>23. JavaScript-də massiv necə yaradılır?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: let arr = [1,2,3]; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>24. SQL-də "INSERT" əmri nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Məlumatı silir ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Yeni məlumat əlavə edir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> INSERT əmri verilənlər bazasına yeni
-                məlumat əlavə edir.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>25. HTML-də əsas məzmun hansı tag içində olur?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: &lt;body&gt; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>26. CSS-də "border" nədir?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Elementin sərhəd xətləri ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>27. JavaScript-də funksiya necə elan olunur?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: function = myFunc() ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: function myFunc() { ... }
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> Funksiya "function" açar sözü ilə təyin
-                olunur.
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>
-                28. HTML-də cədvəl yaratmaq üçün hansı tag istifadə olunur?
-              </h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: &lt;table&gt; ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>29. CSS-də "display: none;" nə edir?</h3>
-              <div class="result-answer correct">
-                Seçilmiş cavab: Elementi gizlədir ✅
-              </div>
-            </div>
-
-            <div class="result-question col-lg-6">
-              <h3>30. SQL-də "UPDATE" əmri nə edir?</h3>
-              <div class="result-answer wrong">
-                Seçilmiş cavab: Yeni cədvəl yaradır ❌
-              </div>
-              <div class="true-result-answer">
-                Doğru cavab: Mövcud məlumatı dəyişir
-              </div>
-              <div class="note">
-                <strong>İzahi:</strong> UPDATE əmri verilənlər bazasında mövcud
-                məlumatların dəyişdirilməsi üçün istifadə olunur.
-              </div>
-            </div>
+<!-- Banner Start -->
+<section class="inner-banner">
+  <div class="main-banner-bg-shape">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="banner-content text-center">
+          <h1 class="h1-title">{{ exam.title }}</h1>
+          <div class="banner-breadcrum">
+            <ul>
+              <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
+              <li><i class="fa-solid fa-angle-right"></i></li>
+              <li>{{ exam.title }}</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+<!-- Banner End -->
 
-    <!-- Exams End -->
+<!-- Exams Start -->
+<div class="sec-space single-exam">
+  <div class="container">
+    <div class="row">
+      <div class="text-center mb-3">
+        <a href="{% url 'exam_review' exam.id %}" class="sec-btn"> {% trans 'Rəy yaz' %} </a>
+      </div>
+
+      <div class="row col-lg-12">
+        <!-- Əsas nəticə qutusu -->
+        <div class="result-box">
+          <h2>{% trans 'İmtahanın nəticəsi' %}</h2>
+
+          <div class="info-row">
+            <div class="label">{% trans 'İmtahan:' %}</div>
+            <div class="value">{{ exam.title }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label">{% trans 'Ad, soyad:' %}</div>
+            <div class="value">{{ session.user.get_full_name }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label">{% trans 'Başlama vaxtı:' %}</div>
+            <div class="value">{{ session.started_at|date:"d F Y, H:i" }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label">{% trans 'Bitmə vaxtı:' %}</div>
+            <div class="value">{{ session.finished_at|date:"d F Y, H:i" }}</div>
+          </div>
+        </div>
+
+        <div class="result-box">
+          <div class="info-row">
+            <div class="label green">{% trans 'Sual sayı:' %}</div>
+            <div class="value green">{{ total_questions }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label gray">{% trans 'Cavab verilməmiş:' %}</div>
+            <div class="value gray">{{ unanswered_count }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label green">{% trans 'Doğru cavab sayı:' %}</div>
+            <div class="value green">{{ correct_count }}</div>
+          </div>
+
+          <div class="info-row">
+            <div class="label red">{% trans 'Yanlış cavab sayı:' %}</div>
+            <div class="value red">{{ wrong_count }}</div>
+          </div>
+
+          <div class="info-row blue">
+            <div class="label">{% trans 'Toplanmış bal:' %}</div>
+            <div class="value blue">{{ final_points }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suallar və cavablar -->
+      {% for ans in answers %}
+      <div class="result-question col-lg-6">
+        <h3>
+          {{ forloop.counter }}.
+          {% if ans.question.image_quest %}
+            <img src="{{ ans.question.image_quest.url }}" alt="Sual şəkli" />
+          {% endif %}
+          {{ ans.question.title_quest|safe }}
+        </h3>
+
+        <div class="result-answer {% if ans.is_correct %}correct{% else %}wrong{% endif %}">
+          <span>{% trans 'Seçilmiş cavab:' %}</span>
+          {% if ans.selected_option %}
+            {% with opt=ans.selected_option %}
+
+              {{ opt }} {% if ans.is_correct %}✅{% else %}❌{% endif %}
+            {% endwith %}
+          {% else %}
+            <em>{% trans 'Cavab verilməyib' %}</em>
+          {% endif %}
+        </div>
+
+        {% if not ans.is_correct and ans.selected_option %}
+          <div class="true-result-answer">
+            <strong>{% trans 'Doğru cavab:' %}</strong>
+            {% if ans.question.correct_option %}
+              {{ ans.question.correct_option }}
+            {% else %}
+              {% for letter in "ABCDEF" %}
+                {% with field="is_correct_"|add:letter|lower %}
+                  {% if ans.question|attr:field %}
+                    {{ letter }}
+                  {% endif %}
+                {% endwith %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if ans.question.explanation %}
+          <div class="note">
+            <strong>{% trans 'İzahi:' %}</strong> {{ ans.question.explanation|safe }}
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- Exams End -->
 {% endblock %}
 
 {% block js %}
@@ -506,24 +210,24 @@
 
     <!-- Jquery JS Link -->
 
-    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
 
     <!-- Bootstrap JS Link -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
     <!-- Swiper Slider JS Link -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
 
     <!-- Bg Moving JS Link -->
-    <script src="assets/js/bg-moving.js"></script>
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
 
     <!-- Wow Animation JS Link -->
-    <script src="assets/js/wow.min.js"></script>
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
 
     <!-- Custom JS Link -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/custom-scroll-count.js"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
 
     <!-- Back To Top JS Link -->
-    <script src="assets/js/back-to-top.js"></script>
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
 {% endblock %}

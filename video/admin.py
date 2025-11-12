@@ -69,3 +69,26 @@ class FreeVideoAdmin(TranslationAdmin):
         css = {
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
+
+
+
+
+@admin.register(PurchasedVideo)
+class PurchasedVideoAdmin(admin.ModelAdmin):
+    list_display = ('user_display', 'video_display', 'purchased_at', 'expires_at', 'is_active_display')
+    list_filter = ('purchased_at',)
+    search_fields = ('user__username', 'video__title')
+    autocomplete_fields = ('user', 'video')
+
+    def user_display(self, obj):
+        return obj.user.username
+    user_display.short_description = "İstifadəçi"
+
+    def video_display(self, obj):
+        return obj.video.title
+    video_display.short_description = "Video"
+
+    def is_active_display(self, obj):
+        return obj.video.is_active
+    is_active_display.short_description = "Aktivdirmi?"
+    is_active_display.boolean = True

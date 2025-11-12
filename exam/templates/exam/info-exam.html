@@ -25,28 +25,28 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/bootstrap.min.css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
     />
 
     <!-- Swiper Slider CSS Link -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/swiper-bundle.min.css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
     />
 
     <!-- Font Awesome CSS Link -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="assets/css/fontawesome.min.css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
     />
 
     <!-- Wow Animation CSS Link -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
 
     <!-- Main Style CSS Link -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
   </head>
 {% endblock %}
 
@@ -62,7 +62,7 @@
       <div class="inner-banner-bg-aliment-wp">
         <div class="bg-aliment-3 zoom-fade-animation">
           <img
-            src="assets/images/aliment-03.svg"
+            src="{% static 'assets/images/aliment-03.svg' %}"
             width="44"
             height="44"
             alt="Aliment"
@@ -71,7 +71,7 @@
 
         <div class="bg-aliment-6 zoom-fade-animation">
           <img
-            src="assets/images/aliment-03.svg"
+            src="{% static 'assets/images/aliment-03.svg' %}"
             width="44"
             height="44"
             alt="Aliment"
@@ -80,7 +80,7 @@
 
         <div class="bg-aliment-9 zoom-fade-animation">
           <img
-            src="assets/images/aliment-03.svg"
+            src="{% static 'assets/images/aliment-03.svg' %}"
             width="29"
             height="29"
             alt="Aliment"
@@ -91,12 +91,12 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="banner-content text-center">
-              <h1 class="h1-title">Məlumat və təlimatlar</h1>
+              <h1 class="h1-title">{% trans 'Məlumat və təlimatlar' %}</h1>
               <div class="banner-breadcrum">
                 <ul>
-                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
                   <li><i class="fa-solid fa-angle-right"></i></li>
-                  <li>Məlumat və təlimatlar</li>
+                  <li>{% trans 'Məlumat və təlimatlar' %}</li>
                 </ul>
               </div>
             </div>
@@ -110,79 +110,51 @@
       <div class="main-box container">
         <!-- Sol tərəf (Ödənişsiz badge) -->
         <div class="left-badge">
-          <img src="assets/images/logo.svg" alt="Ödənişsiz" />
+          <img src="{{ exam.image.url }}" alt="Ödənişsiz" />
         </div>
 
         <!-- Sağ tərəf -->
         <div class="right-content">
           <h2>
-            Riyaziyyat toplu (I Hissə) (İnteraktiv test toplusu)
+            {{ exam.title }}
           </h2>
 
           <div class="highlight-box">
-            Xidmətdəm istifadə etmək üçün sistemə daxil olub
-            ekranda sol tərəfdə yerləşən
-            <b>Hesabınızdan imtahanlarım</b> bölməsində imtahanın adı üzərində
-            vurun.
+            {{ exam.instructions_small }}
           </div>
 
           <table class="info-table">
             <tr>
-              <td>Aktiv olma müddəti</td>
+              <td>{% trans 'Aktiv olma müddəti' %}</td>
               <td>
-                <span class="special-text">1 ay</span><br />
-                Xidmətə yazıldığınız gündən etibarən 1 ay ərzində xidmətin adı
-                "Yazıldığım xidmətlər" menyusunda qalacaq. Bu müddət ərzində
-                xidmətin adı üzərində vurmaqla siz öz nəticənizə, imtahan
-                suallarına, sualların düzgün cavablarına baxa biləcəksiniz.
-                <br /><span class="red"
-                  >İmtahanlara 1 cəhd verilir (mövzular üzrə sınaqlarda hər bir
-                  mövzu üzrə imtahana 1 cəhd verilir).</span
-                >
+                <span class="special-text">{{ exam.active_period_days }} gün</span><br />
+                {{ exam.active_period|safe }}
+                
               </td>
             </tr>
             <tr>
-                       <td>Davam etmə vaxtı</td>
-              <td class="green time-green">2 saat 30dəq</td>
+                       <td>{% trans 'Davam etmə vaxtı' %}</td>
+              <td class="green time-green">{{ exam.duration_hours }} {% trans 'saat' %} {{ exam.duration_minutes }} {% trans 'dəq' %}</td>
             </tr>
             <tr>
-              <td>Yazılış sayı</td>
+              <td>{% trans 'Yazılış sayı' %}</td>
               <td>
-                Bu xidmətə (imtahana) ödəniş edib bir neçə dəfə yazıla
-                bilirsiniz. Bu sizə eyni bir imtahanı müxtəlif vaxtlarda verib
-                nəticələrinizi müqayisə etməyə imkan verir. Bundan əlavə, 1
-                istifadəçi öz hesabı ilə eyni imtahana 2 dəfə yazıla bilər.
-                Həmin imtahanları eyni hesabdan istifadə etməklə 2 müxtəlif şəxs
-                imtahan verə bilər.
+                {{ exam.subscription_info }}
               </td>
             </tr>
             <tr>
-              <td>Qiymət</td>
-              <td class="price">20 manat</td>
+              <td>{% trans 'Qiymət' %}</td>
+              <td class="price">{{ exam.price }} {% trans 'manat' %}</td>
             </tr>
           </table>
 
           <div class="note-box">
-            <span>Təlimatlar:</span> "Abituriyent" jurnalının nəşr etdiyi fənlər
-            üzrə test toplularının interaktiv versiyasına yazılmaqla siz
-            toplusda olan test tapşırıqlarını onlayn imtahan formatında işləməyi
-            əldə edirsiniz. Əldə etdiyiniz interaktiv toplu 1 il aktiv olur. Bu
-            müddət ərzində siz testlərə, öz cavablarınıza və testlərin düzgün
-            cavablarına baxa bilirsiniz. Açıq tipli test tapşırıqlarının
-            meyarları təqdim edilir.
-            Test toplusunda hər bir bölmə üzrə test tapşırıqlarının sayı çox
-            olduğundan bölmə üzrə test tapşırıqlarını hissə-hissə bir neçə gün
-            ərzində işləyə bilirsiniz (vaxt məhdudiyyəti yoxdur). Hər bir test
-            tapşırığını işlədikdə cavabınızın düzgün olub-olmamağını anında
-            yoxlamaq üçün tapşırığın altında "Yoxla" düyməsini vurun.
-            <br /><br />
-            Bütün test tapşırıqlarını hansısa bir neçə gün ərzində
-            işləyəcəksinizsə imtahana başladıqdan sonra ekranın sağ tərəfində
-            "Testin sonu" düyməsini vurmağınız vacibdir.
+            <span>{% trans 'Təlimatlar:' %}</span> 
+            {{ exam.instructions }}
           </div>
 
           <div class="info-page-btn">
-            <a href="info.html" class="buy-btn">Ödəniş et</a>
+            <a href="{% url 'buy_exam' exam.id %}" class="buy-btn">{% trans 'Ödəniş et' %}</a>
           </div>
         </div>
       </div>
@@ -201,7 +173,7 @@
             >
               <div class="apply-now-shape animate-this">
                 <img
-                  src="assets/images/newsletter-bg-shape.svg"
+                  src="{% static 'assets/images/newsletter-bg-shape.svg"
                   width="838"
                   height="488"
                   alt=""
@@ -210,7 +182,7 @@
               <div class="apply-now-content">
                 <div class="apply-now-image-box">
                   <img
-                    src="assets/images/apply-now-image.png"
+                    src="{% static 'assets/images/apply-now-image.png"
                     width="305"
                     height="287"
                     alt=""
@@ -268,27 +240,27 @@
 
     <!-- Jquery JS Link -->
 
-    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
 
     <!-- Bootstrap JS Link -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
     <!-- Swiper Slider JS Link -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
 
     <!-- Bg Moving JS Link -->
-    <script src="assets/js/bg-moving.js"></script>
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
 
     <!-- Isotope JS Link -->
-    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
 
     <!-- Wow Animation JS Link -->
-    <script src="assets/js/wow.min.js"></script>
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
 
     <!-- Custom JS Link -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/custom-scroll-count.js"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
 
     <!-- Back To Top JS Link -->
-    <script src="assets/js/back-to-top.js"></script>
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
 {% endblock %}

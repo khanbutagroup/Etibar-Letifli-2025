@@ -86,12 +86,12 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="banner-content text-center">
-              <h1 class="h1-title">Hesabım</h1>
+              <h1 class="h1-title">{% trans 'Hesabım' %}</h1>
               <div class="banner-breadcrum">
                 <ul>
-                  <li><a href="{% url 'index' %}" title="Home">Ana səhifə</a></li>
+                  <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
                   <li><i class="fa-solid fa-angle-right"></i></li>
-                  <li>Hesabım</li>
+                  <li>{% trans 'Hesabım' %}</li>
                 </ul>
               </div>
             </div>
@@ -118,7 +118,7 @@
                       class="nav-link active"
                       aria-selected="true"
                       role="tab"
-                      >Hesabım
+                      >{% trans 'Hesabım' %}
                     </a>
                   </li>
                   <!-- <li>
@@ -138,7 +138,7 @@
                       class="nav-link"
                       aria-selected="false"
                       role="tab"
-                      >Video dərslərim
+                      >{% trans 'Video dərslərim' %}
                     </a>
                   </li>
                   <li>
@@ -148,7 +148,7 @@
                       class="nav-link"
                       aria-selected="false"
                       role="tab"
-                      >İmtahanlarım
+                      >{% trans 'İmtahanlarım' %}
                     </a>
                   </li>
                   <li>
@@ -158,7 +158,7 @@
                       class="nav-link"
                       aria-selected="false"
                       role="tab"
-                      >Nəticələrim
+                      >{% trans 'Nəticələrim' %}
                     </a>
                   </li>
                   <li>
@@ -167,7 +167,7 @@
                       class="nav-link"
                       aria-selected="false"
                       role="tab"
-                      >Çıxış et</a
+                      >{% trans 'Çıxış et' %}</a
                     >
                   </li>
                 </ul>
@@ -178,7 +178,7 @@
               <div class="tab-content dashboard_content">
                 <!-- Videos -->
                 <div class="tab-pane fade" id="videos" role="tabpanel">
-                  <h3>Video dərslərim</h3>
+                  <h3>{% trans 'Video dərslərim' %}</h3>
                   <div class="orders-600">
                     <div class="row video-area">
                       
@@ -218,7 +218,7 @@
                 </div>
                 <!-- Exams -->
                 <div class="tab-pane fade" id="exams" role="tabpanel">
-                  <h3>İmtahanlarım</h3>
+                  <h3>{% trans 'İmtahanlarım' %}</h3>
                   <div class="orders-600">
                     <table
                       class="table first-table order-table"
@@ -227,16 +227,13 @@
                       <thead>
                         <tr>
                           <th class="product-name order-product-name">
-                            İmtahan adı
+                            {% trans 'İmtahan adı' %}
                           </th>
                           <th class="product-price order-procut-price">
-                            Qiymət
+                            {% trans 'Qiymət' %}
                           </th>
 
-                          <th class="order-date">Tarix</th>
-                          <th class="product-subtotal order-product-subtotal">
-                            <a href="startExam.html"> İmtahana başla </a>
-                          </th>
+                          <th class="order-date">{% trans 'Tarix' %}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -244,7 +241,7 @@
                             <tr class="product-box-container">
                               <td class="product-name-container">
                                 <a
-                                  href="#"
+                                  
                                   class="text-gray-90 card-text order-text-name order-text-width"
                                 >
                                   {{ i.exam.title }}
@@ -259,12 +256,12 @@
 
                               <td class="order-date"><span>{{ i.purchased_at|date:" d.m.Y H:i" }}</span></td>
                               <td class="order-date">
-                                {% if i.exam.is_available %}
-                                <a href="{% url 'start_exam' i.exam.id %}" class="start-btn sec-btn"
-                                  >İmtahana başla</a
-                                >
+                                {% if i.exam.get_status_text == "İmtahana başla" %}
+                                  <a href="{% url 'start_exam' i.exam.id %}" class="start-btn sec-btn">
+                                    {% trans 'İmtahana başla' %}
+                                  </a>
                                 {% else %}
-                                <p style="color: gray;">İmtahan {{ i.start_date|date:"d.m.Y H:i" }} tarixində açılacaq</p>
+                                  <p style="color: gray;">{{ i.exam.get_status_text }}</p>
                                 {% endif %}
                               </td>
                             </tr>
@@ -276,124 +273,64 @@
 
                 <!-- RESULTS -->
                 <div class="tab-pane fade" id="results" role="tabpanel">
-                  <h3>Nəticələrim</h3>
+                  <h3>{% trans 'Nəticələrim' %}</h3>
                   <div class="orders-600">
-                    <table
-                      class="table first-table order-table"
-                      cellspacing="0"
-                    >
+                    <table class="table first-table order-table" cellspacing="0">
                       <thead>
                         <tr>
-                          <th class="product-name order-product-name">
-                            İmtahan adı
-                          </th>
-                          <th class="product-price order-procut-price">
-                            Qiymət
-                          </th>
-
-                          <th class="order-date">Tarix</th>
-                          <th class="product-subtotal order-product-subtotal">
-                            <a href="startExam.html"> Nəticələrimə bax </a>
-                          </th>
+                          <th>{% trans 'İmtahan adı' %}</th>
+                          <th>{% trans 'Qiymət' %}</th>
+                          <th>{% trans 'Tarix' %}</th>
+                          <th>{% trans 'Nəticə' %}</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="product-box-container">
-                          <td class="product-name-container">
-                            <a
-                              href="#"
-                              class="text-gray-90 card-text order-text-name order-text-width"
-                            >
-                              SASMO Sınaq İmtahanı - 01 (Categoria D)
-                            </a>
+                        {% for session in sessions %}
+                        <tr>
+                          <td>{{ session.exam.title }}</td>
+                          <td>
+                            {% if session.exam.price %}
+                              {{ session.exam.price }} ₼
+                            {% else %}
+                              -
+                            {% endif %}
                           </td>
-                          <td class="product-price order-product-price">
-                            <span>
-                              <small
-                                ><del>60 <span class="azn">₼</span></del></small
-                              >
-                              45.00 <span class="azn">₼</span>
-                            </span>
+                          <td>
+                            {% if session.finished_at %}
+                              {{ session.finished_at|date:"d.m.Y H:i" }}
+                            {% else %}
+                              {% trans 'Davam edir' %}
+                            {% endif %}
                           </td>
-
-                          <td class="order-date"><span>01.05.2025</span></td>
-                          <td class="order-date">
-                            <a href="result.html" class="start-btn sec-btn"
-                              >Nəticənə bax</a
-                            >
-                          </td>
-                        </tr>
-                        <tr class="product-box-container">
-                          <td class="product-name-container">
-                            <a
-                              href="#"
-                              class="text-gray-90 card-text order-text-name order-text-width"
-                            >
-                              RFM Riyaziyyat Sınaq 01 - C
-                            </a>
-                          </td>
-                          <td class="product-price order-product-price">
-                            <span> 45.00 <span class="azn">₼</span> </span>
-                          </td>
-
-                          <td class="order-date"><span>01.05.2025</span></td>
-                          <td class="order-date">
-                            <a href="result.html" class="start-btn sec-btn"
-                              >Nəticənə bax</a
-                            >
+                          <td>
+                            {% if session.finished_at %}
+                              <a href="{% url 'exam_finish' session.id %}" class="start-btn sec-btn">
+                                {% trans 'Nəticənə bax' %}
+                              </a>
+                            {% else %}
+                              <span class="text-muted">{% trans 'Bitməyib' %}</span>
+                            {% endif %}
                           </td>
                         </tr>
-                        <tr class="product-box-container">
-                          <td class="product-name-container">
-                            <a
-                              href="#"
-                              class="text-gray-90 card-text order-text-name order-text-width"
-                            >
-                              SASMO Sınaq İmtahanı - 01 (Categoria D)
-                            </a>
-                          </td>
-                          <td class="product-price order-product-price">
-                            <span> 45.00 <span class="azn">₼</span> </span>
-                          </td>
-
-                          <td class="order-date"><span>01.05.2025</span></td>
-                          <td class="order-date">
-                            <a href="result.html" class="start-btn sec-btn"
-                              >Nəticənə bax</a
-                            >
+                        {% empty %}
+                        <tr>
+                          <td colspan="4" class="text-center text-muted">
+                            {% trans 'Hələ heç bir imtahan nəticəniz yoxdur.' %}'
                           </td>
                         </tr>
-                        <tr class="product-box-container">
-                          <td class="product-name-container">
-                            <a
-                              href="#"
-                              class="text-gray-90 card-text order-text-name order-text-width"
-                            >
-                              Kenquru BRM - Sınaq İmtahanı 01 / Categoria B
-                            </a>
-                          </td>
-                          <td class="product-price order-product-price">
-                            <span> 45.00 <span class="azn">₼</span> </span>
-                          </td>
-
-                          <td class="order-date"><span>01.05.2025</span></td>
-                          <td class="order-date">
-                            <a href="result.html" class="start-btn sec-btn"
-                              >Nəticənə bax</a
-                            >
-                          </td>
-                        </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
                 </div>
+
                 <!-- Account details -->
                 <div
                   class="tab-pane fade show active"
                   id="account-details"
                   role="tabpanel"
                 >
-                  <h3 class="fz-product-details__title">Hesab detalları</h3>
+                  <h3 class="fz-product-details__title">{% trans 'Hesab detalları' %}</h3>
                   <div class="login">
                     <div class="login_form_container">
                       <div class="account_login_form">
@@ -401,23 +338,23 @@
                           <div class="account_content">
                             <div class="row">
                               <div class="col-6">
-                                <label>Ad</label>
+                                <label>{% trans 'Ad' %}</label>
                                 <input
                                   type="text"
                                   name="first_name"
-                                  value="Türkan"
+                                  value="{% trans 'Fərid' %}"
                                 />
                               </div>
                               <div class="col-6">
-                                <label>Soyad</label>
+                                <label>{% trans 'Soyad' %}</label>
                                 <input
                                   type="text"
                                   name="last_name"
-                                  value="Alakbarova"
+                                  value="{% trans 'Rzazadə' %}"
                                 />
                               </div>
                               <div class="col-6 phone-div">
-                                <label>Əlaqə nömrəsi</label>
+                                <label>{% trans 'Əlaqə nömrəsi' %}</label>
                                 <div class="input-group">
                                   <span class="countrycode">+994</span>
                                   <input
@@ -431,7 +368,7 @@
                                 </div>
                               </div>
                               <div class="save_button col-6">
-                                <button type="submit">Yadda saxla</button>
+                                <button type="submit">{% trans 'Yadda saxla' %}</button>
                               </div>
                             </div>
                           </div>
@@ -445,7 +382,7 @@
                                 type="password"
                                 name="register-password"
                                 id="register-password"
-                                placeholder="Şifrə"
+                                placeholder="{% trans 'Şifrə' %}"
                               />
                               <div class="icon-holder">
                                 <i
@@ -459,7 +396,7 @@
                                 type="password"
                                 name="register-repeat-password"
                                 id="register-repeat-password"
-                                placeholder="Təkrar şifrə"
+                                placeholder="{% trans 'Təkrar şifrə' %}"
                               />
                               <div class="icon-holder">
                                 <i
@@ -470,7 +407,7 @@
                             </div>
 
                             <div class="col-6 save_button">
-                              <button type="submit">Yadda saxla</button>
+                              <button type="submit">{% trans 'Yadda saxla' %}</button>
                             </div>
                           </div>
                         </form>
@@ -488,19 +425,12 @@
 
 
     <!-- Modal -->
+    <!-- Modal -->
     <div class="video-modal-area">
-      <div id="videoModal" class="modal">
+      <div id="videoModal" class="modal" style="display:none;">
         <span class="close">&times;</span>
         <div class="modal-content">
-          <!-- <iframe
-            id="modalVideo"
-            width="100%"
-            height="450"
-            src=""
-            frameborder="0"
-            allowfullscreen
-          ></iframe> -->
-          <video src="{% static 'assets/video.mp4" controls autoplay muted loop></video>
+          <!-- Video JS ilə bura əlavə olunacaq -->
         </div>
       </div>
     </div>
@@ -540,34 +470,98 @@
 
     <!-- Back To Top JS Link -->
     <script src="{% static 'assets/js/back-to-top.js' %}"></script>
-    <script>
-      const modal = document.getElementById('videoModal')
-      const modalVideo = document.getElementById('modalVideo')
-      const closeBtn = document.querySelector('.close')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById('videoModal');
+  const modalContent = modal.querySelector('.modal-content');
+  const closeBtn = modal.querySelector('.close');
+  let activeVideo = null;
 
-      // Bütün kartları seçirik
-      document.querySelectorAll('.post-image-box-wp').forEach(item => {
-        item.addEventListener('click', function () {
-          const videoUrl = this.getAttribute('data-video')
-          modal.style.display = 'flex'
-          modalVideo.src = videoUrl + '?autoplay=1'
-        })
-      })
+  // Bütün video kartlarını seçirik
+  document.querySelectorAll('.post-image-box-wp').forEach(item => {
+    item.addEventListener('click', function () {
+      const videoUrl = this.getAttribute('data-video');
+      if (!videoUrl) return;
 
-      // X düyməsinə klik edəndə bağla
-      closeBtn.addEventListener('click', function () {
-        closeModal()
-      })
-
-      // Refresh zamanı modal və video sıfırlansın
-      window.addEventListener('load', () => {
-        closeModal()
-      })
-
-      // Modal bağlama funksiyası
-      function closeModal() {
-        modal.style.display = 'none'
-        modalVideo.src = '' // video linkini təmizlə
+      // Əvvəlki videonu təmizlə
+      if (activeVideo) {
+        activeVideo.pause();
+        activeVideo.remove();
       }
-    </script>
+
+      // Yeni video elementi yarat
+      const video = document.createElement('video');
+      video.src = videoUrl;
+      video.controls = true;
+      video.autoplay = true;
+      video.style.width = '100%';
+      video.style.height = '450px';
+      video.style.borderRadius = '10px';
+
+      // Modalın içərisinə əlavə et
+      modalContent.appendChild(video);
+      activeVideo = video;
+
+      // Modalı göstər
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Modalı bağlama funksiyası
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    if (activeVideo) {
+      activeVideo.pause();
+      activeVideo.remove();
+      activeVideo = null;
+    }
+  }
+
+  // ✕ düyməsinə kliklə bağla
+  closeBtn.addEventListener('click', closeModal);
+
+  // Arxa fon kliklənəndə bağla
+  window.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+});
+</script>
+<style>
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: transparent;
+  max-width: 900px;
+  width: 80%;
+  padding: 10px;
+}
+.close {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+}
+.video-layer {
+  cursor: pointer;
+}
+</style>
+
+
 {% endblock %}

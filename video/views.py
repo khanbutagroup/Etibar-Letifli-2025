@@ -5,7 +5,7 @@ from datetime import timedelta
 from video.models import *
 
 def video_views(request, category_id=None, sub_category_id=None):
-    videos = Video.objects.all().select_related('category', 'sub_category')
+    videos = Video.objects.filter(is_active=True).select_related('category', 'sub_category')
 
     if category_id:
         videos = videos.filter(category_id=category_id)
@@ -60,3 +60,12 @@ def buy_video(request, video_id):
         purchased_video.save()
 
     return redirect('account')
+
+
+def video_detail(request, video_id):
+    video = get_object_or_404(Video, id=video_id)
+
+    context = {
+        'video': video
+    }
+    return render(request, 'video/info-video.html', context)

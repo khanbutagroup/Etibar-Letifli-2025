@@ -70,7 +70,7 @@ class Exam(models.Model):
     ]
 
     sub_sub_sub_category = models.ForeignKey(SubSubSubCategory, related_name="exams", on_delete=models.CASCADE, null=True, verbose_name='Alt Alt Alt Kateqoriya')
-
+    image = models.ImageField(upload_to='image/', null=True, blank=True, verbose_name='Şəkil')
     title = models.CharField(max_length=256, verbose_name='İmtahanın adı')
     description = models.TextField(null=True, verbose_name='Məzmun')
 
@@ -94,6 +94,22 @@ class Exam(models.Model):
         verbose_name='İmtahan müddəti (dəqiqə)',
         help_text='İstifadəçi imtahana başladıqda bu müddət hesablanacaq'
     )
+
+    is_main = models.BooleanField(default=False, null=True, blank=True, verbose_name='Əsas imtahandır? Ana səhifədə')
+
+    # Ödənişdən qabaq məlumatlandırıcı hissə
+    # 📆 Aktivlik və müddət
+    active_period_days = models.PositiveIntegerField(default=30, verbose_name='Aktiv olma müddəti (günlərlə)')
+    active_period = RichTextField(null=True, blank=True, verbose_name='Aktiv olma müddəti yazısı')
+    duration_hours = models.PositiveIntegerField(default=0, verbose_name='Davam etmə vaxtı (saat)')
+    duration_minutes = models.PositiveIntegerField(default=0, verbose_name='Davam etmə vaxtı (dəqiqə)')
+
+    # 🧾 Təlimat və əlavə məlumat
+    instructions = models.TextField(null=True, blank=True, verbose_name='Təlimatlar')
+    subscription_info = models.TextField(null=True, blank=True, verbose_name='Yazılış haqqında məlumat')
+    instructions_small = models.TextField(null=True, blank=True, verbose_name='Qısa Təlimat yazısı')
+
+
     def has_started(self):
         return self.started_at is not None
 
@@ -139,6 +155,24 @@ class Exam(models.Model):
 
         return round(max(final, 0), 2)
 
+    def get_status_text(self):
+        now = timezone.now()
+
+        # Heç bir tarix qoyulmayıbsa — imtahan açıqdır
+        if not self.start_date and not self.end_date:
+            return "İmtahan aktivdir"
+
+        # Hələ başlamayıbsa
+        if self.start_date and now < self.start_date:
+            return f"İmtahan {self.start_date.strftime('%d.%m.%Y %H:%M')} tarixində açılacaq"
+
+        # Bitmə tarixi keçibsə
+        if self.end_date and now > self.end_date:
+            return "İmtahanın aktiv olma vaxtı bitib."
+
+        # Aralıqdadırsa
+        return "İmtahana başla"
+        
     class Meta:
         verbose_name='İmtahan'
         verbose_name_plural='İmtahanlar'
@@ -209,6 +243,10 @@ class UserExamSession(models.Model):
     started_at = models.DateTimeField(auto_now_add=True)
     finished_at = models.DateTimeField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = "İstifadəçi imtahan sessiyası"
+        verbose_name_plural = "İstifadəçi imtahan sessiyaları"
+
 class UserAnswer(models.Model):
     session = models.ForeignKey(UserExamSession, on_delete=models.CASCADE, related_name='answers')
     question = models.ForeignKey(QuestionAnswer, on_delete=models.CASCADE)
@@ -226,3 +264,22 @@ class PurchasedExam(models.Model):
     finished_at = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return f"{self.user.username} - {self.exam.title}"
+
+    class Meta:
+        verbose_name = "Alınmış imtahan"
+        verbose_name_plural = "Alınmış imtahanlar"
+
+class ExamReview(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='reviews', verbose_name="İmtahan")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="İstifadəçi")
+    rating = models.PositiveSmallIntegerField(default=5, verbose_name="Ulduz sayı (1-5)")
+    comment = models.TextField(verbose_name="Rəy mətni")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Yazılma tarixi")
+
+    def __str__(self):
+        return f"{self.user.username} — {self.exam.title} ({self.rating}★)"
+    
+    class Meta:
+        verbose_name = "İmtahan rəyi"
+        verbose_name_plural = "İmtahan rəyləri"
+        ordering = ['-created_at']

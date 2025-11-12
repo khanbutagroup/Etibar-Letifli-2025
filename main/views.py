@@ -6,7 +6,7 @@ from django.db.models import Q
 
 from main.models import *
 from main.forms import *
-
+from exam.models import *
 
 def news_views(request):
 
@@ -130,11 +130,13 @@ def index_views(request):
     index_books = IndexBooks.objects.all()
     index_pdf = IndexPDFBooks.objects.all()
     news = News.objects.all().order_by('-created_at')
+    exam = Exam.objects.filter(is_main=True)
 
     context = {
         'index_slider': index_slider,
         'index_books': index_books,
         'index_pdf': index_pdf,
         'news': news,
+        'exam': exam,
     }
     return render(request, 'main/index.html', context)
