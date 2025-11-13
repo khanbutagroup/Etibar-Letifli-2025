@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -53,7 +53,7 @@
     <form method="POST">
       {% csrf_token %}
       <div class="rating-box">
-        <h2>{{ exam.title }} imtahanını qiymətləndirin</h2>
+        <h2>{{ exam.title }} {% trans 'imtahanını qiymətləndirin' %}</h2>
 
         <div class="stars">
           <i class="fas fa-star" data-index="1"></i>
@@ -67,11 +67,11 @@
         <div class="comment-box mt-3">
           <textarea
             name="comment"
-            placeholder="İmtahan haqqında düşüncəniz..."
+            placeholder="{% trans 'İmtahan haqqında düşüncəniz...' %}"
             required
           ></textarea>
         </div>
-        <button type="submit" class="send-btn mt-3">Göndər</button>
+        <button type="submit" class="send-btn mt-3">{% trans 'Göndər' %}</button>
       </div>
     </form>
 

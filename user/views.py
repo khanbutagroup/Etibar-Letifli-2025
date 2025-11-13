@@ -2,6 +2,7 @@ from .cart import Cart
 from user.models import *
 from exam.models import *
 from video.models import *
+from main.models import *
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail

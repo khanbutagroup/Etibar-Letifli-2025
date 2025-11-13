@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
     <!-- Google Fonts Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -110,7 +110,7 @@
       <div class="main-box container">
         <!-- Sol tərəf (Ödənişsiz badge) -->
         <div class="left-badge">
-          <img src="{{ exam.image.url }}" alt="Ödənişsiz" />
+          <img src="{{ exam.image.url }}" alt="" />
         </div>
 
         <!-- Sağ tərəf -->
@@ -127,7 +127,7 @@
             <tr>
               <td>{% trans 'Aktiv olma müddəti' %}</td>
               <td>
-                <span class="special-text">{{ exam.active_period_days }} gün</span><br />
+                <span class="special-text">{{ exam.active_period_days }} {% trans 'gün' %}</span><br />
                 {{ exam.active_period|safe }}
                 
               </td>
@@ -159,67 +159,7 @@
         </div>
       </div>
     </section>
-    <!-- Top Course End -->
 
-    <!-- Apply Now Start -->
-    <section class="apply-now-sec">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div
-              class="apply-now-box wow fadeup-animation"
-              data-wow-duration="0.8s"
-              data-wow-delay="0.2s"
-            >
-              <div class="apply-now-shape animate-this">
-                <img
-                  src="{% static 'assets/images/newsletter-bg-shape.svg"
-                  width="838"
-                  height="488"
-                  alt=""
-                />
-              </div>
-              <div class="apply-now-content">
-                <div class="apply-now-image-box">
-                  <img
-                    src="{% static 'assets/images/apply-now-image.png"
-                    width="305"
-                    height="287"
-                    alt=""
-                  />
-                </div>
-                <div class="apply-now-text">
-                  <div class="sec-title">
-                    <span class="sub-title">Abone</span>
-                    <h3 class="h3-title">Yeniliklərdən xəbərdar ol !</h3>
-                  </div>
-                  <div class="newsletter-form">
-                    <form>
-                      <div class="form-element">
-                        <input
-                          type="email"
-                          class="form-input"
-                          placeholder="Email..."
-                          required=""
-                        />
-                        <button
-                          type="submit"
-                          class="sec-btn"
-                          title="Submit Now"
-                        >
-                          <span>Təsdiqlə</span>
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Apply Now End -->
 {% endblock %}
 
 {% block js %}

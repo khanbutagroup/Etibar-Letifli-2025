@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-from pathlib import Path
 from os import getenv
+from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-+^*x$0s_1*%ojs*1_94-1rli)74lj8brl^ue)d8c+aecr=tp%@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'rosetta',
+
+
     'exam',
     'info',
     'main',
@@ -79,7 +81,9 @@ TEMPLATES = [
                 'main.context_processors.categories',
                 'video.context_processors.video_context_processors',
                 'exam.context_processors.exam_categories',
-               
+                'main.context_processors.meta_tags',
+                'django.template.context_processors.i18n',
+
 
 
             ],
@@ -99,6 +103,37 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+
+
+
+
+# if not DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': getenv('POSTGRES_DB'),
+#             'USER': getenv('POSTGRES_USER'),
+#             'PASSWORD': getenv('POSTGRES_PASSWORD'),
+#             'HOST': getenv('POSTGRES_HOST'),
+#             'PORT': 5432,
+#         }
+# }
+
+
+
+
+
+
 
 
 # Password validation

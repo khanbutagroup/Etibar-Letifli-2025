@@ -19,7 +19,7 @@ class SubSubSubCategoryTranslationOptions(TranslationOptions):
 
 @register(Exam)
 class ExamTranslationOptions(TranslationOptions):
-    fields = ('title', 'description', 'active_period', 'instructions', 'subscription_info', 'instructions_small')
+    fields = ('title', 'description', 'active_period', 'instructions', 'subscription_info', 'instructions_small', 'meta_title', 'meta_description', 'meta_keywords')
 
 @register(QuestionAnswer)
 class QuestionAnswerTranslationOptions(TranslationOptions):

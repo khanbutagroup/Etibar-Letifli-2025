@@ -3,7 +3,12 @@ from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from django.contrib import messages
 from django.db.models import Q
-
+from urllib.parse import urlparse
+from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.urls import reverse, resolve, Resolver404
+from django.urls.exceptions import Resolver404 
+from django.utils import translation
 from main.models import *
 from main.forms import *
 from exam.models import *
@@ -140,3 +145,32 @@ def index_views(request):
         'exam': exam,
     }
     return render(request, 'main/index.html', context)
+
+
+
+
+
+
+
+
+
+
+def set_language(request, language):
+    if language not in dict(settings.LANGUAGES):
+        return HttpResponseRedirect("/")
+
+    referer = request.META.get("HTTP_REFERER", "/")
+    try:
+        view = resolve(urlparse(referer).path)
+        translation.activate(language)
+        app_name = view.app_name if hasattr(view, 'app_name') else None
+        view_name = f"{app_name}:{view.url_name}" if app_name else view.url_name
+
+        response = HttpResponseRedirect(
+            reverse(view_name, args=view.args, kwargs=view.kwargs)
+        )
+    except Resolver404:
+        response = HttpResponseRedirect("/")
+    
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response

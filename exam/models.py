@@ -109,6 +109,9 @@ class Exam(models.Model):
     subscription_info = models.TextField(null=True, blank=True, verbose_name='Yazılış haqqında məlumat')
     instructions_small = models.TextField(null=True, blank=True, verbose_name='Qısa Təlimat yazısı')
 
+    meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name='Meta Title')
+    meta_description = models.TextField(blank=True, null=True, verbose_name='Meta Description')
+    meta_keywords = models.TextField(blank=True, null=True, verbose_name='Meta Keywords')
 
     def has_started(self):
         return self.started_at is not None

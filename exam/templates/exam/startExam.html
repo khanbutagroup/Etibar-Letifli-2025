@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -68,7 +68,7 @@
 
 <div class="sec-space single-exam">
   <div class="container">
-    <div class="exam-title"><span>İmtahan:</span> {{ exam.title }}</div>
+    <div class="exam-title"><span>{% trans 'İmtahan:' %}</span> {{ exam.title }}</div>
     <div class="row">
       <!-- SOL BLOK -->
       <div class="col-xl-9 col-lg-8">
@@ -77,7 +77,7 @@
             <div class="m-card-profile__pic col-md-12">
               <ul class="user-area">
                 <li class="user_name">{{ user.get_full_name }}</li>
-                <li class="user_id"><span>Sual sayı: </span>{{ total }}</li>
+                <li class="user_id"><span>{% trans 'Sual sayı:' %} </span>{{ total }}</li>
               </ul>
             </div>
 
@@ -91,7 +91,7 @@
                     <div class="questions_block">
                       <div class="questions-inner" style="padding-bottom:0">
                         {% if q.image_quest %}
-                          <img src="{{ q.image_quest.url }}" class="img-fluid mb-2" alt="Sual şəkli">
+                          <img src="{{ q.image_quest.url }}" class="img-fluid mb-2" alt="{{ q.title_quest|safe }}">
                         {% endif %}
                         <span>{{ q.title_quest|safe }}</span>
                       </div>
@@ -202,7 +202,7 @@
               </div>
 
               <div class="bottom_bar text-center mt-3">
-                <button type="submit" class="sec-btn download" name="finishExam" id="finishExam"><span>İmtahanı bitir</span></button>
+                <button type="submit" class="sec-btn download" name="finishExam" id="finishExam"><span>{% trans 'İmtahanı bitir' %}</span></button>
               </div>
             </form>
           </div>
@@ -215,7 +215,7 @@
           <div class="m-portlet__head">
             <div class="m-portlet__head-tools">
               <span class="timer_quiz spnTime">
-                Qalan vaxt: <span id="examTimer" data-seconds="{{ total_seconds }}"></span>
+                {% trans 'Qalan vaxt:' %} <span id="examTimer" data-seconds="{{ total_seconds }}"></span>
               </span>
             </div>
           </div>
@@ -349,7 +349,7 @@ function updateTimer() {
   if (totalSeconds <= 0) {
     clearInterval(timerInterval);
     alert('Vaxt bitdi! Nəticə səhifəsinə yönləndirilirsiniz.');
-    window.location.href = 'result.html';
+    window.location.href = '{% url "exam_finish" session.id %}';
   }
 
   totalSeconds--;
@@ -368,7 +368,7 @@ let timerInterval = setInterval(updateTimer, 1000);
 
   if (finishBtn && modal && yesBtn && noBtn) {
     finishBtn.addEventListener('click', () => (modal.style.display = 'flex'));
-    yesBtn.addEventListener('click', () => (window.location.href = 'result.html'));
+    yesBtn.addEventListener('click', () => (window.location.href = '{% url "exam_finish" session.id %}'));
     noBtn.addEventListener('click', () => (modal.style.display = 'none'));
   }
 </script>

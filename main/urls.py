@@ -8,4 +8,5 @@ urlpatterns = [
     path('book/', book_views, name='book'),
     path('book/<int:id>/', book_details, name='book_details'),
     path('', index_views, name='index'),
+    path('set-language/<str:language>/', set_language, name='set_language'),
 ]

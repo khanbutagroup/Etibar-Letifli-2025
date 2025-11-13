@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -173,7 +173,7 @@
     <!-- Jquery JS Link -->
     <script
       data-cfasync="false"
-      src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"
+      src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
     ></script>
     <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
 

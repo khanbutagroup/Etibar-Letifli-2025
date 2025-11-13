@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+
+<title>{{ meta.title|default:"Default Title" }}</title>
+<meta name="description" content="{{ meta.description|default:'Default description' }}">
+<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+
+{% endblock %}
+{% block css %}
+
+    <!-- Google Fonts Link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+    />
+
+    <!-- Swiper Slider CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/swiper-bundle.min.css' %}"
+    />
+
+    <!-- Font Awesome CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'assets/css/fontawesome.min.css' %}"
+    />
+
+    <!-- Wow Animation CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}" />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+  </head>
+{% endblock %}
+
+{% block main %}
+<!-- Banner Start -->
+<section class="inner-banner">
+  <div class="main-banner-bg-shape">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+  </div>
+  <div class="container text-center">
+    <h1 class="h1-title">{% trans 'Axtarış nəticələri' %}</h1>
+    <div class="banner-breadcrum">
+      <ul>
+        <li><a href="{% url 'index' %}">{% trans 'Ana səhifə' %}</a></li>
+        <li><i class="fa-solid fa-angle-right"></i></li>
+        <li>{% trans 'Axtarış nəticələri' %}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- Banner End -->
+
+<!-- Search Results Start -->
+<section class="search-results sec-space">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-12 text-center">
+        {% if query %}
+          <h3 class="mb-3">{% trans 'Axtarış sözü:' %} "<strong>{{ query }}</strong>"</h3>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if results %}
+      {% comment %} ✅ Xəbərlər {% endcomment %}
+        {% if results.news %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'Xəbərlər' %}</h3>
+        <div class="row">
+            {% for item in results.news %}
+            <div class="col-md-4">
+            <div class="card mb-4 shadow-sm border-0">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'news_details' item.id %}" class="text-dark">{{ item.title }}</a>
+                </h5>
+                <p class="card-text">{{ item.description|safe|striptags|truncatechars:120 }}</p>
+                <a href="{% url 'news_details' item.id %}" class="btn btn-primary btn-sm">{% trans 'Ətraflı oxu' %}</a>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% endif %}
+
+
+        {% comment %} ✅ Kitablar {% endcomment %}
+        {% if results.book %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'Kitablar' %}</h3>
+        <div class="row">
+            {% for item in results.book %}
+            <div class="col-md-4">
+            <div class="card mb-4 border-0 shadow-sm">
+                {% if item.image %}
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'book_details' item.id %}" class="text-dark">{{ item.title }}</a>
+                </h5>
+                <p class="card-text">{{ item.description|safe|striptags|truncatechars:100 }}</p>
+                <a href="{% url 'book_details' item.id %}" class="btn btn-outline-primary btn-sm">{% trans 'Ətraflı bax' %}</a>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% endif %}
+
+
+        {% comment %} ✅ PDF-lər {% endcomment %}
+        {% if results.pdf %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'PDF-lər' %}</h3>
+        <ul class="list-group">
+            {% for item in results.pdf %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'pdf' %}#pdf-{{ item.id }}" class="text-dark">
+                {{ item.title|default:item.title_2 }}
+            </a>
+            <span class="badge bg-light text-dark">{% trans 'PDF' %}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+
+
+        {% comment %} ✅ İmtahanlar {% endcomment %}
+        {% if results.exam %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'İmtahanlar' %}</h3>
+        <div class="row">
+            {% for item in results.exam %}
+            <div class="col-md-4">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{% url 'exam_detail' item.id %}" class="text-dark">{{ item.title }}</a>
+                </h5>
+                <p class="card-text">{{ item.description|safe|striptags|truncatechars:100 }}</p>
+                <a href="{% url 'exam_detail' item.id %}" class="btn btn-outline-success btn-sm">{% trans 'Ətraflı bax' %}</a>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% endif %}
+
+
+        {% comment %} ✅ Haqqımızda {% endcomment %}
+        {% if results.about %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'Haqqımızda' %}</h3>
+        <ul class="list-group">
+            {% for item in results.about %}
+            <li class="list-group-item">
+            <a href="{% url 'about' %}" class="text-dark">
+                {{ item.title }}
+            </a>
+            <div class="text-muted small mt-1">{{ item.description|safe|striptags|truncatechars:120 }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+
+
+        {% comment %} ✅ Kateqoriyalar (bütün səviyyələr) {% endcomment %}
+        {% if results.category or results.subcategory or results.subsubcategory or results.subsubsubcategory %}
+        <div class="result-section mb-5">
+        <h3 class="section-title">{% trans 'Kateqoriyalar' %}</h3>
+        <ul class="list-group">
+            {% for c in results.category %}
+            <li class="list-group-item">
+                <a href="{% url 'exam_list' %}?category={{ c.id }}" class="text-dark">{{ c.title }}</a>
+            </li>
+            {% endfor %}
+            {% for sc in results.subcategory %}
+            <li class="list-group-item">
+                <a href="{% url 'exam_list' %}?subcategory={{ sc.id }}" class="text-dark">{{ sc.title }}</a>
+            </li>
+            {% endfor %}
+            {% for ssc in results.subsubcategory %}
+            <li class="list-group-item">
+                <a href="{% url 'exam_list' %}?subsubcategory={{ ssc.id }}" class="text-dark">{{ ssc.title }}</a>
+            </li>
+            {% endfor %}
+            {% for sssc in results.subsubsubcategory %}
+            <li class="list-group-item">
+                <a href="{% url 'exam_list' %}?subsubsubcategory={{ sssc.id }}" class="text-dark">{{ sssc.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+
+            {% else %}
+            <div class="text-center">
+                <p class="text-muted">{% trans 'Heç bir nəticə tapılmadı.' %}</p>
+            </div>
+            {% endif %}
+        </div>
+        </section>
+<!-- Search Results End -->
+{% endblock %}
+
+{% block js %}
+
+    <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+
+    <!-- Bg Moving JS Link -->
+    <script src="{% static 'assets/js/bg-moving.js' %}"></script>
+
+    <!-- Wow Animation JS Link -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
+    <!-- Custom JS Link -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scroll-count.js' %}"></script>
+
+    <!-- Back To Top JS Link -->
+    <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+    <script>
+      $('.button-show').on('click', function () {
+        $('.sidebar').toggleClass('active')
+      })
+    </script>
+{% endblock %}

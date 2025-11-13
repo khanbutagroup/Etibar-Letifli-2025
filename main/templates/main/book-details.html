@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
-<title>{{ meta.title|default:"Default Title" }}</title>
-<meta name="description" content="{{ meta.description|default:'Default description' }}">
-<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+<title>{{ book.meta_title|default:"Default Title" }}</title>
+<meta name="description" content="{{ book.meta_description|default:'Default description' }}">
+<meta name="keywords" content="{{ book.meta_keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -165,7 +165,7 @@
                     <div class="btn-flex">
                     <div class="course-join-btn book-btn">
                       <a href="{% url 'cart_add' book.id %}" class="sec-btn">
-                        <span>Səbətə at</span>
+                        <span>{% trans 'Səbətə at' %}</span>
                       </a>
                     </div>
 

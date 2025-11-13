@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
-<title>{{ meta.title|default:"Default Title" }}</title>
-<meta name="description" content="{{ meta.description|default:'Default description' }}">
-<meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
+<title>{{ news.meta_title|default:"Default Title" }}</title>
+<meta name="description" content="{{ news.meta_description|default:'Default description' }}">
+<meta name="keywords" content="{{ news.meta_keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
     <!-- Google Fonts Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com/" />

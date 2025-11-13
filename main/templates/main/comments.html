@@ -3,13 +3,13 @@
 {% load i18n %}
 {% load dict_filters %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -55,12 +55,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="h1-title">Rəylər — {{ exam.title }}</h1>
+        <h1 class="h1-title">{% trans 'Rəylər' %} — {{ exam.title }}</h1>
         <div class="banner-breadcrum">
           <ul>
-            <li><a href="{% url 'index' %}">Ana səhifə</a></li>
+            <li><a href="{% url 'index' %}">{% trans 'Ana səhifə' %}</a></li>
             <li><i class="fa-solid fa-angle-right"></i></li>
-            <li>Rəylər</li>
+            <li>{% trans 'Rəylər' %}</li>
           </ul>
         </div>
       </div>
@@ -73,19 +73,19 @@
     <div class="header col-sm-7 text-center mx-auto ">
       <div class="rating">
         <div class="stars">
-  {% for i in "12345" %}
-    {% if forloop.counter <= avg_rating %}
-      <span style="color: #4caf50;">★</span>
-    {% elif forloop.counter <= avg_rating|add:"1" and avg_rating|floatformat:1|stringformat:"s"|slice:":3"|add:""|floatformat:1|stringformat:"s"|slice:"-1" == "5" %}
-      <span style="color: #8bc34a;">★</span>
-    {% else %}
-      <span style="color: #ccc;">☆</span>
-    {% endif %}
-  {% endfor %}
+          {% for i in "12345" %}
+            {% if forloop.counter <= avg_rating %}
+              <span style="color: #4caf50;">★</span>
+            {% elif forloop.counter <= avg_rating|add:"1" and avg_rating|floatformat:1|stringformat:"s"|slice:":3"|add:""|floatformat:1|stringformat:"s"|slice:"-1" == "5" %}
+              <span style="color: #8bc34a;">★</span>
+            {% else %}
+              <span style="color: #ccc;">☆</span>
+            {% endif %}
+          {% endfor %}
 
         </div>
         <h1>{{ avg_rating|default:"0.0" }}</h1>
-        <p>{{ total_reviews }} nəfər</p>
+        <p>{{ total_reviews }} {% trans 'nəfər' %}</p>
       </div>
 
       <div class="bars">
@@ -128,21 +128,21 @@
             <h3>{{ review.user.get_full_name|default:review.user.username }}</h3>
             <div class="meta">
               <div class="stars">
-  {% for i in "12345" %}
-    {% if forloop.counter <= review.rating|add:"0" %}
-      <span style="color: #4caf50;">★</span>
-    {% else %}
-      <span style="color: #ccc;">☆</span>
-    {% endif %}
-  {% endfor %}
+                {% for i in "12345" %}
+                  {% if forloop.counter <= review.rating|add:"0" %}
+                    <span style="color: #4caf50;">★</span>
+                  {% else %}
+                    <span style="color: #ccc;">☆</span>
+                  {% endif %}
+                {% endfor %}
               </div>
-              <span>{{ review.created_at|timesince }} əvvəl</span>
+              <span>{{ review.created_at|timesince }} {% trans 'əvvəl' %}</span>
             </div>
             <p>{{ review.comment }}</p>
           </div>
         {% endfor %}
       {% else %}
-        <p class="text-center">Bu imtahan üçün hələ rəy yoxdur.</p>
+        <p class="text-center">{% trans 'Bu imtahan üçün hələ rəy yoxdur.' %}</p>
       {% endif %}
     </div>
   </div>

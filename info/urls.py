@@ -8,4 +8,5 @@ urlpatterns = [
     path('about/', about_views, name='about'),
     path('pdf/', pdf_views, name='pdf'),
     path('subscribe/', subscribe_view, name='subscribe'),
+    path('search/', global_search, name='search'),
 ]

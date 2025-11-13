@@ -3,7 +3,7 @@ from modeltranslation.translator import TranslationOptions, register
 
 @register(News)
 class NewsTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'meta_title', 'meta_description', 'meta_keywords')
 
 @register(BookCategory)
 class BookCategoryTranslationOptions(TranslationOptions):
@@ -15,7 +15,7 @@ class BookSubCategoryTranslationOptions(TranslationOptions):
 
 @register(Book)
 class BookTranslationOptions(TranslationOptions):
-    fields = ('title', 'description', 'ticket')
+    fields = ('title', 'description', 'ticket', 'meta_title', 'meta_description', 'meta_keywords')
 
 @register(IndexSlider)
 class IndexSliderTranslationOptions(TranslationOptions):

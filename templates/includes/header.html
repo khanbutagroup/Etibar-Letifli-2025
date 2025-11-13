@@ -42,24 +42,26 @@
 
                       <div class="search-input">
                         <div class="search-input-box">
-                          <form>
+                          <form action="{% url 'search' %}" method="get" class="search-form">
                             <input
                               type="text"
-                              name="search"
+                              name="q"
                               class="form-input"
-                              placeholder="Search Here..."
-                              required=""
+                              placeholder="{% trans 'Axtarış edin...' %}"
+                              required
                             />
                             <button type="submit" class="sec-btn">
-                              <span
-                                ><img
+                              <span>
+                                <img
                                   src="{% static 'assets/images/search-icon.svg' %}"
                                   width="18"
                                   height="18"
                                   alt="Search Icon"
-                              /></span>
+                                />
+                              </span>
                             </button>
                           </form>
+
                         </div>
                       </div>
                     </div>
@@ -74,6 +76,19 @@
                         />
                       </a>
                     </div>
+                    <div class="el-lang">
+                        <span>
+                            {{ LANGUAGE_CODE|upper }}
+                            <i class="fa-solid fa-angle-down"></i>
+                        </span>
+
+                        <ul>
+                            <li><a href="{% url 'set_language' 'az' %}">Az</a></li>
+                            <li><a href="{% url 'set_language' 'ru' %}">Ru</a></li>
+                            <li><a href="{% url 'set_language' 'en' %}">En</a></li>
+                        </ul>
+                    </div>
+
                   </div>
                   {% if user.is_authenticated %}
                     <!-- İstifadəçi login olub -->
@@ -87,7 +102,7 @@
                     <!-- İstifadəçi login olmayıb -->
                     <div class="header-btn">
                       <a href="{% url 'login' %}" class="sec-btn" title="Get Started">
-                        <span class="register-text">Qeydiyyat / Giriş</span>
+                        <span class="register-text">{% trans 'Qeydiyyat / Giriş' %}</span>
                         <span class="user-icon fas fa-user"></span>
                       </a>
                     </div>
@@ -129,7 +144,7 @@
                   </li>
 
               <li class="sub-items">
-                <a href="{% url 'exam_list' %}" title="imtahanlar">Online imtahanlar</a>
+                <a href="{% url 'exam_list' %}" title="imtahanlar">{% trans 'Online imtahanlar' %}</a>
                 <ul class="sub-menu">
                   {% for category in all_categories %}
                     <li>
@@ -181,25 +196,25 @@
                     <a href="{% url 'video' %}" title="Blog">{% trans 'Video dərslər' %}</a>
                   <ul class="sub-menu">
                     {% for cat in categories %}
-                    <li>
-                      {% if cat.id %}
-                      <a href="{% url 'video_category' cat.id %}" title="">
-                        {{ cat.title }}
-                      </a>
-                      {% endif %}
+                      <li>
+                        {% if cat.id %}
+                        <a href="{% url 'video_category' cat.id %}" title="">
+                          {{ cat.title }}
+                        </a>
+                        {% endif %}
 
-                      {% if cat.videosubcategory_set.all %}
-                      <ul class="sub-menu">
-                        {% for sub in cat.videosubcategory_set.all %}
-                        <li>
-                          <a href="{% url 'video_subcategory' cat.id sub.id %}" title="">
-                            {{ sub.title }}
-                          </a>
-                        </li>
-                        {% endfor %}
-                      </ul>
-                      {% endif %}
-                    </li>
+                        {% if cat.videosubcategory_set.all %}
+                        <ul class="sub-menu">
+                          {% for sub in cat.videosubcategory_set.all %}
+                          <li>
+                            <a href="{% url 'video_subcategory' cat.id sub.id %}" title="">
+                              {{ sub.title }}
+                            </a>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                        {% endif %}
+                      </li>
                     {% endfor %}
 
                     <li>

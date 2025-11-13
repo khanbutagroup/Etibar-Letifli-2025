@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -106,9 +106,9 @@
       <div class="container">
         <div class="row sec-space">
           <!-- Sidebar -->
-          <button class="button-show">Filtr</button>
+          <button class="button-show">{% trans 'Filtr' %}</button>
           <div class="sidebar">
-            <h3>Filter</h3>
+            <h3>{% trans 'Filter' %}</h3>
             <nav class="exams-nav menu">
               <!-- Azərbaycan bölməsi -->
               {% for category in all_categories %}
@@ -143,7 +143,7 @@
                 {{ i.description }}
               </p>
               <div class="comments-div">
-                <a href="{% url 'exam_comments' i.id %}" class="comment-a">Rəylər</a>
+                <a href="{% url 'exam_comments' i.id %}" class="comment-a">{% trans 'Rəylər' %}</a>
               </div>
               {% if i.price %}
                 <div class="price">{{ i.price}} AZN</div>
@@ -152,7 +152,7 @@
                 {% if i.sub_sub_sub_category %}
                 <span>{{ i.sub_sub_sub_category.title }}</span>
                 {% endif %}
-                <a href="{% url 'exam_detail' i.id %}" class="buy-btn">Al</a>
+                <a href="{% url 'exam_detail' i.id %}" class="buy-btn">{% trans 'Al' %}</a>
               </div>
             </div>
             {% endfor %}

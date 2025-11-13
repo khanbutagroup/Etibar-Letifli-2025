@@ -3,13 +3,13 @@
 {% load i18n %}
 {% load time_filters %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
 
     <!-- Google Fonts Link -->
@@ -335,8 +335,8 @@
           <div class="row">
             <div class="col-xl-6">
               <div class="sec-title">
-                <span class="sub-title">Əsas imtahanlar</span>
-                <h2 class="h2-title">İmtahanlarda iştirak et</h2>
+                <span class="sub-title">{% trans 'Əsas imtahanlar' %}</span>
+                <h2 class="h2-title">{% trans 'İmtahanlarda iştirak et' %}</h2>
               </div>
             </div>
           </div>
@@ -598,7 +598,7 @@
                             <a
                               href="{{ book.pdf.url }}"
                               target="_blank"
-                              title="Kitabın adı"
+                              title="{{ book.title }}"
                             >
                               <h4 class="h4-title">{{ book.title }}</h4>
                             </a>
@@ -652,7 +652,7 @@
                         src="{{ i.image.url }}"
                         width="356"
                         height="266"
-                        alt="Blog Image"
+                        alt="{{ i.title }}"
                       />
                     </a>
                   </div>

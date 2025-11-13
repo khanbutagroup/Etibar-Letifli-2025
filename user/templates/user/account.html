@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<!-- {% block meta %}
+{% block meta %}
 
 <title>{{ meta.title|default:"Default Title" }}</title>
 <meta name="description" content="{{ meta.description|default:'Default description' }}">
 <meta name="keywords" content="{{ meta.keywords|default:'keyword1, keyword2' }}">
 
-{% endblock %} -->
+{% endblock %}
 {% block css %}
     <!-- Google Fonts Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -375,7 +375,7 @@
 
                           <div class="account_reset_password ml-0 mt-4 mb-4">
                             <h3 class="fz-product-details__title">
-                              Şifrəni dəyişdir
+                              {% trans 'Şifrəni dəyişdir' %}
                             </h3>
                             <div class="col-md-6 col-12 pass-area">
                               <input

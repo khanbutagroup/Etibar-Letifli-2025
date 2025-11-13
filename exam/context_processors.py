@@ -17,3 +17,4 @@ def exam_categories(request):
     return {
         'all_categories': categories
     }
+

@@ -224,9 +224,9 @@
                     <li>
                       <a href="{% url 'book' %}" title="Courses">{% trans 'Kitablar' %}</a>
                     </li>
-                    <li><a href="exams.html" title="FAQ">İmtahanlar</a></li>
+                    <li><a href="{% url 'exam_list' %}" title="FAQ">{% trans 'İmtahanlar' %}</a></li>
                     <li>
-                      <a href="videoLessons.html" title="FAQ">Video dərslər</a>
+                      <a href="{% url 'video' %}" title="FAQ">{% trans 'Video dərslər' %}</a>
                     </li>
                     <li>
                       <a href="{% url 'pdf' %}" target="_blank" title="FAQ"
@@ -244,26 +244,15 @@
             <div class="col-lg-3 col-md-6">
               <div class="our-link-box">
                 <div class="our-link-content">
-                  <h4 class="underline-title">Video dərslər</h4>
+                  <h4 class="underline-title">{% trans 'Video dərslər' %}</h4>
                   <ul>
+                  {% for cat in categories %}
                     <li>
-                      <a href="courses-list.html" title="Məntiq">Məntiq</a>
+                      {% if cat.id %}
+                      <a href="{% url 'video_category' cat.id %}" title="Məntiq">{{ cat.title }}</a>
+                      {% endif %}
                     </li>
-                    <li>
-                      <a href="courses-list.html" title="Riyaziyyat"
-                        >Riyaziyyat</a
-                      >
-                    </li>
-                    <li>
-                      <a href="courses-list.html" title="Ödənişsiz videolar"
-                        >Ödənişsiz videolar</a
-                      >
-                    </li>
-                    <li>
-                      <a href="courses-list.html" title="Learn Marketing"
-                        >Digər</a
-                      >
-                    </li>
+                  {% endfor %}
                   </ul>
                 </div>
               </div>

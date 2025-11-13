@@ -9,6 +9,10 @@ class News(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True, verbose_name='Yaradılma tarixi')
     is_active = models.BooleanField(default=True, null=True, verbose_name='Aktivdir?')
 
+    meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name='Meta Title')
+    meta_description = models.TextField(blank=True, null=True, verbose_name='Meta Description')
+    meta_keywords = models.TextField(blank=True, null=True, verbose_name='Meta Keywords')
+
     class Meta:
         verbose_name='Xəbərlər'
         verbose_name_plural='Xəbərlər'
@@ -54,6 +58,11 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Yaradılma tarixi')
     is_active = models.BooleanField(default=True, verbose_name='Aktivdir?')
     views_count = models.PositiveIntegerField(default=0, verbose_name='Baxış sayı')
+
+    meta_title = models.CharField(max_length=255, blank=True, null=True, verbose_name='Meta Title')
+    meta_description = models.TextField(blank=True, null=True, verbose_name='Meta Description')
+    meta_keywords = models.TextField(blank=True, null=True, verbose_name='Meta Keywords')
+
 
     class Meta:
         verbose_name = 'Kitab'
@@ -114,3 +123,61 @@ class IndexPDFBooks(models.Model):
         verbose_name='Ana səhifə Ödənişsiz Kitablar'
         verbose_name_plural='Ana Səhifə Ödənişsiz Kitablar'
 
+
+
+
+
+
+class MetaTags(models.Model):
+    PAGE_CHOICES = [
+        # --- info app ---
+        ('faq', 'FAQ'),
+        ('contact', 'Əlaqə'),
+        ('about', 'Haqqımızda'),
+        ('pdf', 'PDF Səhifəsi'),
+        ('search', 'Axtarış Nəticəsi'),
+
+        # --- exam app ---
+        ('exam_list', 'İmtahan Siyahısı'),
+        ('take_exam', 'İmtahan Hissəsi'),
+        ('exam_finish', 'İmtahan Nəticə'),
+        ('exam_review', 'İmtahan Rəy Yaz'),
+        ('exam_comments', 'İmtahan Rəyləri'),
+        ('exam_detail', 'İmtahan Məlumatı'),
+        
+
+        # --- main app ---
+        ('news', 'Xəbərlər'),
+        ('news_details', 'Xəbər Detalı'),
+        ('books', 'Kitablar'),
+        ('book_details', 'Kitab Detalı'),
+        ('index', 'Ana Səhifə'),
+
+        # --- user app ---
+        ('cart', 'Səbət'),
+        ('login', 'Daxil ol'),
+        ('register', 'Qeydiyyatdan keç'),
+        ('verify_email', 'Email Təsdiqi'),
+        ('account', 'Hesabım'),
+        ('password_reset', 'Şifrə Yenilə'),
+        ('password_reset_verify', 'OTP Təsdiqi'),
+        ('password_reset_confirm', 'Şifrə Yeniləmə'),
+
+        # --- video app ---
+        ('video_list', 'Videolar'),
+        ('video_info', 'Video Haqqında'),
+        ('free_video', 'Pulsuz Videolar'),
+        ('video_detail', 'Video Detalı'),
+    ]
+
+    page = models.CharField(max_length=50, choices=PAGE_CHOICES, unique=True, verbose_name='Səhifə')
+    title = models.CharField(max_length=255, blank=True, null=True, verbose_name='Title')
+    description = models.TextField(blank=True, null=True, verbose_name='Description')
+    keywords = models.TextField(blank=True, null=True, verbose_name='Keywords')
+
+    def __str__(self):
+        return self.get_page_display()
+
+    class Meta:
+        verbose_name = 'Saytın Meta Başlığı'
+        verbose_name_plural = 'Saytın Meta Başlıqları'
