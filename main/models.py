@@ -111,17 +111,17 @@ class IndexBooks(models.Model):
 
 
 
-class IndexPDFBooks(models.Model):
-    books = models.ManyToManyField(PDF, null=True, blank=True, verbose_name='Kitablar')
-    title_1 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq bikinci')
-    title_2 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq ikinci')
+# class IndexPDFBooks(models.Model):
+#     books = models.ManyToManyField(PDF, null=True, blank=True, verbose_name='Kitablar')
+#     title_1 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq bikinci')
+#     title_2 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq ikinci')
     
-    def __str__(self):
-        return f"{self.title_1 or 'Başlıqsız'}"
+#     def __str__(self):
+#         return f"{self.title_1 or 'Başlıqsız'}"
 
-    class Meta:
-        verbose_name='Ana səhifə Ödənişsiz Kitablar'
-        verbose_name_plural='Ana Səhifə Ödənişsiz Kitablar'
+#     class Meta:
+#         verbose_name='Ana səhifə Ödənişsiz Kitablar'
+#         verbose_name_plural='Ana Səhifə Ödənişsiz Kitablar'
 
 
 
@@ -181,3 +181,30 @@ class MetaTags(models.Model):
     class Meta:
         verbose_name = 'Saytın Meta Başlığı'
         verbose_name_plural = 'Saytın Meta Başlıqları'
+
+
+
+from django.core.exceptions import ValidationError
+
+class CartQuantityDiscount(models.Model):
+    min_quantity = models.PositiveIntegerField(verbose_name='Minimum cəm say')
+    max_quantity = models.PositiveIntegerField(verbose_name='Maksimum cəm say')
+    discount_percent = models.PositiveIntegerField(
+        verbose_name='Endirim faizi',
+        help_text='Məs: 10 = 10%'
+    )
+    is_active = models.BooleanField(default=True, verbose_name='Aktivdir?')
+
+    class Meta:
+        verbose_name = 'Səbət üzrə miqdar endirimi'
+        verbose_name_plural = 'Səbət üzrə miqdar endirimləri'
+        ordering = ['min_quantity']
+
+    def __str__(self):
+        return f"{self.min_quantity}-{self.max_quantity} → {self.discount_percent}%"
+
+
+
+    def clean(self):
+        if self.min_quantity > self.max_quantity:
+            raise ValidationError("Minimum cəm say maksimumdan böyük ola bilməz")

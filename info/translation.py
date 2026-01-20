@@ -18,7 +18,7 @@ class ContactTranslationOptions(TranslationOptions):
 
 @register(About)
 class AboutTranslationOptions(TranslationOptions):
-    fields = ('title', 'description', 'statistic_1_title', 'statistic_1_description', 'statistic_2_title', 'statistic_2_description')
+    fields = ('title', 'description', 'statistic_1_title', 'statistic_1_description', 'statistic_2_title', 'statistic_2_description', 'image_2_title_1', 'image_2_title_2')
 
 
 @register(Statistic)
@@ -41,3 +41,25 @@ class PdfTranslationOptions(TranslationOptions):
 @register(LogoFavicon)
 class LogoFaviconTranslationOptions(TranslationOptions):
     fields = ('footer_description',)
+
+
+
+@register(BookFree)
+class BookFreeTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+@register(Test)
+class TestTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+@register(Expanation)
+class ExpanationTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+@register(BookFreeCategory)
+class BookFreeCategoryTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+@register(Course)
+class CourseTranslationOptions(TranslationOptions):
+    fields = ('description',)

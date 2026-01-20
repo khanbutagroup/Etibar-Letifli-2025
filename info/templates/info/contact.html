@@ -126,7 +126,7 @@
                   <div class="contact-us-link-text">
                     <a
                       href=""
-                      title="1247/Plot No. 39, 15th Phase, Colony, Kukatpally, Hyderabad"
+                      title="{{ contact.location }}"
                       target="_blank"
                       >{{ contact.location }}</a
                     >
@@ -154,9 +154,11 @@
                     <a href="tel:9873654987" title="{{ contact.phone_1 }}"
                       >{{ contact.phone_1 }}</a
                     >
+                    {% if contact.phone_2 %}
                     <a href="tel:9875621254" title="{{ contact.phone_2 }}"
                       >{{ contact.phone_2 }}</a
                     >
+                    {% endif %}
                   </div>
                 </div>
               </div>
@@ -185,6 +187,7 @@
                         >{{ contact.email_1 }}</span
                       ></a
                     >
+                    {% if contact.email_2 %}
                     <a href="mailto:{{ contact.email_2 }}" title="{{ contact.email_2 }}"
                       ><span
                         class="__cf_email__"
@@ -192,6 +195,7 @@
                         >{{ contact.email_2 }}</span
                       ></a
                     >
+                    {% endif %}
                   </div>
                 </div>
               </div>

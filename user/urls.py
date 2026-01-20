@@ -19,4 +19,9 @@ urlpatterns = [
     path('password-reset/<int:user_id>/', password_reset_verify, name='password_reset_verify'),
     path('password-reset-confirm/<int:user_id>/', password_reset_confirm, name='password_reset_confirm'),
 
+
+    path('return-policy/', return_policy_views, name='return_policy'),
+    path('privacy-policy/', privacy_policy_views, name='privacy_policy'),
+    path('site-info/', site_info_views, name='site_info'),
+
 ]

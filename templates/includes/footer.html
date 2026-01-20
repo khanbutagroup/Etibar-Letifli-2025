@@ -1,7 +1,99 @@
 {% load static %}
 {% load i18n %}
 
+<style>
+      .sticky-wp {
+        position: fixed;
+        bottom: 120px;
+        right: 45px;
+        width: 50px;
+        height: 50px;
+        line-height: 58px;
+        border-radius: 50%;
+        text-align: center;
+        background-color: #1ceb1c;
+        z-index: 1000;
+        position: fixed;
+      }
 
+      /* Pulse Animation */
+      .sticky-wp::before,
+      .sticky-wp::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #1ceb1c;
+        opacity: 0.6;
+        z-index: -1;
+        animation: pulse 2s infinite ease-out;
+      }
+
+      .sticky-wp::after {
+        animation-delay: 0.7s;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+      }
+
+      .sticky-wp i {
+        font-size: 25px;
+        color: white;
+      }
+
+      @media (max-width: 992px) {
+        .sticky-wp {
+          position: fixed;
+          bottom: 84px;
+          right: 23px;
+          width: 40px;
+          height: 40px;
+          line-height: 45px;
+          border-radius: 50%;
+
+        }
+
+        /* Pulse Animation */
+        .sticky-wp::before,
+        .sticky-wp::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: #1ceb1c;
+          opacity: 0.6;
+          z-index: -1;
+          animation: pulse 2s infinite ease-out;
+        }
+
+        .sticky-wp::after {
+          animation-delay: 0.7s;
+        }
+        .sticky-wp i {
+          font-size: 20px;
+        }
+      }
+    </style>
+
+    <div class="sticky-wp">
+      <a href="https://wa.me/{{ sosial.whatsapp }}" target="_blank"
+        ><i class="fab fa-whatsapp"></i
+      ></a>
+    </div>
         <!-- Apply Now Start -->
     <section class="apply-now-sec">
       <div class="container">
@@ -94,14 +186,7 @@
             />
           </div>
 
-          <div class="bg-aliment-6 zoom-fade-animation">
-            <img
-              src="{% static 'assets/images/aliment-03.svg' %}"
-              width="29"
-              height="29"
-              alt="Aliment"
-            />
-          </div>
+       
           <div class="bg-aliment-7 zoom-fade-animation">
             <img
               src="{% static 'assets/images/aliment-03.svg' %}"
@@ -163,7 +248,7 @@
                   </p>
                 </div>
                 <div class="social-info">
-                  <h4 class="underline-title">Bizi izlə</h4>
+                  <h4 class="underline-title">{% trans 'Bizi izlə' %}</h4>
                   <div class="footer-social-icons">
                 {% if sosial %}
                   {% if sosial.facebook %}
@@ -230,7 +315,7 @@
                     </li>
                     <li>
                       <a href="{% url 'pdf' %}" target="_blank" title="FAQ"
-                        >{% trans 'Pd yüklə' %}</a
+                        >{% trans 'Pdf yüklə' %}</a
                       >
                     </li>
                     <li><a href="{% url 'news' %}" title="Blog">{% trans 'Xəbərlər' %}</a></li>
@@ -244,15 +329,26 @@
             <div class="col-lg-3 col-md-6">
               <div class="our-link-box">
                 <div class="our-link-content">
-                  <h4 class="underline-title">{% trans 'Video dərslər' %}</h4>
+                  <h4 class="underline-title">{% trans 'Hüquqi məlumatlar' %}</h4>
                   <ul>
-                  {% for cat in categories %}
+
                     <li>
-                      {% if cat.id %}
-                      <a href="{% url 'video_category' cat.id %}" title="Məntiq">{{ cat.title }}</a>
-                      {% endif %}
+
+                      <a href="{% url 'privacy_policy' %}" title="Məxfilik siyasəti">{% trans 'Məxfilik siyasəti' %}</a>
+
                     </li>
-                  {% endfor %}
+
+                    <li>
+
+                      <a href="{% url 'site_info' %}" title="İsdifadə qaydaları">{% trans 'İstifadə qaydaları' %}</a>
+
+                    </li>
+
+                    <li>
+
+                      <a href="{% url 'return_policy' %}" title="Geri qaytarma siyasəti">{% trans 'Geri qaytarma siyasəti' %}</a>
+
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -334,10 +430,7 @@
             <div class="col-lg-12">
               <div class="footer-bottom-box">
                 <div class="copy-right">
-                  <p>
-                    {% trans 'Developed' %}
-                    <a href="https://khanbutagroup.az/" target="_blank" title="1 s">Khan Buta Group</a>
-                  </p>
+                 
                   <p>
                     {% trans 'Copyright' %} © <span id="copy-right-year"></span>
                     <a href="" target="_blank" title="1 s">Etibar Latifli</a>.

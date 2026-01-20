@@ -855,9 +855,10 @@ textarea.form-input {
 .bottom-header {
   display: flex;
   align-items: center;
-  height: 90px;
+  height: 110px;
   background: transparent;
   transition: var(--transition);
+
 }
 
 .site-branding {
@@ -878,7 +879,7 @@ textarea.form-input {
 .main-navigation ul li {
   display: inline-block;
   position: relative;
-  margin-right: 26px;
+  margin-right: 14px;
 }
 
 .main-navigation ul li:last-child {
@@ -5244,7 +5245,7 @@ textarea.form-input {
 @media screen and (min-width: 992px) {
   .sticky-header {
     top: calc(var(--top-header-height) * -1);
-    top: -87px;
+    top: -106px;
   }
   .sticky-header .navbar-menu {
     padding: 15px 0;
@@ -5350,7 +5351,7 @@ textarea.form-input {
   }
 
   .main-navigation ul li {
-    margin-right: 30px;
+    margin-right: 14px;
   }
 
   .main-banner-bg-aliment-wp .bg-aliment-1 {
@@ -7333,6 +7334,7 @@ textarea.form-input {
 
 .site-branding img {
   width: 100%;
+  height: 100px;
 }
 @media screen and (max-width: 575px) {
   .container {
@@ -8786,7 +8788,7 @@ textarea.form-input {
 }
 
 .exams-page .buy-btn {
-  display: inline-block;
+  /* display: inline-block;
   background: #ff6100;
   color: #fff;
   border: none;
@@ -8795,7 +8797,19 @@ textarea.form-input {
   font-size: 14px;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.3s;
+  transition: background 0.3s; */
+    display: block;              /* 🔹 butonu tam sətrə yayıb */
+    width: 100%;                 /* 🔹 kartın bütün enini tutsun */
+    background: #ff6100;         /* 🔹 narıncı rəng */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;              /* 🔹 yuxarı-aşağı aralıq, amma yan tərəf sıfır */
+    font-size: 14px;
+    text-align: center;          /* 🔹 mətni ortala */
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
 }
 
 .exams-page .buy-btn:hover {
@@ -9816,4 +9830,37 @@ textarea.form-input {
 .all-comments .rating {
     text-align: start;
 }
+}
+
+@media (max-width: 380px) {
+      .main-navigation {
+        gap: 8px;
+    }    .main-navigation {
+        padding-right: 43px;
+    }
+    .col-xxl-9.col-lg-10.col-6{
+      padding: 7px;
+    }
+        .header-icon-wp {
+        gap: 10px;
+    }
+}
+
+
+@media (max-width: 992px) {
+  .site-branding img {
+    height: 70px;
+    object-fit: contain;
+    width: 80px;
+  }
+}
+
+
+.footer-logo img{ width:150px}
+
+
+
+.exam-active {
+  color: #f5b400 !important; /* sarı */
+  font-weight: 600;
 }

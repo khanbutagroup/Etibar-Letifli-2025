@@ -99,7 +99,7 @@
                 data-wow-duration="0.8s"
                 data-wow-delay="0.5s"
               >
-                <a href="{{ idnex_slider.url }}" class="sec-btn" title="Get Started">
+                <a href="{{ index_slider.url }}" class="sec-btn" title="Get Started">
                   <span>{{ index_slider.url_title }}</span>
                 </a>
               </div>
@@ -140,7 +140,7 @@
                   />
                 </div>
                 <div class="congra-text">
-                  <a href="kurs">
+                  <a>
                     <h5 class="h5-title">{{ index_slider.image_2_title}}</h5>
                     <p>{{ index_slider.image_2_title_2 }}</p>
                   </a>
@@ -568,7 +568,7 @@
           <div class="col-lg-12">
             <div class="our-event-content">
               <div class="sec-title text-center">
-                {% for i in index_pdf %}
+                {% for i in feature_items %}
 
                     <span class="sub-title">{{ i.title_1 }}</span>
                     <h2 class="h2-title">{{ i.title_2 }}</h2>
@@ -576,49 +576,77 @@
                 {% endfor %}
               </div>
               <div class="our-event-box-wp">
-              {% for i in index_pdf %}
+              {% for item in feature_items %}
 
-                  {% for book in i.books.all %}
-                    <div
-                      class="our-event-box wow fadeup-animation"
-                      data-wow-duration="0.8s"
-                      data-wow-delay="0.2s"
-                    >
-                      <div class="our-event-image-text">
-                        <div class="our-event-image">
-                          <img
-                            src="{{ book.image.url }}"
-                            width="270"
-                            height="150"
-                            alt="Event Image"
-                          />
-                        </div>
-                        <div class="our-event-text">
-                          <div class="our-event-title">
-                            <a
-                              href="{{ book.pdf.url }}"
-                              target="_blank"
-                              title="{{ book.title }}"
-                            >
-                              <h4 class="h4-title">{{ book.title }}</h4>
-                            </a>
-                          </div>
-                          <div class="our-event-btn">
-                            <a
-                              href="{{ book.pdf.url }}"
-                              target="_blank"
-                              class="sec-btn"
-                              download="{{ book.pdf.url }}"
-                              title=""
-                              ><span>{% trans 'Yüklə' %}</span></a
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  {% endfor %}
+  {% comment %} Hamısı eyni görünüşdə, heç bir CSS dəyişmədən {% endcomment %}
+  {% for obj in item.books.all %}
+    <div class="our-event-box wow fadeup-animation" data-wow-duration="0.8s" data-wow-delay="0.2s">
+      <div class="our-event-image-text">
+        <div class="our-event-image">
+          <img src="{{ obj.image.url }}" width="270" height="150" alt="{{ obj.title }}" />
+        </div>
+        <div class="our-event-text">
+          <div class="our-event-title">
+            <a href="{{ obj.pdf.url }}" target="_blank" title="{{ obj.title }}">
+              <h4 class="h4-title">{{ obj.title }}</h4>
+            </a>
+          </div>
+          <div class="our-event-btn">
+            <a href="{{ obj.pdf.url }}" target="_blank" class="sec-btn" download="{{ obj.pdf.url }}">
+              <span>{% trans 'Yüklə' %}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 
-              {% endfor %}
+  {% for obj in item.tests.all %}
+    <div class="our-event-box wow fadeup-animation" data-wow-duration="0.8s" data-wow-delay="0.2s">
+      <div class="our-event-image-text">
+        <div class="our-event-image">
+          <img src="{{ obj.image.url }}" width="270" height="150" alt="{{ obj.title }}" />
+        </div>
+        <div class="our-event-text">
+          <div class="our-event-title">
+            <a href="{{ obj.pdf.url }}" target="_blank" title="{{ obj.title }}">
+              <h4 class="h4-title">{{ obj.title }}</h4>
+            </a>
+          </div>
+          <div class="our-event-btn">
+            <a href="{{ obj.pdf.url }}" target="_blank" class="sec-btn" download="{{ obj.pdf.url }}">
+              <span>{% trans 'Yüklə' %}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for obj in item.explanations.all %}
+    <div class="our-event-box wow fadeup-animation" data-wow-duration="0.8s" data-wow-delay="0.2s">
+      <div class="our-event-image-text">
+        <div class="our-event-image">
+          <img src="{{ obj.image.url }}" width="270" height="150" alt="{{ obj.title }}" />
+        </div>
+        <div class="our-event-text">
+          <div class="our-event-title">
+            <a href="{{ obj.pdf.url }}" target="_blank" title="{{ obj.title }}">
+              <h4 class="h4-title">{{ obj.title }}</h4>
+            </a>
+          </div>
+          <div class="our-event-btn">
+            <a href="{{ obj.pdf.url }}" target="_blank" class="sec-btn" download="{{ obj.pdf.url }}">
+              <span>{% trans 'Yüklə' %}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endfor %}
+
 
                 
               </div>

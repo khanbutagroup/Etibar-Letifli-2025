@@ -9,4 +9,8 @@ urlpatterns = [
     path('pdf/', pdf_views, name='pdf'),
     path('subscribe/', subscribe_view, name='subscribe'),
     path('search/', global_search, name='search'),
+
+    path('book-free/', book_free_views, name='book_free'),
+    path('test/', test_views, name='test'),
+    path('expanation/', expanation_views, name='expanation'),
 ]

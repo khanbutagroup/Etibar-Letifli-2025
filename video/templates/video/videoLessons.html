@@ -18,10 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+
     <!-- Bootstrap CSS Link -->
     <link
       rel="stylesheet"
@@ -51,7 +48,6 @@
   </head>
 {% endblock %}
 {% block main %}
-
     <!-- Banner Start -->
     <section class="inner-banner">
       <div class="main-banner-bg-shape">
@@ -90,73 +86,119 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="banner-content text-center">
-              <h1 class="h1-title">{% trans 'Video dərslər' %}</h1>
+              <h1 class="h1-title">{% trans 'İmtahanlar' %}</h1>
               <div class="banner-breadcrum">
                 <ul>
                   <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
-                  <li><i class="fa-solid fa-angle-right"></i></li>
-                  <li>{% trans 'Video dərslər' %}</li>
+    {% if selected_category %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li><a href="{% url 'exam_list' %}?category={{ selected_category.id }}">{{ selected_category.title }}</a></li>
+    {% endif %}
+
+    {% if selected_subcategory %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li><a href="{% url 'exam_list' %}?subcategory={{ selected_subcategory.id }}">{{ selected_subcategory.title }}</a></li>
+    {% endif %}
+
+
+
+
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
+          <style>
+.empty-description-wrapper {
+    display: flex;
+    justify-content: center; /* horizontal mərkəz */
+    align-items: center;    /* vertikal mərkəz */
+    text-align: center;     /* mətnin ortalanması */
+    min-height: 300px;      /* səhifədə boşluq olsun */
+    padding: 50px 20px;     /* istəyə görə */
+    font-size: 1.2rem;      /* istəyə görə */
+    color: #333;            /* mətni qaranlıq rəngdə */
+}
+
+
+    </style>
+  {% if not videos %}
+      <div class="empty-description-wrapper">
+          {{ course_video_description|safe }}
+      </div>
+  {% endif %}
     </section>
     <!-- Banner End -->
-    <!-- Top Course Start -->
-    <section class="top-course-sec sec-space-top sec-bg">
-      <div class="container">
-        <div
-          class="grid wow fadeup-animation video-area"
-          data-wow-duration="0.8s"
-          data-wow-delay="0.4s"
-        >
 
-            {% for i in videos %}
-              <div class="grid-item">
-                <div class="common-post-card">
-                  <div class="post-image-box-wp video-layer">
-                    <div class="post-image pdf-image">
-                      <img
-                        src="{{ i.image.url }}"
-                        width="356"
-                        height="230"
-                        alt="Course Image"
-                      />
-                    </div>
-                    <div class="post-tag video-tag">
-                      <span><i class="fa fa-play"></i></span>
-                    </div>
-                  </div>
-                  <div class="common-post-content">
-                    <div class="post-content-title">
-                      <h4 class="h4-title">{{ i.title }}</h4>
-                    </div>
+    <!-- Exams Start -->
+    <div class="exams-page">
+      <div class="container">
+        <div class="row sec-space">
+          <!-- Sidebar -->
+          <button class="button-show">{% trans 'Filtr' %}</button>
+<div class="sidebar">
+  <h3>Filter</h3>
+  <nav class="exams-nav menu">
+
+    {% for category in categories %}
+      <a href="?category={{ category.id }}"
+         class="exam-language {% if selected_category == category.id %}exam-active{% endif %}">
+        {{ category.title }}
+      </a>
+
+      <div class="sub-menu">
+        {% for sub in category.videosubcategory_set.all %}
+          <a href="?category={{ category.id }}&subcategory={{ sub.id }}"
+             class="{% if selected_subcategory == sub.id %}exam-active{% endif %}">
+            {{ sub.title }}
+          </a>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+  </nav>
+</div>
+
+
+<div class="products" id="exams-products">
+
+  {% for video in videos %}
+    <div class="card">
+      {% if video.image %}
+        <img src="{{ video.image.url }}" alt="{{ video.title }}">
+      {% endif %}
+
+      <h4>{{ video.title }}</h4>
+
+      {% if video.price %}
                     <div class="course-price">
-                      <h4 class="h4-title">{{ i.price }}₼</h4>
-                      {% if i.old_price %}
-                      <h4 class="h4-title prev-price">{{ i.old_price }}₼</h4>
+                      <h4 class="h4-title">{{ video.price }}₼</h4>
+                      {% if video.old_price %}
+                      <h4 class="h4-title prev-price">{{ video.old_price }}₼</h4>
                       {% endif %}
                     </div>
-                    <div class="header-btn">
-                      <a href="{% url 'video_detail' i.id %}" class="sec-btn mt-0" title="Get Started"
-                        ><span>{% trans 'İndi al' %}</span></a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
+      {% endif %}
 
-          
+      <a href="{% url 'video_detail' video.id %}" class="buy-btn">
+        {% trans 'İndi al' %}
+      </a>
+    </div>
+    {% empty %}
+      <p>{{ empty_description|safe }}</p>
+  {% endfor %}
+
+</div>
+
+
         </div>
       </div>
-    </section>
-    <!-- Top Course End -->
-{% endblock %}
+    </div>
 
+    <!-- Exams End -->
+{% endblock %}
 {% block js %}
+
     <!-- Back To Top Start -->
     <div class="scroll-to-top">
       <svg
@@ -171,10 +213,7 @@
     <!-- Back To Top End -->
 
     <!-- Jquery JS Link -->
-    <script
-      data-cfasync="false"
-      src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-    ></script>
+
     <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}"></script>
 
     <!-- Bootstrap JS Link -->
@@ -186,9 +225,6 @@
     <!-- Bg Moving JS Link -->
     <script src="{% static 'assets/js/bg-moving.js' %}"></script>
 
-    <!-- Isotope JS Link -->
-    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
-
     <!-- Wow Animation JS Link -->
     <script src="{% static 'assets/js/wow.min.js' %}"></script>
 
@@ -198,4 +234,9 @@
 
     <!-- Back To Top JS Link -->
     <script src="{% static 'assets/js/back-to-top.js' %}"></script>
+    <script>
+      $('.button-show').on('click', function () {
+        $('.sidebar').toggleClass('active')
+      })
+    </script>
 {% endblock %}

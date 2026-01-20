@@ -157,12 +157,18 @@
           <div class="summary-item">
             <span>{% trans 'Qiymət' %}</span><span id="subtotal">{{ cart.get_total_price }}₼</span>
           </div>
+
+          <div class="summary-item discount" style="display: none;">
+            <span>{% trans 'Endirim' %} (<span id="discount-percent">0%</span>)</span>
+            <span id="discount">0₼</span>
+          </div>
+
           <div class="summary-item">
-            <span>{% trans 'Çatdırılma' %}</span><span id="delivery">2.00₼</span>
+            <span>{% trans 'Çatdırılma' %}</span><span id="delivery">{{ delivery.price|default:0 }}₼</span>
           </div>
           <hr />
           <div class="summary-item total">
-            <span>{% trans 'Yekun məbləğ' %}</span><span id="grandtotal">{{ cart.get_total_price|add:2 }}₼</span>
+            <span>{% trans 'Yekun məbləğ' %}</span><span id="grandtotal">{{ cart.get_total_price|add:delivery.price|default:0 }}₼</span>
           </div>
 
           <button id="whatsappOrder" class="whatsapp-btn">{% trans 'Sifariş et' %}</button>
@@ -175,6 +181,18 @@
 
 
 {% endblock %}
+<script id="cartDiscounts" type="application/json">
+[
+  {% for d in cart_discounts %}
+    {
+      "min": {{ d.min_quantity }},
+      "max": {{ d.max_quantity }},
+      "percent": {{ d.discount_percent }},
+      "is_active": {{ d.is_active|yesno:"true,false" }}
+    }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+]
+</script>
 
 {% block js %}
     <!-- Back To Top Start -->
@@ -211,90 +229,121 @@
 
     <!-- Back To Top JS Link -->
     <script src="{% static 'assets/js/back-to-top.js' %}"></script>
-    <script>
-      document.querySelectorAll(".qty").forEach((box) => {
-        const minusBtn = box.querySelector(".minus");
-        const plusBtn = box.querySelector(".plus");
-        const input = box.querySelector("input");
-        const row = box.closest("tr");
-        const price = parseFloat(row.querySelector(".price").innerText);
+<script id="cartDiscounts" type="application/json">
+[
+  {% for d in cart_discounts %}
+    {
+      "min": {{ d.min_quantity }},
+      "max": {{ d.max_quantity }},
+      "percent": {{ d.discount_percent }},
+      "is_active": {{ d.is_active|yesno:"true,false" }}
+    }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+]
+</script>
 
-        // CSRF token üçün funksiya
-        const getCookie = (name) => {
-          let cookieValue = null;
-          if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              if (cookie.substring(0, name.length + 1) === name + "=") {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-              }
-            }
-          }
-          return cookieValue;
-        };
-
-        // Backend-ə göndər (say dəyişəndə sessiyada da yenilə)
-        const updateBackend = (bookId, qty) => {
-          fetch("{% url 'cart_update' %}", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              "X-CSRFToken": getCookie("csrftoken"),
-            },
-            body: new URLSearchParams({
-              book_id: bookId,
-              quantity: qty
-            })
-          })
-          .then(res => res.json())
-          .then(data => {
-            if (data.success) {
-              updateCartTotal();
-            }
-          });
-        };
-
-        // Hər sətrin ümumi qiymətini yenilə
-        const updateRow = () => {
-          const qty = parseInt(input.value);
-          const total = (price * qty).toFixed(2);
-          row.querySelector(".item-total").innerText = total + "₼";
-        };
-
-        // Bütün məhsulların cəmini və yekunu yenilə
-        const updateCartTotal = () => {
-          let subtotal = 0;
-          document.querySelectorAll(".item-total").forEach(el => {
-            subtotal += parseFloat(el.innerText);
-          });
-
-          const delivery = parseFloat(document.getElementById("delivery").innerText);
-          const grandtotal = (subtotal + delivery).toFixed(2);
-
-          document.getElementById("subtotal").innerText = subtotal.toFixed(2) + "₼";
-          document.getElementById("grandtotal").innerText = grandtotal + "₼";
-        };
-
-        plusBtn.addEventListener("click", () => {
-          const newQty = parseInt(input.value) + 1;
-          input.value = newQty;
-          updateRow();
-          updateBackend(input.dataset.bookId, newQty);
-        });
-
-        minusBtn.addEventListener("click", () => {
-          const newQty = parseInt(input.value) - 1;
-          if (newQty >= 1) {
-            input.value = newQty;
-            updateRow();
-            updateBackend(input.dataset.bookId, newQty);
-          }
-        });
-      });
-    </script>
 <script>
+  const cartDiscounts = JSON.parse(document.getElementById("cartDiscounts").textContent);
+
+  const calculateCartDiscountPercent = (totalQty) => {
+    let percent = 0;
+    cartDiscounts.forEach(d => {
+      if(d.is_active && totalQty >= d.min && totalQty <= d.max) percent = d.percent;
+    });
+    return percent;
+  };
+
+  const updateCartTotals = () => {
+    let subtotal = 0;
+    let totalQty = 0;
+
+    document.querySelectorAll(".cart-items tbody tr").forEach(row => {
+      const qty = parseInt(row.querySelector(".qty input").value);
+      const price = parseFloat(row.querySelector(".price").innerText.replace("₼",""));
+      const total = qty * price;
+      row.querySelector(".item-total").innerText = total.toFixed(2) + "₼";
+
+      subtotal += total;
+      totalQty += qty;
+    });
+
+    const discountPercent = calculateCartDiscountPercent(totalQty);
+    const discountAmount = (subtotal * discountPercent / 100).toFixed(2);
+    const delivery = parseFloat(document.getElementById("delivery").innerText.replace("₼",""));
+    const grandtotal = (subtotal - discountAmount + delivery).toFixed(2);
+
+    document.getElementById("subtotal").innerText = subtotal.toFixed(2) + "₼";
+
+    const discountEl = document.getElementById("discount");
+    if(discountEl){
+      if(discountPercent > 0){
+        discountEl.innerText = `-${discountAmount}₼`;
+        discountEl.previousElementSibling.innerText = `Endirim (${discountPercent}%)`;
+        discountEl.parentElement.style.display = "flex"; // göstər
+      } else {
+        discountEl.parentElement.style.display = "none"; // endirim yoxdursa gizlət
+      }
+    }
+
+    document.getElementById("grandtotal").innerText = grandtotal + "₼";
+  };
+
+  document.querySelectorAll(".qty").forEach((box) => {
+    const minusBtn = box.querySelector(".minus");
+    const plusBtn = box.querySelector(".plus");
+    const input = box.querySelector("input");
+
+    const getCookie = (name) => {
+      let cookieValue = null;
+      if(document.cookie && document.cookie !== ""){
+        document.cookie.split(";").forEach(cookie => {
+          if(cookie.trim().startsWith(name + "=")){
+            cookieValue = decodeURIComponent(cookie.trim().substring(name.length+1));
+          }
+        });
+      }
+      return cookieValue;
+    };
+
+    const updateBackend = (bookId, qty) => {
+      fetch("{% url 'cart_update' %}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: new URLSearchParams({ book_id: bookId, quantity: qty })
+      })
+      .then(res => res.json())
+      .then(data => { if(data.success) updateCartTotals(); });
+    };
+
+    const updateRow = () => {
+      const qty = parseInt(input.value);
+      const row = input.closest("tr");
+      const price = parseFloat(row.querySelector(".price").innerText.replace("₼",""));
+      const total = qty * price;
+      row.querySelector(".item-total").innerText = total.toFixed(2) + "₼";
+    };
+
+    plusBtn.addEventListener("click", () => {
+      input.value = parseInt(input.value) + 1;
+      updateRow();
+      updateBackend(input.dataset.bookId, input.value);
+      updateCartTotals();
+    });
+
+    minusBtn.addEventListener("click", () => {
+      if(parseInt(input.value) > 1){
+        input.value = parseInt(input.value) - 1;
+        updateRow();
+        updateBackend(input.dataset.bookId, input.value);
+        updateCartTotals();
+      }
+    });
+  });
+
+  // WhatsApp sifarişi
   document.getElementById("whatsappOrder").addEventListener("click", () => {
     const products = [];
     document.querySelectorAll(".cart-items tbody tr").forEach(row => {
@@ -302,33 +351,44 @@
       const quantity = row.querySelector(".qty input")?.value;
       const price = row.querySelector(".price")?.innerText;
       const total = row.querySelector(".item-total")?.innerText;
-
-      if (title && quantity && price) {
-        products.push(`${title} — ${quantity} ədəd × ${price} = ${total}`);
-      }
+      if(title && quantity && price) products.push(`${title} — ${quantity} ədəd × ${price} = ${total}`);
     });
 
     const subtotal = document.getElementById("subtotal").innerText;
     const delivery = document.getElementById("delivery").innerText;
     const grandtotal = document.getElementById("grandtotal").innerText;
 
-    // WhatsApp mesajı mətni
+    const discountEl = document.getElementById("discount");
+    const discountAmount = discountEl ? discountEl.innerText : "0₼";
+    const discountPercentEl = document.querySelector(".summary-item.discount span");
+    const discountPercent = discountPercentEl ? discountPercentEl.innerText.match(/\d+/)?.[0] + "%" : "0%";
+
     const message = 
       `🛒 Yeni sifariş:\n\n` +
       products.join("\n") +
       `\n\n📦 Qiymət: ${subtotal}` +
+      `\n🏷️ Endirim: ${discountAmount} (${discountPercent})` +
       `\n🚚 Çatdırılma: ${delivery}` +
       `\n💰 Yekun məbləğ: ${grandtotal}`;
 
-
-    const phone = "{{ sosial.whatsapp }}"; // 
-
-  
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+    const phone = "{{ sosial.whatsapp }}";
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
   });
-</script>
+  const discountDiv = document.querySelector(".summary-item.discount");
+  const discountAmountEl = document.getElementById("discount");
+  const discountPercentEl = document.getElementById("discount-percent");
 
+  if(discountPercent > 0){
+      discountAmountEl.innerText = `-${discountAmount}₼`;
+      discountPercentEl.innerText = `${discountPercent}%`;
+      discountDiv.style.display = "flex"; // göstərin
+  } else {
+      discountDiv.style.display = "none"; // gizlədin
+  }
+
+  // Səhifə yüklənəndə total-u update et
+  updateCartTotals();
+</script>
 
 
     

@@ -3,25 +3,34 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import timedelta
 from video.models import *
+from info.models import *
 
-def video_views(request, category_id=None, sub_category_id=None):
-    videos = Video.objects.filter(is_active=True).select_related('category', 'sub_category')
+
+def video_views(request):
+    courses = Course.objects.filter(content_type='video')
+
+    category_id = request.GET.get('category')
+    sub_category_id = request.GET.get('subcategory')
+
+    videos = Video.objects.filter(is_active=True)
 
     if category_id:
         videos = videos.filter(category_id=category_id)
 
     if sub_category_id:
-        videos.filter(sub_category_id=sub_category_id)
+        videos = videos.filter(sub_category_id=sub_category_id)
 
-    categories = VideoCategory.objects.all()
+    categories = VideoCategory.objects.prefetch_related('videosubcategory_set').all()
 
     context = {
         'videos': videos,
-        'category_id': category_id,
-        'sub_category_id': sub_category_id,
         'categories': categories,
+        'selected_category': int(category_id) if category_id else None,
+        'selected_subcategory': int(sub_category_id) if sub_category_id else None,
+        'courses': courses,
     }
     return render(request, 'video/videoLessons.html', context)
+
 
 
 

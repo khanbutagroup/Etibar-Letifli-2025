@@ -1,6 +1,8 @@
+import random
+
 from django.db import models
 from django.contrib.auth.models import User
-import random
+from ckeditor.fields import RichTextField
 
 PURPOSE_CHOICES = (
     ('register', 'Register'),
@@ -35,3 +37,43 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - Profile"
+
+
+
+
+class DeliveryPrice(models.Model):
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Qiymət (AZN)")
+
+    class Meta:
+        verbose_name = "Çatdırılma qiyməti"
+        verbose_name_plural = "Çatdırılma qiymətləri"
+
+
+
+
+class PrivacyPolicy(models.Model):
+    title = RichTextField(null=True, blank=True, verbose_name='Başlıq')
+    description = RichTextField(null=True, blank=True, verbose_name='Məzmun')
+
+    class Meta:
+        verbose_name='Məxfilik Siyasəti'
+        verbose_name_plural='Məxfilik Siyasəti'
+
+
+
+class SiteInfo(models.Model):
+    title = RichTextField(null=True, blank=True, verbose_name='Başlıq')
+    description = RichTextField(null=True, blank=True, verbose_name='Məzmun')
+
+    class Meta:
+        verbose_name='İsdifadə Qaydaları'
+        verbose_name_plural='İsdifadə Qaydaları'
+
+
+class ReturnPolicy(models.Model):
+    title = RichTextField(null=True, blank=True, verbose_name='Başlıq')
+    description = RichTextField(null=True, blank=True, verbose_name='Məzmun')
+
+    class Meta:
+        verbose_name='Geri Qaytarma Siyasəti'
+        verbose_name_plural='Geri Qaytarma Siyasəti'

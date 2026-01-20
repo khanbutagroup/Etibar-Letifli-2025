@@ -177,3 +177,84 @@ class Subscribe(models.Model):
         verbose_name='Abonə Olanlar'
         verbose_name_plural='Abonə Olanlar'
 
+
+
+
+class BookFreeCategory(models.Model):
+    title = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq')
+
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='Sual Kitabçaları Kateqoriyası'
+        verbose_name_plural='Sual Kitabçaları Kateqoriyaları'
+
+
+class BookFree(models.Model):
+    category = models.ForeignKey(BookFreeCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Kateqoriya')
+    title = models.TextField(null=True, blank=True, verbose_name='Başlıq')
+    image = models.ImageField(upload_to='bookfree/', null=True, blank=True, verbose_name='Şəkil')
+    pdf = models.FileField(upload_to='prf/', null=True, blank=True, verbose_name='PDF')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Yaranma tarixi')
+ 
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='Sual Kitabçaları'
+        verbose_name_plural='Sual Kitabçaları'
+
+class Test(models.Model):
+    title = models.TextField(null=True, blank=True, verbose_name='Başlıq')
+    image = models.ImageField(upload_to='bookfree/', null=True, blank=True, verbose_name='Şəkil')
+    pdf = models.FileField(upload_to='prf/', null=True, blank=True, verbose_name='PDF')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Yaranma tarixi')
+
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='Test'
+        verbose_name_plural='Testlər'
+
+class Expanation(models.Model):
+    title = models.TextField(null=True, blank=True, verbose_name='Başlıq')
+    image = models.ImageField(upload_to='bookfree/', null=True, blank=True, verbose_name='Şəkil')
+    pdf = models.FileField(upload_to='prf/', null=True, blank=True, verbose_name='PDF')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Yaranma tarixi')
+
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='İzah'
+        verbose_name_plural='İzahlar'
+
+
+class FeatureItem(models.Model):
+    title_1 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq bikinci')
+    title_2 = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq ikinci')
+    books = models.ManyToManyField('BookFree', blank=True, verbose_name='Sual Kitabçaları')
+    tests = models.ManyToManyField('Test', blank=True, verbose_name='Testlər')
+    explanations = models.ManyToManyField('Expanation', blank=True, verbose_name='İzahlar')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Ana Səhifə Pulsuz resurslar'
+        verbose_name_plural = 'Ana Səhifə Pulsuz resurslar'
+
+
+# Constant seçimlər
+CONTENT_TYPE_CHOICES = [
+    ('video', 'Video Dərslər'),
+    ('exam', 'Online İmtahanlar'),
+]
+
+class Course(models.Model):
+    content_type = models.CharField(max_length=10, choices=CONTENT_TYPE_CHOICES, default='video', verbose_name="Məzmun Növü")
+    description = RichTextField(blank=True, verbose_name="Təsvir")
+
+    class Meta:
+        verbose_name='İsdifadəçiyə məlumat mesajı'
+        verbose_name_plural='İsdifadəçiyə məlumat mesajı'

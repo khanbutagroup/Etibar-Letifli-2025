@@ -6,48 +6,73 @@ from django.contrib import messages
 from exam.models import *
 
 def exam_list(request):
+    
     category_id = request.GET.get('category')
     subcategory_id = request.GET.get('subcategory')
     subsubcategory_id = request.GET.get('subsubcategory')
     subsubsubcategory_id = request.GET.get('subsubsubcategory')
 
-    exams = Exam.objects.select_related(
-        'sub_sub_sub_category',
-        'sub_sub_sub_category__sub_sub_category',
-        'sub_sub_sub_category__sub_sub_category__sub_category',
-        'sub_sub_sub_category__sub_sub_category__sub_category__category'
-    )
-
-    if subsubsubcategory_id:
-        exams = exams.filter(sub_sub_sub_category_id=subsubsubcategory_id)
-    elif subsubcategory_id:
-        exams = exams.filter(sub_sub_sub_category__sub_sub_category_id=subsubcategory_id)
-    elif subcategory_id:
-        exams = exams.filter(sub_sub_sub_category__sub_sub_category__sub_category_id=subcategory_id)
-    elif category_id:
-        exams = exams.filter(sub_sub_sub_category__sub_sub_category__sub_category__category_id=category_id)
-
-    exams = exams.order_by('title')
-
-    categories = {}
-    for exam in exams:
-        cat = exam.sub_sub_sub_category.sub_sub_category.sub_category.category.title \
-            if exam.sub_sub_sub_category and exam.sub_sub_sub_category.sub_sub_category and \
-               exam.sub_sub_sub_category.sub_sub_category.sub_category and \
-               exam.sub_sub_sub_category.sub_sub_category.sub_category.category else "Digər"
-        subcat = exam.sub_sub_sub_category.sub_sub_category.title if exam.sub_sub_sub_category and exam.sub_sub_sub_category else "Digər"
-        subsubcat = exam.sub_sub_sub_category.title if exam.sub_sub_sub_category else "Digər"
-        categories.setdefault(cat, {}).setdefault(subcat, {}).setdefault(subsubcat, []).append(exam)
-
     all_categories = Category.objects.prefetch_related(
         'subcategory_set__subsubcategory_set__subsubsubcategory_set'
     ).all()
 
+    active_title = "Bütün kateqoriyalar"
+    categories = None
+    subcategories = None
+    subsubcategories = None
+    subsubsubcategories = None
+    exams = None
+
+
+    category = None
+    subcategory = None
+    subsubcategory = None
+    subsubsubcategory = None
+
+
+    # 1️⃣ Əsas səviyyə - Kateqoriyalar
+    if not category_id:
+        categories = all_categories
+
+    # 2️⃣ Alt səviyyə - SubCategory-lər
+    elif category_id and not subcategory_id:
+        category = get_object_or_404(Category, id=category_id)
+        active_title = category.title
+        subcategories = category.subcategory_set.all()
+
+    # 3️⃣ Daha alt səviyyə - SubSubCategory-lər
+    elif subcategory_id and not subsubcategory_id:
+        subcategory = get_object_or_404(SubCategory, id=subcategory_id)
+        active_title = subcategory.title
+        subsubcategories = subcategory.subsubcategory_set.all()
+
+    # 4️⃣ Ən alt səviyyə - SubSubSubCategory-lər
+    elif subsubcategory_id and not subsubsubcategory_id:
+        subsubcategory = get_object_or_404(SubSubCategory, id=subsubcategory_id)
+        active_title = subsubcategory.title
+        subsubsubcategories = subsubcategory.subsubsubcategory_set.all()
+
+    # 5️⃣ Ən dərin səviyyə - artıq imtahanları göstər
+    elif subsubsubcategory_id:
+        subsubsubcategory = get_object_or_404(SubSubSubCategory, id=subsubsubcategory_id)
+        active_title = subsubsubcategory.title
+        exams = Exam.objects.filter(sub_sub_sub_category=subsubsubcategory).order_by('title')
+
     return render(request, "exam/exams.html", {
         "categories": categories,
+        "subcategories": subcategories,
+        "subsubcategories": subsubcategories,
+        "subsubsubcategories": subsubsubcategories,
+        "exams": exams,
+        "active_title": active_title,
         "all_categories": all_categories,
-        "exams": exams
+        'selected_category': category if category_id else None,
+        'selected_subcategory': subcategory if subcategory_id else None,
+        'selected_subsubcategory': subsubcategory if subsubcategory_id else None,
+        'selected_subsubsubcategory': subsubsubcategory if subsubsubcategory_id else None,
+
     })
+
 
 
 @login_required
@@ -62,25 +87,39 @@ def buy_exam(request, exam_id):
 
 @login_required
 def start_exam(request, exam_id):
-    purchased_exam = get_object_or_404(PurchasedExam, user=request.user, exam_id=exam_id)
+    purchased_exam = get_object_or_404(
+        PurchasedExam,
+        user=request.user,
+        exam_id=exam_id
+    )
     exam = purchased_exam.exam
-
     now = timezone.now()
+
+    # ❌ ƏGƏR İMTAHANA ARTİQ GİRİBSƏ
+    if purchased_exam.started_at:
+        return HttpResponse(
+            "Bu imtahana artıq daxil olmusunuz. Yenidən giriş mümkün deyil."
+        )
 
     # İmtahan hələ başlamayıb
     if exam.start_date and now < exam.start_date:
-        return HttpResponse(f"İmtahan {exam.start_date.strftime('%d.%m.%Y %H:%M')} tarixində başlayacaq.")
+        return HttpResponse(
+            f"İmtahan {exam.start_date.strftime('%d.%m.%Y %H:%M')} tarixində başlayacaq."
+        )
 
     # İmtahan bitib
     if exam.end_date and now > exam.end_date:
         return HttpResponse("İmtahan artıq bitib.")
 
-    # İstifadəçi imtahana başlayırsa, started_at və finished_at (timer) təyin olunur
-    if not purchased_exam.started_at:
-        purchased_exam.started_at = now
-        if exam.duration_minutes:
-            purchased_exam.finished_at = now + timezone.timedelta(minutes=exam.duration_minutes)
-        purchased_exam.save()
+    # ✅ İLK VƏ YEGANƏ DAXİL OLMA ANI
+    purchased_exam.started_at = now
+
+    if exam.duration_minutes:
+        purchased_exam.finished_at = now + timezone.timedelta(
+            minutes=exam.duration_minutes
+        )
+
+    purchased_exam.save()
 
     return redirect('take_exam_first', exam_id=exam.id)
 
@@ -90,6 +129,16 @@ def take_exam(request, exam_id):
     exam = get_object_or_404(Exam, pk=exam_id)
     purchased_exam = get_object_or_404(PurchasedExam, user=request.user, exam=exam)
     now = timezone.now()
+
+
+
+    # ❌ Heç başlamayıbsa buraya düşməsin
+    if not purchased_exam.started_at:
+        return redirect('exam_list')
+
+    # ❌ Vaxt bitibsə
+    if purchased_exam.finished_at and timezone.now() > purchased_exam.finished_at:
+        return HttpResponse("İmtahan müddəti bitib.")
 
     # imtahan vaxtı yoxlamaları
     if exam.start_date and now < exam.start_date:
@@ -135,6 +184,13 @@ def finish_exam(request, session_id):
     request.session['last_session_id'] = session.id
     exam = session.exam
 
+
+    forced_finish = False
+    if not session.finished_at:
+        session.finished_at = now
+        session.save()
+        forced_finish = True 
+
     # Bitmə vaxtı qeyd et
     if not session.finished_at:
         session.finished_at = timezone.now()
@@ -166,8 +222,10 @@ def finish_exam(request, session_id):
     # ✅ modeldəki məntiqi burda işə sal
     exam.right_number = correct_count
     exam.row_number = wrong_count
+
     final_points = exam.logical_calculation()
-    
+    session.final_points = final_points
+    session.save()
     context = {
         "session": session,
         "exam": exam,

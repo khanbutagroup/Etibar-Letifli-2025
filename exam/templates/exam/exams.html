@@ -90,14 +90,50 @@
               <div class="banner-breadcrum">
                 <ul>
                   <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
-                  <li><i class="fa-solid fa-angle-right"></i></li>
-                  <li>{% trans 'İmtahanlar' %}</li>
+    {% if selected_category %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li><a href="{% url 'exam_list' %}?category={{ selected_category.id }}">{{ selected_category.title }}</a></li>
+    {% endif %}
+
+    {% if selected_subcategory %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li><a href="{% url 'exam_list' %}?subcategory={{ selected_subcategory.id }}">{{ selected_subcategory.title }}</a></li>
+    {% endif %}
+
+    {% if selected_subsubcategory %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li><a href="{% url 'exam_list' %}?subsubcategory={{ selected_subsubcategory.id }}">{{ selected_subsubcategory.title }}</a></li>
+    {% endif %}
+
+    {% if selected_subsubsubcategory %}
+      <li><i class="fa-solid fa-angle-right"></i></li>
+      <li>{{ selected_subsubsubcategory.title }}</li>
+    {% endif %}
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
+          <style>
+.empty-description-wrapper {
+    display: flex;
+    justify-content: center; /* horizontal mərkəz */
+    align-items: center;    /* vertikal mərkəz */
+    text-align: center;     /* mətnin ortalanması */
+    min-height: 300px;      /* səhifədə boşluq olsun */
+    padding: 50px 20px;     /* istəyə görə */
+    font-size: 1.2rem;      /* istəyə görə */
+    color: #333;            /* mətni qaranlıq rəngdə */
+}
+
+
+    </style>
+  {% if not categories and not subcategories and not subsubcategories and not subsubsubcategories and not exams %}
+      <div class="empty-description-wrapper">
+          {{ course_exam_description|safe }}
+      </div>
+  {% endif %}
     </section>
     <!-- Banner End -->
 
@@ -112,16 +148,32 @@
             <nav class="exams-nav menu">
               <!-- Azərbaycan bölməsi -->
               {% for category in all_categories %}
-                <a href="{% url 'exam_list' %}?category={{ category.id }}" class="exam-language">{{ category.title }}</a>
+                <a href="{% url 'exam_list' %}?category={{ category.id }}"
+                  class="exam-language {% if selected_category and selected_category.id == category.id %}exam-active{% endif %}">
+                  {{ category.title }}
+                </a>
+
                 <div class="sub-menu">
                   {% for subcat in category.subcategory_set.all %}
-                    <a href="{% url 'exam_list' %}?subcategory={{ subcat.id }}" class="parent">{{ subcat.title }}</a>
+                    <a href="{% url 'exam_list' %}?category={{ category.id }}&subcategory={{ subcat.id }}"
+   class="parent {% if selected_subcategory and selected_subcategory.id == subcat.id %}exam-active{% endif %}">
+  {{ subcat.title }}
+</a>
+
                     <div class="sub-menu">
                       {% for subsub in subcat.subsubcategory_set.all %}
-                        <a href="{% url 'exam_list' %}?subsubcategory={{ subsub.id }}" class="parent">{{ subsub.title }}</a>
+                        <a href="{% url 'exam_list' %}?category={{ category.id }}&subcategory={{ subcat.id }}&subsubcategory={{ subsub.id }}"
+   class="parent {% if selected_subsubcategory and selected_subsubcategory.id == subsub.id %}exam-active{% endif %}">
+  {{ subsub.title }}
+</a>
+
                         <div class="sub-menu">
                           {% for subsubsub in subsub.subsubsubcategory_set.all %}
-                            <a href="{% url 'exam_list' %}?subsubsubcategory={{ subsubsub.id }}">{{ subsubsub.title }}</a>
+                            <a href="{% url 'exam_list' %}?category={{ category.id }}&subcategory={{ subcat.id }}&subsubcategory={{ subsub.id }}&subsubsubcategory={{ subsubsub.id }}" 
+   class="{% if selected_subsubsubcategory and selected_subsubsubcategory.id == subsubsub.id %}exam-active{% endif %}">
+  {{ subsubsub.title }}
+</a>
+
                           {% endfor %}
                         </div>
                       {% endfor %}
@@ -136,29 +188,74 @@
 
           <!-- Products -->
           <div class="products" id="exams-products">
-            {% for i in exams %}
-            <div class="card">
-              <h4>{{ i.title }}</h4>
-              <p>
-                {{ i.description }}
-              </p>
-              <div class="comments-div">
-                <a href="{% url 'exam_comments' i.id %}" class="comment-a">{% trans 'Rəylər' %}</a>
-              </div>
-              {% if i.price %}
-                <div class="price">{{ i.price}} AZN</div>
-              {% endif %}
-              <div class="grades">
-                {% if i.sub_sub_sub_category %}
-                <span>{{ i.sub_sub_sub_category.title }}</span>
-                {% endif %}
-                <a href="{% url 'exam_detail' i.id %}" class="buy-btn">{% trans 'Al' %}</a>
-              </div>
-            </div>
-            {% endfor %}
 
-            
-          </div>
+  <!-- 1️⃣ Əsas kateqoriyalar -->
+  {% if categories %}
+    {% for cat in categories %}
+      <div class="card">
+        <h4>{{ cat.title }}</h4>
+        <a href="{% url 'exam_list' %}?category={{ cat.id }}" class="buy-btn">{% trans 'Alt kateqoriyalara bax' %}</a>
+      </div>
+          {% empty %}
+      <p>{{ empty_description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- 2️⃣ SubCategory-lər -->
+  {% if subcategories %}
+    {% for sub in subcategories %}
+      <div class="card">
+        <h4>{{ sub.title }}</h4>
+        <a href="{% url 'exam_list' %}?category={{ sub.category.id }}&subcategory={{ sub.id }}" class="buy-btn">{% trans 'Davam et' %}</a>
+      </div>
+          {% empty %}
+      <p>{{ empty_description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- 3️⃣ SubSubCategory-lər -->
+  {% if subsubcategories %}
+    {% for subsub in subsubcategories %}
+      <div class="card">
+        <h4>{{ subsub.title }}</h4>
+        <a href="{% url 'exam_list' %}?category={{ subsub.sub_category.category.id }}&subcategory={{ subsub.sub_category.id }}&subsubcategory={{ subsub.id }}" class="buy-btn">{% trans 'Davam et' %}</a>
+      </div>
+          {% empty %}
+      <p>{{ empty_description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- 4️⃣ SubSubSubCategory-lər -->
+  {% if subsubsubcategories %}
+    {% for subsubsub in subsubsubcategories %}
+      <div class="card">
+        <h4>{{ subsubsub.title }}</h4>
+        <a href="{% url 'exam_list' %}?category={{ subsubsub.sub_sub_category.sub_category.category.id }}&subcategory={{ subsubsub.sub_sub_category.sub_category.id }}&subsubcategory={{ subsubsub.sub_sub_category.id }}&subsubsubcategory={{ subsubsub.id }}" class="buy-btn">{% trans 'İmtahanlara bax' %}</a>
+      </div>
+      {% empty %}
+      <p>{{ empty_description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- 5️⃣ İmtahanlar -->
+  {% if exams %}
+    {% for exam in exams %}
+      <div class="card">
+        <h4>{{ exam.title }}</h4>
+        <p>{{ exam.description|truncatewords:20 }}</p>
+        {% if exam.price %}
+          <div class="price">{{ exam.price }} AZN</div>
+        {% endif %}
+        <a href="{% url 'exam_detail' exam.id %}" class="buy-btn">{% trans 'İmtahana bax' %}</a>
+      </div>
+    {% empty %}
+      <p>{{ empty_description|safe }}</p>
+    {% endfor %}
+  {% endif %}
+
+
+</div>
+
         </div>
       </div>
     </div>

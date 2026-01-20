@@ -25,6 +25,6 @@ class IndexSliderTranslationOptions(TranslationOptions):
 class IndexBooksTranslationOptions(TranslationOptions):
     fields = ('title_1', 'title_2')
 
-@register(IndexPDFBooks)
-class IndexPDFBooksTranslationOptions(TranslationOptions):
-    fields = ('title_1', 'title_2')
+# @register(IndexPDFBooks)
+# class IndexPDFBooksTranslationOptions(TranslationOptions):
+#     fields = ('title_1', 'title_2')

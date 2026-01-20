@@ -12,6 +12,8 @@ from django.utils import translation
 from main.models import *
 from main.forms import *
 from exam.models import *
+from info.models import *
+
 
 def news_views(request):
 
@@ -133,16 +135,17 @@ def book_details(request, id):
 def index_views(request):
     index_slider = IndexSlider.objects.last()
     index_books = IndexBooks.objects.all()
-    index_pdf = IndexPDFBooks.objects.all()
+    # index_pdf = IndexPDFBooks.objects.all()
     news = News.objects.all().order_by('-created_at')
     exam = Exam.objects.filter(is_main=True)
-
+    feature_items = FeatureItem.objects.prefetch_related('books', 'tests', 'explanations').order_by('-created_at')
     context = {
         'index_slider': index_slider,
         'index_books': index_books,
-        'index_pdf': index_pdf,
+        # 'index_pdf': index_pdf,
         'news': news,
         'exam': exam,
+        'feature_items': feature_items,
     }
     return render(request, 'main/index.html', context)
 

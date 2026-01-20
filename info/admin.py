@@ -109,21 +109,21 @@ class AboutTwoAdmin(TranslationAdmin):
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
 
-@admin.register(PDF)
-class PDFAdmin(TranslationAdmin):
-    list_display = ('title', 'title_2', 'pdf', 'is_active')
-    search_fields = ('title', 'title_2', 'pdf', 'is_active')
+# @admin.register(PDF)
+# class PDFAdmin(TranslationAdmin):
+#     list_display = ('title', 'title_2', 'pdf', 'is_active')
+#     search_fields = ('title', 'title_2', 'pdf', 'is_active')
 
-    group_fieldsets = True
-    class Media:
-        js = (
-            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
-            'modeltranslation/js/tabbed_translation_fields.js',
-        )
-        css = {
-            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
-        }
+#     group_fieldsets = True
+#     class Media:
+#         js = (
+#             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+#             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+#             'modeltranslation/js/tabbed_translation_fields.js',
+#         )
+#         css = {
+#             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+#         }
 
 
 @admin.register(LogoFavicon)
@@ -149,3 +149,90 @@ class SubscribeAdmin(admin.ModelAdmin):
     search_fields = ('email', 'created_at')
 
     
+@admin.register(BookFree)
+class BookFreeAdmin(TranslationAdmin):
+    list_display = ('title', 'created_at')
+    search_fields = ('title', 'created_at')
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+@admin.register(Test)
+class TestAdmin(TranslationAdmin):
+    list_display = ('title', 'created_at')
+    search_fields = ('title', 'created_at')
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+@admin.register(Expanation)
+class ExpanationAdmin(TranslationAdmin):
+    list_display = ('title', 'created_at')
+    search_fields = ('title', 'created_at')
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+@admin.register(BookFreeCategory)
+class BookFreeCategoryAdmin(TranslationAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+
+@admin.register(FeatureItem)
+class FeatureItemAdmin(admin.ModelAdmin):
+    list_display = ('created_at',)
+    filter_horizontal = ('books', 'tests', 'explanations') 
+
+
+@admin.register(Course)
+class CourseAdmin(TranslationAdmin):
+    list_display = ('description', 'content_type')
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }

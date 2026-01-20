@@ -8,6 +8,9 @@ from django.utils import timezone
 class VideoCategory(models.Model):
     title = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq')
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name='Video Kateqoriyası'
         verbose_name_plural='Video Kateqoriyaları'
@@ -17,6 +20,9 @@ class VideoCategory(models.Model):
 class VideoSubCategory(models.Model):
     title = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq')
     category = models.ForeignKey(VideoCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Kateqoriya')
+    
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name='Video Sub Kateqoriyası'

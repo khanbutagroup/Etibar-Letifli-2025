@@ -120,12 +120,14 @@
                     data-video="{{ i.video }}"
                   >
                     <div class="post-image pdf-image">
+                      {% if i.image %}
                       <img
                         src="{{ i.image.url }}"
                         width="356"
                         height="230"
                         alt="Course Image"
                       />
+                      {% endif %}
                     </div>
                     <div class="post-tag video-tag">
                       <span><i class="fa fa-play"></i></span>

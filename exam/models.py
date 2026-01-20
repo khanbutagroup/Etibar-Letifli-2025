@@ -245,6 +245,10 @@ class UserExamSession(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     started_at = models.DateTimeField(auto_now_add=True)
     finished_at = models.DateTimeField(null=True, blank=True)
+    final_points = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+    def is_finished(self):
+        return self.finished_at is not None or self.started_at is not None
 
     class Meta:
         verbose_name = "İstifadəçi imtahan sessiyası"
@@ -268,7 +272,11 @@ class PurchasedExam(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.exam.title}"
 
+
+
+
     class Meta:
+        unique_together = ('user', 'exam')
         verbose_name = "Alınmış imtahan"
         verbose_name_plural = "Alınmış imtahanlar"
 

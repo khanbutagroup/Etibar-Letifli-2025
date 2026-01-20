@@ -148,3 +148,47 @@ def global_search(request):
         "results": results,
     }
     return render(request, "info/searchResult.html", context)
+
+
+def book_free_views(request):
+    category_id = request.GET.get('category')
+
+    book_free = BookFree.objects.select_related('category').order_by('-created_at')
+
+    if category_id:
+        book_free = book_free.filter(category_id=category_id)
+
+    categories = BookFreeCategory.objects.all()
+
+    # Seçilmiş kateqoriya obyekti
+    active_category_obj = None
+    if category_id:
+        try:
+            active_category_obj = categories.get(id=category_id)
+        except BookFreeCategory.DoesNotExist:
+            active_category_obj = None
+
+    context = {
+        'book_free': book_free,
+        'categories': categories,
+        'active_category': active_category_obj,  # artıq obyekt göndəririk
+    }
+    return render(request, 'info/book_free.html', context)
+
+
+def test_views(request):
+    test = Test.objects.all()
+
+    context = {
+        'test': test
+    }
+    return render(request, 'info/test.html', context)
+
+
+def expanation_views(request):
+    expanation = Expanation.objects.all()
+
+    context = {
+        'expanation': expanation
+    }
+    return render(request, 'info/expanation.html', context)

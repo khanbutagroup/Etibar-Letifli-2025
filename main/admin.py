@@ -148,24 +148,62 @@ class IndexBooksAdmin(TranslationAdmin):
 
 
 
-@admin.register(IndexPDFBooks)
-class IndexPDFBooksAdmin(TranslationAdmin):
-    list_display = ('get_books', 'title_1', 'title_2')
-    search_fields = ('title_1', 'title_2', 'books__title')
+# @admin.register(IndexPDFBooks)
+# class IndexPDFBooksAdmin(TranslationAdmin):
+#     list_display = ('get_books', 'title_1', 'title_2')
+#     search_fields = ('title_1', 'title_2', 'books__title')
 
-    filter_horizontal = ('books',)  # çoxlu seçim üçün rahat interfeys
+#     filter_horizontal = ('books',)  # çoxlu seçim üçün rahat interfeys
 
-    def get_books(self, obj):
-        return ", ".join([book.title for book in obj.books.all()])
-    get_books.short_description = 'Kitablar'
+#     def get_books(self, obj):
+#         return ", ".join([book.title for book in obj.books.all()])
+#     get_books.short_description = 'Kitablar'
 
-    group_fieldsets = True
-    class Media:
-        js = (
-            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
-            'modeltranslation/js/tabbed_translation_fields.js',
-        )
-        css = {
-            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
-        }
+#     group_fieldsets = True
+#     class Media:
+#         js = (
+#             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+#             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+#             'modeltranslation/js/tabbed_translation_fields.js',
+#         )
+#         css = {
+#             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+#         }
+
+
+@admin.register(CartQuantityDiscount)
+class CartQuantityDiscountAdmin(admin.ModelAdmin):
+    list_display = (
+        'min_quantity',
+        'max_quantity',
+        'discount_percent',
+        'is_active',
+    )
+
+    list_filter = (
+        'is_active',
+    )
+
+    list_editable = (
+        'discount_percent',
+        'is_active',
+    )
+
+    ordering = (
+        'min_quantity',
+    )
+
+    fieldsets = (
+        ('Miqdar aralığı', {
+            'fields': (
+                'min_quantity',
+                'max_quantity',
+            )
+        }),
+        ('Endirim məlumatı', {
+            'fields': (
+                'discount_percent',
+                'is_active',
+            )
+        }),
+    )

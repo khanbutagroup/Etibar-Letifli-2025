@@ -256,14 +256,17 @@
 
                               <td class="order-date"><span>{{ i.purchased_at|date:" d.m.Y H:i" }}</span></td>
                               <td class="order-date">
-                                {% if i.exam.get_status_text == "İmtahana başla" %}
+                                {% if i.exam.get_status_text == "İmtahana başla" and not i.started_at %}
                                   <a href="{% url 'start_exam' i.exam.id %}" class="start-btn sec-btn">
                                     {% trans 'İmtahana başla' %}
                                   </a>
                                 {% else %}
-                                  <p style="color: gray;">{{ i.exam.get_status_text }}</p>
+                                  <span style="color: #999; cursor: not-allowed;">
+                                    {% trans 'İmtahana başla' %}
+                                  </span>
                                 {% endif %}
                               </td>
+
                             </tr>
                         {% endfor %}
                       </tbody>
@@ -279,7 +282,7 @@
                       <thead>
                         <tr>
                           <th>{% trans 'İmtahan adı' %}</th>
-                          <th>{% trans 'Qiymət' %}</th>
+                          <th>{% trans 'Bal' %}</th>
                           <th>{% trans 'Tarix' %}</th>
                           <th>{% trans 'Nəticə' %}</th>
                         </tr>
@@ -289,8 +292,8 @@
                         <tr>
                           <td>{{ session.exam.title }}</td>
                           <td>
-                            {% if session.exam.price %}
-                              {{ session.exam.price }} ₼
+                            {% if session.final_points %}
+                              {{ session.final_points }}
                             {% else %}
                               -
                             {% endif %}
@@ -298,19 +301,26 @@
                           <td>
                             {% if session.finished_at %}
                               {{ session.finished_at|date:"d.m.Y H:i" }}
+                            {% elif session.started_at %}
+                              <span style="color: gray;">{% trans 'Yarımçıq bitdi' %}</span>
                             {% else %}
                               {% trans 'Davam edir' %}
                             {% endif %}
                           </td>
+
                           <td>
-                            {% if session.finished_at %}
+                            {% if session.can_show_result %}
                               <a href="{% url 'exam_finish' session.id %}" class="start-btn sec-btn">
                                 {% trans 'Nəticənə bax' %}
                               </a>
                             {% else %}
-                              <span class="text-muted">{% trans 'Bitməyib' %}</span>
+                              <span class="text-muted" style="cursor: not-allowed;">
+                                {% trans 'Nəticənə bax' %}
+                              </span>
                             {% endif %}
                           </td>
+
+
                         </tr>
                         {% empty %}
                         <tr>

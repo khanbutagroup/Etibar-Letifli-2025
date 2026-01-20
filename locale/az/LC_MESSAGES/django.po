@@ -8,681 +8,783 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-18 15:07+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2026-01-20 15:41+0400\n"
+"PO-Revision-Date: 2026-01-20 15:45+0400\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: core/settings.py:178
-msgid "Az"
-msgstr ""
+"X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: core/settings.py:179
-msgid "Ru"
-msgstr ""
+msgid "Az"
+msgstr "Az"
 
 #: core/settings.py:180
-msgid "En"
-msgstr ""
+msgid "Ru"
+msgstr "Ru"
 
-#: exam/templates/exam/exams.html:89 exam/templates/exam/exams.html:94
-#: info/templates/info/searchResult.html:160 templates/includes/footer.html:227
+#: core/settings.py:181
+msgid "En"
+msgstr "En"
+
+#: exam/templates/exam/exams.html:89 info/templates/info/searchResult.html:160
+#: templates/includes/footer.html:312
+#: video/templates/video/videoLessons.html:89
 msgid "İmtahanlar"
-msgstr ""
+msgstr "Online imtahanlar"
 
 #: exam/templates/exam/exams.html:92 exam/templates/exam/info-exam.html:97
 #: exam/templates/exam/result.html:69 exam/templates/exam/startExam.html:61
-#: info/templates/info/about.html:92 info/templates/info/contact.html:93
+#: info/templates/info/about.html:92 info/templates/info/book_free.html:94
+#: info/templates/info/contact.html:93 info/templates/info/expanation.html:96
 #: info/templates/info/faq.html:93 info/templates/info/pdf.html:96
-#: info/templates/info/searchResult.html:62
+#: info/templates/info/searchResult.html:62 info/templates/info/test.html:96
 #: main/templates/main/book-details.html:96 main/templates/main/books.html:98
 #: main/templates/main/comments.html:61
 #: main/templates/main/news-details.html:95 main/templates/main/news.html:97
-#: templates/includes/footer.html:220 templates/includes/header.html:128
+#: templates/includes/footer.html:305 templates/includes/header.html:163
 #: user/templates/user/account.html:92 user/templates/user/cart.html:95
 #: user/templates/user/emailforReset.html:95 user/templates/user/login.html:92
+#: user/templates/user/privacy_policy.html:90
 #: user/templates/user/register.html:92
 #: user/templates/user/resetPassword.html:92
-#: user/templates/user/smsCode.html:92 video/templates/video/info-video.html:97
-#: video/templates/video/videoLessons.html:96
+#: user/templates/user/returnpolicy.html:90
+#: user/templates/user/siteinfo.html:90 user/templates/user/smsCode.html:92
+#: video/templates/video/info-video.html:97
+#: video/templates/video/videoLessons.html:92
 #: video/templates/video/videoLessonsFree.html:96
 msgid "Ana səhifə"
-msgstr ""
+msgstr "Ana səhifə"
 
-#: exam/templates/exam/exams.html:109
+#: exam/templates/exam/exams.html:145 info/templates/info/book_free.html:112
+#: video/templates/video/videoLessons.html:139
 msgid "Filtr"
-msgstr ""
+msgstr "Filtr"
 
-#: exam/templates/exam/exams.html:111
+#: exam/templates/exam/exams.html:147
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
-#: exam/templates/exam/exams.html:146 main/templates/main/comments.html:58
-#: main/templates/main/comments.html:63
-msgid "Rəylər"
-msgstr ""
+#: exam/templates/exam/exams.html:197
+#, fuzzy
+#| msgid "Kateqoriyalar"
+msgid "Alt kateqoriyalara bax"
+msgstr "Kateqoriyalar"
 
-#: exam/templates/exam/exams.html:155
-msgid "Al"
-msgstr ""
+#: exam/templates/exam/exams.html:209 exam/templates/exam/exams.html:221
+#, fuzzy
+#| msgid "Davam edir"
+msgid "Davam et"
+msgstr "Davam edir"
+
+#: exam/templates/exam/exams.html:233
+#, fuzzy
+#| msgid "İmtahanlar"
+msgid "İmtahanlara bax"
+msgstr "Online imtahanlar"
+
+#: exam/templates/exam/exams.html:249
+#, fuzzy
+#| msgid "İmtahana başla"
+msgid "İmtahana bax"
+msgstr "İmtahana başla"
 
 #: exam/templates/exam/info-exam.html:94 exam/templates/exam/info-exam.html:99
 #: video/templates/video/info-video.html:94
 #: video/templates/video/info-video.html:99
 msgid "Məlumat və təlimatlar"
-msgstr ""
+msgstr "Məlumat və təlimatlar"
 
 #: exam/templates/exam/info-exam.html:128
 #: video/templates/video/info-video.html:128
 msgid "Aktiv olma müddəti"
-msgstr ""
+msgstr "Aktiv olma müddəti"
 
 #: exam/templates/exam/info-exam.html:130
 msgid "gün"
-msgstr ""
+msgstr "gün"
 
 #: exam/templates/exam/info-exam.html:136
 #: video/templates/video/info-video.html:136
 msgid "Davam etmə vaxtı"
-msgstr ""
+msgstr "Davam etmə müddəti"
 
 #: exam/templates/exam/info-exam.html:137
 #: video/templates/video/info-video.html:137
 msgid "saat"
-msgstr ""
+msgstr "saat"
 
 #: exam/templates/exam/info-exam.html:137
 #: video/templates/video/info-video.html:137
 msgid "dəq"
-msgstr ""
+msgstr "dəqiqə"
 
 #: exam/templates/exam/info-exam.html:140
 #: video/templates/video/info-video.html:140
 msgid "Yazılış sayı"
-msgstr ""
+msgstr "Yazılış sayı"
 
 #: exam/templates/exam/info-exam.html:146 main/templates/main/books.html:143
-#: user/templates/user/account.html:233 user/templates/user/account.html:282
-#: user/templates/user/cart.html:158 video/templates/video/info-video.html:146
+#: user/templates/user/account.html:233 user/templates/user/cart.html:158
+#: video/templates/video/info-video.html:146
 msgid "Qiymət"
-msgstr ""
+msgstr "Qiymət"
 
 #: exam/templates/exam/info-exam.html:147
 #: video/templates/video/info-video.html:147
 msgid "manat"
-msgstr ""
+msgstr "manat"
 
 #: exam/templates/exam/info-exam.html:152
 #: video/templates/video/info-video.html:152
 msgid "Təlimatlar:"
-msgstr ""
+msgstr "Təlimatlar:"
 
 #: exam/templates/exam/info-exam.html:157
 #: video/templates/video/info-video.html:157
 msgid "Ödəniş et"
-msgstr ""
+msgstr "Ödəniş et"
 
 #: exam/templates/exam/result.html:86
 msgid "Rəy yaz"
-msgstr ""
+msgstr "Rəy yaz "
 
 #: exam/templates/exam/result.html:92
 msgid "İmtahanın nəticəsi"
-msgstr ""
+msgstr "İmtahan nəticəsi"
 
 #: exam/templates/exam/result.html:95 exam/templates/exam/startExam.html:71
 msgid "İmtahan:"
-msgstr ""
+msgstr "İmtahan:"
 
 #: exam/templates/exam/result.html:100
 msgid "Ad, soyad:"
-msgstr ""
+msgstr "Ad, soyad:"
 
 #: exam/templates/exam/result.html:105
 msgid "Başlama vaxtı:"
-msgstr ""
+msgstr "Başlama vaxtı:"
 
 #: exam/templates/exam/result.html:110
 msgid "Bitmə vaxtı:"
-msgstr ""
+msgstr "Bitmə vaxtı:"
 
 #: exam/templates/exam/result.html:117 exam/templates/exam/startExam.html:80
 msgid "Sual sayı:"
-msgstr ""
+msgstr "Sual sayı:"
 
 #: exam/templates/exam/result.html:122
 msgid "Cavab verilməmiş:"
-msgstr ""
+msgstr "Cavab verilməmiş:"
 
 #: exam/templates/exam/result.html:127
 msgid "Doğru cavab sayı:"
-msgstr ""
+msgstr "Doğru cavab sayı:"
 
 #: exam/templates/exam/result.html:132
 msgid "Yanlış cavab sayı:"
-msgstr ""
+msgstr "Yanlış cavab sayı:"
 
 #: exam/templates/exam/result.html:137
 msgid "Toplanmış bal:"
-msgstr ""
+msgstr "Toplanmış bal:"
 
 #: exam/templates/exam/result.html:155
 msgid "Seçilmiş cavab:"
-msgstr ""
+msgstr "Seçilmiş cavab:"
 
 #: exam/templates/exam/result.html:162
 msgid "Cavab verilməyib"
-msgstr ""
+msgstr "Cavab verilməyib:"
 
 #: exam/templates/exam/result.html:168
 msgid "Doğru cavab:"
-msgstr ""
+msgstr "Doğru cavab:"
 
 #: exam/templates/exam/result.html:185
 msgid "İzahi:"
-msgstr ""
+msgstr "İzahı:"
 
 #: exam/templates/exam/startExam.html:205
 msgid "İmtahanı bitir"
-msgstr ""
+msgstr "İmtahanı bitir"
 
 #: exam/templates/exam/startExam.html:218
 msgid "Qalan vaxt:"
-msgstr ""
+msgstr "Qalan vaxt:"
 
 #: info/templates/info/about.html:89 info/templates/info/about.html:94
-#: info/templates/info/about.html:170 info/templates/info/searchResult.html:184
-#: main/templates/main/index.html:490 templates/includes/footer.html:222
-#: templates/includes/header.html:229
+#: info/templates/info/about.html:170
+#: info/templates/info/searchResult.html:184
+#: main/templates/main/index.html:490 templates/includes/footer.html:307
+#: templates/includes/header.html:293
 msgid "Haqqımızda"
-msgstr ""
+msgstr "Haqqımızda"
 
 #: info/templates/info/about.html:247
 msgid "Xüsusiyyətlərimiz"
-msgstr ""
+msgstr "Niyə məhz etibarletifli.az?"
+
+#: info/templates/info/book_free.html:91 info/templates/info/pdf.html:93
+#: info/templates/info/pdf.html:98
+msgid "Ödənişsiz kitablar"
+msgstr "Pulsuz Resurslar"
+
+#: info/templates/info/book_free.html:144
+#: info/templates/info/expanation.html:128
+#: info/templates/info/searchResult.html:148 info/templates/info/test.html:128
+msgid "PDF"
+msgstr "PDF"
+
+#: info/templates/info/book_free.html:153
+#: info/templates/info/expanation.html:142 info/templates/info/pdf.html:142
+#: info/templates/info/test.html:142 main/templates/main/index.html:597
+#: main/templates/main/index.html:619 main/templates/main/index.html:641
+msgid "Yüklə"
+msgstr "Yüklə"
+
+#: info/templates/info/book_free.html:159
+#, fuzzy
+#| msgid "Heç bir nəticə tapılmadı."
+msgid "Kitab tapılmadı."
+msgstr "Heç bir nəticə tapılmadı."
 
 #: info/templates/info/contact.html:90 info/templates/info/contact.html:95
-#: templates/includes/footer.html:238 templates/includes/footer.html:262
-#: templates/includes/header.html:232
+#: templates/includes/footer.html:323 templates/includes/footer.html:358
+#: templates/includes/header.html:297
 msgid "Əlaqə"
-msgstr ""
+msgstr "Əlaqə"
 
 #: info/templates/info/contact.html:125
 msgid "Ünvan"
-msgstr ""
+msgstr "Ünvan"
 
-#: info/templates/info/contact.html:152 info/templates/info/contact.html:322
+#: info/templates/info/contact.html:152 info/templates/info/contact.html:326
 msgid "Telefon"
-msgstr ""
+msgstr "Telefon"
 
-#: info/templates/info/contact.html:179 info/templates/info/contact.html:311
+#: info/templates/info/contact.html:181 info/templates/info/contact.html:315
 #: user/templates/user/emailforReset.html:92
 #: user/templates/user/emailforReset.html:97
 #: user/templates/user/emailforReset.html:127
 #: user/templates/user/login.html:124 user/templates/user/register.html:146
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: info/templates/info/contact.html:227
+#: info/templates/info/contact.html:231
 msgid "Sosial şəbəkələrimiz:"
-msgstr ""
+msgstr "Sosial şəbəkələrimiz:"
 
-#: info/templates/info/contact.html:277
+#: info/templates/info/contact.html:281
 msgid "Əlaqə formu"
-msgstr ""
+msgstr "Əlaqə formu"
 
-#: info/templates/info/contact.html:289 user/templates/user/account.html:341
+#: info/templates/info/contact.html:293 user/templates/user/account.html:351
 #: user/templates/user/register.html:124
 msgid "Ad"
-msgstr ""
+msgstr "Ad"
 
-#: info/templates/info/contact.html:300 user/templates/user/account.html:349
+#: info/templates/info/contact.html:304 user/templates/user/account.html:359
 #: user/templates/user/register.html:135
 msgid "Soyad"
-msgstr ""
+msgstr "Soyad"
 
-#: info/templates/info/contact.html:332
+#: info/templates/info/contact.html:336
 msgid "Mesajınız..."
-msgstr ""
+msgstr "Mesajınız..."
 
-#: info/templates/info/contact.html:344
+#: info/templates/info/contact.html:348
 #: main/templates/main/writeComments.html:74
 msgid "Göndər"
-msgstr ""
+msgstr "Göndər"
+
+#: info/templates/info/expanation.html:93
+#: info/templates/info/expanation.html:98 templates/includes/header.html:286
+#, fuzzy
+#| msgid "İzahi:"
+msgid "İzahlar"
+msgstr "İzahı:"
 
 #: info/templates/info/faq.html:90 info/templates/info/faq.html:95
-#: templates/includes/header.html:234
+#: templates/includes/header.html:301
 msgid "Sual-cavab"
-msgstr ""
+msgstr "Sual-cavab"
 
-#: info/templates/info/pdf.html:93 info/templates/info/pdf.html:98
-msgid "Ödənişsiz kitablar"
-msgstr ""
-
-#: info/templates/info/pdf.html:142 main/templates/main/index.html:613
-msgid "Yüklə"
-msgstr ""
+#: info/templates/info/faq.html:149
+msgid "Cavab yoxdur."
+msgstr "Cavab yoxdur."
 
 #: info/templates/info/searchResult.html:59
 #: info/templates/info/searchResult.html:64
 msgid "Axtarış nəticələri"
-msgstr ""
+msgstr "Axtarış nəticələri"
 
 #: info/templates/info/searchResult.html:77
 msgid "Axtarış sözü:"
-msgstr ""
+msgstr "Axtarış sözü:"
 
 #: info/templates/info/searchResult.html:87
 #: main/templates/main/news-details.html:97 main/templates/main/news.html:94
-#: main/templates/main/news.html:99 templates/includes/footer.html:236
-#: templates/includes/header.html:131
+#: main/templates/main/news.html:99 templates/includes/footer.html:321
+#: templates/includes/header.html:167
 msgid "Xəbərlər"
-msgstr ""
+msgstr "Xəbərlər"
 
 #: info/templates/info/searchResult.html:100
 msgid "Ətraflı oxu"
-msgstr ""
+msgstr "Ətraflı oxu"
 
 #: info/templates/info/searchResult.html:114
 #: main/templates/main/book-details.html:98 main/templates/main/books.html:95
-#: main/templates/main/books.html:100 templates/includes/footer.html:225
-#: templates/includes/header.html:134
+#: main/templates/main/books.html:100 templates/includes/footer.html:310
+#: templates/includes/header.html:171
 msgid "Kitablar"
-msgstr ""
+msgstr "Kitablar"
 
 #: info/templates/info/searchResult.html:127
 #: info/templates/info/searchResult.html:170
 msgid "Ətraflı bax"
-msgstr ""
+msgstr "Ətraflı bax"
 
 #: info/templates/info/searchResult.html:141
 msgid "PDF-lər"
-msgstr ""
+msgstr "PDF-lər"
 
-#: info/templates/info/searchResult.html:148
-msgid "PDF"
-msgstr ""
-
-#: info/templates/info/searchResult.html:203 main/templates/main/books.html:176
+#: info/templates/info/searchResult.html:203
+#: main/templates/main/books.html:176
 msgid "Kateqoriyalar"
-msgstr ""
+msgstr "Kateqoriyalar"
 
 #: info/templates/info/searchResult.html:231
 msgid "Heç bir nəticə tapılmadı."
-msgstr ""
+msgstr "Heç bir nəticə tapılmadı."
+
+#: info/templates/info/test.html:93 info/templates/info/test.html:98
+#: templates/includes/header.html:282
+msgid "Testlər"
+msgstr "Testlər"
 
 #: info/views.py:68
 msgid "Təşəkkürlər, abonə oldunuz!"
-msgstr ""
+msgstr "Təşəkkürlər, abunə oldunuz!"
 
 #: info/views.py:70
 msgid "Email daxil edin."
-msgstr ""
+msgstr "Email daxil edin."
 
 #: main/templates/main/book-details.html:136
 msgid "Kitab haqqında məlumat"
-msgstr ""
+msgstr "Kitab haqqında məlumat"
 
 #: main/templates/main/book-details.html:168
 msgid "Səbətə at"
-msgstr ""
+msgstr "Səbətə at"
 
 #: main/templates/main/book-details.html:184
 msgid "Nümunə səhifələr"
-msgstr ""
+msgstr "Nümunə səhifələr"
 
 #: main/templates/main/book-details.html:194
 msgid "Cavablar"
-msgstr ""
+msgstr "Cavablar"
 
 #: main/templates/main/book-details.html:200
 msgid "Kateqoriya:"
-msgstr ""
+msgstr "Kateqoriya:"
 
 #: main/templates/main/book-details.html:201
 msgid "Baxış:"
-msgstr ""
+msgstr "Baxış:"
 
 #: main/templates/main/book-details.html:202
 msgid "Etiket:"
-msgstr ""
+msgstr "Etiket:"
+
+#: main/templates/main/book-details.html:209
+msgid "Sosial şəbəkələrimiz"
+msgstr "Sosial şəbəkələrimiz"
 
 #: main/templates/main/books.html:126
 msgid "Adına görə axtar..."
-msgstr ""
+msgstr "Adına görə axtar..."
 
 #: main/templates/main/books.html:151
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: main/templates/main/books.html:158
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: main/templates/main/books.html:195
 msgid "Axtar"
-msgstr ""
+msgstr "Axtar"
 
 #: main/templates/main/books.html:213
 msgid "Qiymet yuxaridan ashagi:"
-msgstr ""
+msgstr "Sırala: Qiymət (çoxdan aza)"
 
 #: main/templates/main/books.html:218
 msgid "Ada görə (A-Z)"
-msgstr ""
+msgstr "Ada görə (A-Z)"
 
 #: main/templates/main/books.html:219
 msgid "Ada görə (Z-A)"
-msgstr ""
+msgstr "Ada görə (Z-A)"
 
 #: main/templates/main/books.html:220
 msgid "Qiymətə görə (yuxarıdan-aşağı)"
-msgstr ""
+msgstr "Qiymət (azdan çoxa)"
 
 #: main/templates/main/books.html:221
 msgid "Qiymətə görə (aşağıdan-yuxarı)"
-msgstr ""
+msgstr "Qiymət (çoxdan aza)"
 
 #: main/templates/main/books.html:222
 msgid "Ən son yüklənənlər"
-msgstr ""
+msgstr "Ən son yüklənənlər"
+
+#: main/templates/main/comments.html:58 main/templates/main/comments.html:63
+msgid "Rəylər"
+msgstr "Rəylər"
 
 #: main/templates/main/comments.html:88
 msgid "nəfər"
-msgstr ""
+msgstr "nəfər"
 
 #: main/templates/main/comments.html:139
 msgid "əvvəl"
-msgstr ""
+msgstr "əvvəl"
 
 #: main/templates/main/comments.html:145
 msgid "Bu imtahan üçün hələ rəy yoxdur."
-msgstr ""
+msgstr "Bu imtahan üçün hələ rəy yoxdur."
 
 #: main/templates/main/index.html:338
 msgid "Əsas imtahanlar"
-msgstr ""
+msgstr "İmtahanlar"
 
 #: main/templates/main/index.html:339
 msgid "İmtahanlarda iştirak et"
-msgstr ""
+msgstr "İmtahanda iştirak et"
 
 #: main/templates/main/index.html:531
 msgid "Ətraflı"
-msgstr ""
+msgstr "Ətraflı"
 
-#: main/templates/main/index.html:635
+#: main/templates/main/index.html:664
 msgid "Xəbərlərimiz"
-msgstr ""
+msgstr "Ən son xəbərlər"
 
-#: main/templates/main/index.html:636
+#: main/templates/main/index.html:665
 msgid "Ən son xəbərlər"
-msgstr ""
+msgstr "Xəbərlərimiz"
 
-#: main/templates/main/index.html:696 main/templates/main/news.html:169
+#: main/templates/main/index.html:725 main/templates/main/news.html:169
 msgid "Daha çox"
-msgstr ""
+msgstr "Daha çox"
 
 #: main/templates/main/news-details.html:165
 msgid "Axtar..."
-msgstr ""
+msgstr "Axtar..."
 
 #: main/templates/main/news-details.html:189
 msgid "Son xəbərlər"
-msgstr ""
+msgstr "Son xəbərlər"
 
 #: main/templates/main/writeComments.html:56
 msgid "imtahanını qiymətləndirin"
-msgstr ""
+msgstr "imtahanı qiymətləndirin"
 
 #: main/templates/main/writeComments.html:70
 msgid "İmtahan haqqında düşüncəniz..."
-msgstr ""
+msgstr "İmtahan haqqında düşüncəniz..."
 
-#: templates/includes/footer.html:34
+#: templates/includes/footer.html:126
 msgid "Abone"
-msgstr ""
+msgstr "Abunə"
 
-#: templates/includes/footer.html:35
+#: templates/includes/footer.html:127
 msgid "Yeniliklərdən xəbərdar ol !"
-msgstr ""
+msgstr "Yeniliklərdən xəbərdar ol!"
 
-#: templates/includes/footer.html:45
+#: templates/includes/footer.html:137
 msgid "Email..."
-msgstr ""
+msgstr "Email..."
 
-#: templates/includes/footer.html:53 user/templates/user/emailforReset.html:140
+#: templates/includes/footer.html:145
+#: user/templates/user/emailforReset.html:140
 #: user/templates/user/login.html:150 user/templates/user/register.html:199
 #: user/templates/user/resetPassword.html:152
 #: user/templates/user/smsCode.html:137
 msgid "Təsdiqlə"
-msgstr ""
+msgstr "Təsdiqlə"
 
-#: templates/includes/footer.html:218
+#: templates/includes/footer.html:251
+msgid "Bizi izlə"
+msgstr "Bizi izlə"
+
+#: templates/includes/footer.html:303
 msgid "Keçidlər"
-msgstr ""
+msgstr "Keçidlər"
 
-#: templates/includes/footer.html:229 templates/includes/footer.html:247
-#: templates/includes/header.html:196
-#: video/templates/video/videoLessons.html:93
-#: video/templates/video/videoLessons.html:98
+#: templates/includes/footer.html:314 templates/includes/header.html:235
 msgid "Video dərslər"
-msgstr ""
+msgstr "Video dərslər"
 
-#: templates/includes/footer.html:233
-msgid "Pd yüklə"
-msgstr ""
+#: templates/includes/footer.html:318
+msgid "Pdf yüklə"
+msgstr "Pulsuz Resurslar"
 
-#: templates/includes/footer.html:338
-msgid "Developed"
-msgstr ""
+#: templates/includes/footer.html:332
+msgid "Hüquqi məlumatlar"
+msgstr "Hüquqi məlumatlar"
 
-#: templates/includes/footer.html:342
+#: templates/includes/footer.html:337
+#: user/templates/user/privacy_policy.html:87
+#: user/templates/user/privacy_policy.html:92
+msgid "Məxfilik siyasəti"
+msgstr "Məxfilik siyasəti"
+
+#: templates/includes/footer.html:343
+msgid "İstifadə qaydaları"
+msgstr "İstifadə qaydaları"
+
+#: templates/includes/footer.html:349 user/templates/user/returnpolicy.html:87
+#: user/templates/user/returnpolicy.html:92
+msgid "Geri qaytarma siyasəti"
+msgstr "Geri qaytarma siyasəti"
+
+#: templates/includes/footer.html:435
 msgid "Copyright"
-msgstr ""
+msgstr "Müəllif hüquqları"
 
-#: templates/includes/footer.html:344
+#: templates/includes/footer.html:437
 msgid "All rights reserved."
-msgstr ""
+msgstr "Bütün hüquqlar qorunur."
 
 #: templates/includes/header.html:50
 msgid "Axtarış edin..."
-msgstr ""
+msgstr "Axtarış edin..."
 
-#: templates/includes/header.html:105
+#: templates/includes/header.html:140
 msgid "Qeydiyyat / Giriş"
-msgstr ""
+msgstr "Qeydiyyat / Giriş"
 
-#: templates/includes/header.html:147
+#: templates/includes/header.html:184
 msgid "Online imtahanlar"
-msgstr ""
+msgstr "Online imtahanlar"
 
-#: templates/includes/header.html:222
+#: templates/includes/header.html:258
 msgid "Ödənişsiz videolar"
-msgstr ""
+msgstr "Ödənişsiz videolar"
 
-#: templates/includes/header.html:228
-msgid "Pdf yüklə"
-msgstr ""
+#: templates/includes/header.html:267
+msgid "Pulsuz Resurslar"
+msgstr "Pulsuz Resurslar"
+
+#: templates/includes/header.html:270
+msgid "Sual kitabçaları"
+msgstr "Sual kitabçaları"
 
 #: user/templates/user/account.html:89 user/templates/user/account.html:94
 #: user/templates/user/account.html:121
 msgid "Hesabım"
-msgstr ""
+msgstr "Hesabım"
 
 #: user/templates/user/account.html:141 user/templates/user/account.html:181
 msgid "Video dərslərim"
-msgstr ""
+msgstr "Video dərslərim"
 
 #: user/templates/user/account.html:151 user/templates/user/account.html:221
 msgid "İmtahanlarım"
-msgstr ""
+msgstr "İmtahanlarım"
 
-#: user/templates/user/account.html:161 user/templates/user/account.html:276
+#: user/templates/user/account.html:161 user/templates/user/account.html:279
 msgid "Nəticələrim"
-msgstr ""
+msgstr "Nəticələrim"
 
 #: user/templates/user/account.html:170
 msgid "Çıxış et"
-msgstr ""
+msgstr "Çıxış et"
 
-#: user/templates/user/account.html:230 user/templates/user/account.html:281
+#: user/templates/user/account.html:230 user/templates/user/account.html:284
 msgid "İmtahan adı"
-msgstr ""
+msgstr "İmtahan adı"
 
-#: user/templates/user/account.html:236 user/templates/user/account.html:283
+#: user/templates/user/account.html:236 user/templates/user/account.html:286
 msgid "Tarix"
-msgstr ""
+msgstr "Tarix"
 
-#: user/templates/user/account.html:261
+#: user/templates/user/account.html:261 user/templates/user/account.html:265
 msgid "İmtahana başla"
-msgstr ""
+msgstr "İmtahana başla"
 
-#: user/templates/user/account.html:284
+#: user/templates/user/account.html:285
+msgid "Bal"
+msgstr "Bal"
+
+#: user/templates/user/account.html:287
 msgid "Nəticə"
-msgstr ""
+msgstr "Nəticə"
 
-#: user/templates/user/account.html:302
+#: user/templates/user/account.html:305
+msgid "Yarımçıq bitdi"
+msgstr "Yarımçıq bitdi"
+
+#: user/templates/user/account.html:307
 msgid "Davam edir"
-msgstr ""
+msgstr "Davam edir"
 
-#: user/templates/user/account.html:308
+#: user/templates/user/account.html:314 user/templates/user/account.html:318
 msgid "Nəticənə bax"
-msgstr ""
+msgstr "Nəticənə bax"
 
-#: user/templates/user/account.html:311
-msgid "Bitməyib"
-msgstr ""
-
-#: user/templates/user/account.html:318
+#: user/templates/user/account.html:328
 msgid "Hələ heç bir imtahan nəticəniz yoxdur."
-msgstr ""
+msgstr "Hələ heç bir imtahan nəticəniz yoxdur."
 
-#: user/templates/user/account.html:333
+#: user/templates/user/account.html:343
 msgid "Hesab detalları"
-msgstr ""
+msgstr "Hesab detalları"
 
-#: user/templates/user/account.html:345
+#: user/templates/user/account.html:355
 msgid "Fərid"
-msgstr ""
+msgstr "Ad"
 
-#: user/templates/user/account.html:353
+#: user/templates/user/account.html:363
 msgid "Rzazadə"
-msgstr ""
+msgstr "Soyad"
 
-#: user/templates/user/account.html:357
+#: user/templates/user/account.html:367
 msgid "Əlaqə nömrəsi"
-msgstr ""
+msgstr "Əlaqə nömrəsi"
 
-#: user/templates/user/account.html:371 user/templates/user/account.html:410
+#: user/templates/user/account.html:381 user/templates/user/account.html:420
 msgid "Yadda saxla"
-msgstr ""
+msgstr "Yadda saxla"
 
-#: user/templates/user/account.html:378
+#: user/templates/user/account.html:388
 msgid "Şifrəni dəyişdir"
-msgstr ""
+msgstr "Şifrəni dəyişdir"
 
-#: user/templates/user/account.html:385 user/templates/user/login.html:135
+#: user/templates/user/account.html:395 user/templates/user/login.html:135
 #: user/templates/user/register.html:170
 #: user/templates/user/resetPassword.html:123
 msgid "Şifrə"
-msgstr ""
+msgstr "Şifrə"
 
-#: user/templates/user/account.html:399 user/templates/user/register.html:183
+#: user/templates/user/account.html:409 user/templates/user/register.html:183
 #: user/templates/user/resetPassword.html:136
 msgid "Təkrar şifrə"
-msgstr ""
+msgstr "Təkrar şifrə"
 
 #: user/templates/user/cart.html:92 user/templates/user/cart.html:97
 msgid "Səbət"
-msgstr ""
+msgstr "Səbət"
 
 #: user/templates/user/cart.html:115
 msgid "Məhsul"
-msgstr ""
+msgstr "Məhsul"
 
 #: user/templates/user/cart.html:116
 msgid "Qiyməti"
-msgstr ""
+msgstr "Qiyməti"
 
 #: user/templates/user/cart.html:117
 msgid "Sayı"
-msgstr ""
+msgstr "Sayı"
 
 #: user/templates/user/cart.html:118
 msgid "Ümumi"
-msgstr ""
+msgstr "Ümumi"
 
 #: user/templates/user/cart.html:119
 msgid "Sil"
-msgstr ""
+msgstr "Sil"
 
 #: user/templates/user/cart.html:146
 msgid "Səbət boşdur."
-msgstr ""
+msgstr "Səbət boşdur."
 
 #: user/templates/user/cart.html:156
 msgid "Ödəniləcək məbləğ"
-msgstr ""
+msgstr "Ödəniləcək məbləğ"
 
 #: user/templates/user/cart.html:161
 msgid "Çatdırılma"
-msgstr ""
+msgstr "Çatdırılma"
 
 #: user/templates/user/cart.html:165
 msgid "Yekun məbləğ"
-msgstr ""
+msgstr "Yekun məbləğ"
 
 #: user/templates/user/cart.html:168
 msgid "Sifariş et"
-msgstr ""
+msgstr "Sifariş et"
 
 #: user/templates/user/login.html:89 user/templates/user/login.html:94
 msgid "Daxil ol"
-msgstr ""
+msgstr "Daxil ol"
 
 #: user/templates/user/login.html:144
 msgid "Şifrəmi unutdum"
-msgstr ""
+msgstr "Şifrəmi unutdum"
 
 #: user/templates/user/login.html:153
 msgid "Hesabınız yoxdur? Qeydiyyat"
-msgstr ""
+msgstr "Hesabınız yoxdur? Qeydiyyat"
 
 #: user/templates/user/register.html:89 user/templates/user/register.html:94
 msgid "Qeydiyyat"
-msgstr ""
+msgstr "Qeydiyyat"
 
 #: user/templates/user/register.html:202
 msgid "Hesabınız var? Daxil olun"
-msgstr ""
+msgstr "Hesabınız var? Daxil olun"
 
 #: user/templates/user/resetPassword.html:89
 #: user/templates/user/resetPassword.html:94
 msgid "Yeni şifrə"
-msgstr ""
+msgstr "Yeni şifrə"
+
+#: user/templates/user/siteinfo.html:87 user/templates/user/siteinfo.html:92
+msgid "İsdifadə qaydaları"
+msgstr "İsdifadə qaydaları"
 
 #: user/templates/user/smsCode.html:89 user/templates/user/smsCode.html:94
 msgid "Kod"
-msgstr ""
+msgstr "Kod"
 
 #: user/templates/user/smsCode.html:124
 msgid "6 rəqəmli kod"
-msgstr ""
+msgstr "6 rəqəmli kod"
 
 #: video/templates/video/info-video.html:130
 msgid "ay"
-msgstr ""
+msgstr "ay"
 
-#: video/templates/video/videoLessons.html:144
+#: video/templates/video/videoLessons.html:184
 msgid "İndi al"
-msgstr ""
+msgstr "İndi al"
 
 #: video/templates/video/videoLessonsFree.html:93
 #: video/templates/video/videoLessonsFree.html:98
 msgid "Ödənişsiz dərslər"
-msgstr ""
+msgstr "Ödənişsiz dərslər"
+
+#~ msgid "Bitməyib"
+#~ msgstr "Bitməyib"
+
+#~ msgid "Pd yüklə"
+#~ msgstr "Faydalı məlumatlar"
+
+#~ msgid "Al"
+#~ msgstr "Al"
+
+#~ msgid "Developed"
+#~ msgstr "Developed"

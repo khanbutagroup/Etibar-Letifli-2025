@@ -6,7 +6,7 @@
       <div class="bottom-header">
         <div class="container">
           <div class="row">
-            <div class="col-xxl-3 col-lg-2 col-6">
+            <div class="col-xxl-3 col-lg-2 col-5">
               <div class="site-branding">
                 <a href="{% url 'index' %}" title="Courseshub">
                   {% if logo.header_logo %}
@@ -20,7 +20,7 @@
                 </a>
               </div>
             </div>
-            <div class="col-xxl-9 col-lg-10 col-6">
+            <div class="col-xxl-9 col-lg-10 col-7">
               <div class="header-menu">
                 <nav class="main-navigation">
                   <button class="toggle-button">
@@ -76,18 +76,53 @@
                         />
                       </a>
                     </div>
-                    <div class="el-lang">
-                        <span>
-                            {{ LANGUAGE_CODE|upper }}
-                            <i class="fa-solid fa-angle-down"></i>
-                        </span>
+<div class="el-lang">
+    <span>
+        {% if LANGUAGE_CODE == "az" %}
+            <img src="{% static 'assets/images/flags/AZ.png' %}" alt="AZ"> Az
+        {% elif LANGUAGE_CODE == "ru" %}
+            <img src="{% static 'assets/images/flags/RU.png' %}" alt="RU"> Ru
+        {% else %}
+            <img src="{% static 'assets/images/flags/GB.png' %}" alt="EN"> En
+        {% endif %}
+        <i class="fa-solid fa-angle-down"></i>
+    </span>
 
-                        <ul>
-                            <li><a href="{% url 'set_language' 'az' %}">Az</a></li>
-                            <li><a href="{% url 'set_language' 'ru' %}">Ru</a></li>
-                            <li><a href="{% url 'set_language' 'en' %}">En</a></li>
-                        </ul>
-                    </div>
+    <style>
+        .el-lang:hover ul {
+            width: 80px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+
+    <ul>
+        {% if LANGUAGE_CODE != "az" %}
+        <li>
+            <a href="{% url 'set_language' 'az' %}">
+                <img src="{% static 'assets/images/flags/AZ.png' %}" alt="AZ"> Az
+            </a>
+        </li>
+        {% endif %}
+
+        {% if LANGUAGE_CODE != "ru" %}
+        <li>
+            <a href="{% url 'set_language' 'ru' %}">
+                <img src="{% static 'assets/images/flags/RU.png' %}" alt="RU"> Ru
+            </a>
+        </li>
+        {% endif %}
+
+        {% if LANGUAGE_CODE != "en" %}
+        <li>
+            <a href="{% url 'set_language' 'en' %}">
+                <img src="{% static 'assets/images/flags/GB.png' %}" alt="EN"> En
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
 
                   </div>
                   {% if user.is_authenticated %}
@@ -123,117 +158,151 @@
             </button>
             <div class="mobile-menu-box">
               <div class="header-menu-container">
-                <ul>
-                  <li class="active">
-                    <a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a>
-                  </li>
+  <ul>
+    <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+      <a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a>
+    </li>
+
+    <li class="{% if request.resolver_match.url_name == 'news' %}active{% endif %}">
+      <a href="{% url 'news' %}" title="About Us">{% trans 'Xəbərlər' %}</a>
+    </li>
+
+    <li class="sub-items {% if request.resolver_match.url_name == 'book' %}active{% endif %}">
+      <a href="{% url 'book' %}" title="Kitablar">{% trans 'Kitablar' %}</a>
+      <ul class="sub-menu">
+        {% for sc in book_sub_category %}
+          <li>
+            <a href="{% url 'book' %}?sub_category={{ sc.id }}" title="{{ sc.title }}">
+              {{ sc.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <li class="sub-items {% if request.resolver_match.url_name == 'exam_list' %}active{% endif %}">
+      <a href="{% url 'exam_list' %}" title="imtahanlar">{% trans 'Online imtahanlar' %}</a>
+      <ul class="sub-menu">
+        {% for category in all_categories %}
+          <li>
+            <a href="{% url 'exam_list' %}?category={{ category.id }}" title="">
+              {{ category.title }}
+            </a>
+
+            {% if category.subcategory_set.all %}
+              <ul class="sub-menu">
+                {% for subcat in category.subcategory_set.all %}
                   <li>
-                    <a href="{% url 'news' %}" title="About Us">{% trans 'Xəbərlər' %}</a>
-                  </li>
-                  <li class="sub-items">
-                    <a href="{% url 'book' %}" title="Kitablar">{% trans "Kitablar" %}</a>
-                    <ul class="sub-menu">
-                      {% for sc in book_sub_category %}
-                        <li>
-                          <a href="{% url 'book' %}?sub_category={{ sc.id }}" title="{{ sc.title }}">
-                            {{ sc.title }}
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  </li>
+                    <a href="{% url 'exam_list' %}?category={{ category.id }}&subcategory={{ subcat.id }}">
 
-              <li class="sub-items">
-                <a href="{% url 'exam_list' %}" title="imtahanlar">{% trans 'Online imtahanlar' %}</a>
-                <ul class="sub-menu">
-                  {% for category in all_categories %}
-                    <li>
-                      <a href="{% url 'exam_list' %}?category={{ category.id }}" title="">
-                        {{ category.title }}
-                      </a>
+                      {{ subcat.title }}
+                    </a>
 
-                      {% if category.subcategory_set.all %}
-                        <ul class="sub-menu">
-                          {% for subcat in category.subcategory_set.all %}
-                            <li>
-                              <a href="{% url 'exam_list' %}?subcategory={{ subcat.id }}">
-                                {{ subcat.title }}
-                              </a>
-
-                              {% if subcat.subsubcategory_set.all %}
-                                <ul class="sub-menu">
-                                  {% for subsub in subcat.subsubcategory_set.all %}
-                                    <li>
-                                      <a href="{% url 'exam_list' %}?subsubcategory={{ subsub.id }}">
-                                        {{ subsub.title }}
-                                      </a>
-
-                                      {% if subsub.subsubsubcategory_set.all %}
-                                        <ul class="sub-menu">
-                                          {% for subsubsub in subsub.subsubsubcategory_set.all %}
-                                            <li>
-                                              <a href="{% url 'exam_list' %}?subsubsubcategory={{ subsubsub.id }}">
-                                                {{ subsubsub.title }}
-                                              </a>
-                                            </li>
-                                          {% endfor %}
-                                        </ul>
-                                      {% endif %}
-                                    </li>
-                                  {% endfor %}
-                                </ul>
-                              {% endif %}
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-
-                  <li class="sub-items">
-                    <a href="{% url 'video' %}" title="Blog">{% trans 'Video dərslər' %}</a>
-                  <ul class="sub-menu">
-                    {% for cat in categories %}
-                      <li>
-                        {% if cat.id %}
-                        <a href="{% url 'video_category' cat.id %}" title="">
-                          {{ cat.title }}
-                        </a>
-                        {% endif %}
-
-                        {% if cat.videosubcategory_set.all %}
-                        <ul class="sub-menu">
-                          {% for sub in cat.videosubcategory_set.all %}
+                    {% if subcat.subsubcategory_set.all %}
+                      <ul class="sub-menu">
+                        {% for subsub in subcat.subsubcategory_set.all %}
                           <li>
-                            <a href="{% url 'video_subcategory' cat.id sub.id %}" title="">
-                              {{ sub.title }}
+                            <a href="{% url 'exam_list' %}?category={{ category.id }}&subcategory={{ subcat.id }}&subsubcategory={{ subsub.id }}&subsubsubcategory={{ subsubsub.id }}">
+
+                              {{ subsub.title }}
+                            </a>
+
+                            <!-- {% if subsub.subsubsubcategory_set.all %}
+                              <ul class="sub-menu">
+                                {% for subsubsub in subsub.subsubsubcategory_set.all %}
+                                  <li>
+                                    <a href="{% url 'exam_list' %}?subsubsubcategory={{ subsubsub.id }}">
+                                      {{ subsubsub.title }}
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %} -->
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+
+<li class="sub-items{% if selected_category or selected_subcategory %} active{% endif %}">
+    <a href="{% url 'video' %}">{% trans 'Video dərslər' %}</a>
+    <ul class="sub-menu">
+        {% for cat in categories %}
+        <li>
+            <a href="{% url 'video' %}?category={{ cat.id }}"
+               class="{% if selected_category == cat.id %}active{% endif %}">
+               {{ cat.title }}
+            </a>
+            {% if cat.videosubcategory_set.all %}
+            <ul class="sub-menu">
+                {% for sub in cat.videosubcategory_set.all %}
+                <li>
+                    <a href="{% url 'video' %}?category={{ cat.id }}&subcategory={{ sub.id }}"
+                       class="{% if selected_subcategory == sub.id %}active{% endif %}">
+                       {{ sub.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+        <li>
+            <a href="{% url 'free_video' %}">{% trans 'Ödənişsiz videolar' %}</a>
+        </li>
+    </ul>
+</li>
+
+
+
+
+                  <li class="sub-items">
+                    <a style="color: #19254b;">{% trans 'Pulsuz Resurslar' %}</a>
+                    <ul class="sub-menu">
+                      <li>
+                        <a href="{% url 'book_free' %}" title="">          {% trans 'Sual kitabçaları' %}</a>
+                        <ul class="sub-menu">
+                          {% for i in book_free_category %}
+                          <li>
+                            <a href="{% url 'book_free' %}?category={{ i.id }}" title="{{ i.title }}">
+                              {{ i.title }}
                             </a>
                           </li>
                           {% endfor %}
                         </ul>
-                        {% endif %}
                       </li>
-                    {% endfor %}
-
-                    <li>
-                      <a href="{% url 'free_video' %}" title="Blog Detail">
-                        {% trans 'Ödənişsiz videolar' %}
-                      </a>
-                    </li>
-                  </ul>
-
+                      <li>
+                        <a href="{% url 'test' %}" title="">{% trans 'Testlər' %}</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'expanation' %}" title="Blog Detail"
+                          >{% trans 'İzahlar' %}</a
+                        >
+                      </li>
+                    </ul>
                   </li>
-                  <li><a href="{% url 'pdf' %}" target="_blank">{% trans 'Pdf yüklə' %}</a></li>
-                  <li><a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a></li>
 
-                  <li>
-                    <a href="{% url 'contact' %}" title="Contact Us">{% trans 'Əlaqə' %}</a>
-                  </li>
-                  <li><a href="{% url 'faq' %}">{% trans 'Sual-cavab' %}</a></li>
-                </ul>
-              </div>
+    <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+      <a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a>
+    </li>
+
+    <li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+      <a href="{% url 'contact' %}" title="Contact Us">{% trans 'Əlaqə' %}</a>
+    </li>
+
+    <li class="{% if request.resolver_match.url_name == 'faq' %}active{% endif %}">
+      <a href="{% url 'faq' %}">{% trans 'Sual-cavab' %}</a>
+    </li>
+  </ul>
+</div>
+
             </div>
           </nav>
           <div class="black-shadow"></div>

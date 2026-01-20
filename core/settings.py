@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -208,9 +209,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 CSRF_TRUSTED_ORIGINS = [
-
-
-
+    "https://etibarletifli.az",
+    "https://www.etibarletifli.az",
 ]
 
 
@@ -245,7 +245,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'etibar.letifli@gmail.com'
-EMAIL_HOST_PASSWORD = 'qiovonbbvjwwizyb'  
+EMAIL_HOST_PASSWORD = 'acrehnhybzkihzpk'
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 

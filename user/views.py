@@ -18,7 +18,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 def cart_detail(request):
     cart = Cart(request)
-    return render(request, 'user/cart.html', {'cart': cart})
+
+    # Bütün aktiv endirimləri JS üçün
+    cart_discounts = CartQuantityDiscount.objects.filter(is_active=True)
+
+    context = {
+        'cart': cart,
+        'cart_discounts': cart_discounts,
+        'delivery': {'price': 0},  # əgər real çatdırılma varsa dəyiş
+    }
+    return render(request, 'user/cart.html', context)
 
 def cart_add(request, book_id):
     cart = Cart(request)
@@ -180,6 +189,15 @@ def account_views(request):
         user=request.user
     ).select_related('exam').order_by('-finished_at')
 
+    now = timezone.now()
+    for session in sessions:
+        exam_end = session.exam.end_date
+        # Nəticəyə baxmaq üçün:
+        # session bitmiş olmalı və imtahan hələ bitməmiş olmalı
+        if session.finished_at and (not exam_end or now <= exam_end):
+            session.can_show_result = True
+        else:
+            session.can_show_result = False
 
     context={
         'profile': profile,
@@ -278,3 +296,34 @@ def password_reset_confirm(request, user_id):
             return redirect('login')
 
     return render(request, 'user/resetPassword.html', {'user': user})
+
+
+
+def return_policy_views(request):
+    return_policy = PrivacyPolicy.objects.last()
+
+    context = {
+        'return_policy': return_policy,
+    }
+
+    return render(request, 'user/returnpolicy.html', context)
+
+
+def privacy_policy_views(request):
+
+    privacy = PrivacyPolicy.objects.last()
+
+    context = {
+        'privacy': privacy,
+    }
+    return render(request, 'user/privacy_policy.html', context)
+
+
+def site_info_views(request):
+    site_info = SiteInfo.objects.last()
+
+    context = {
+        'site_info': site_info
+    }
+
+    return render(request, 'user/siteinfo.html', context)
