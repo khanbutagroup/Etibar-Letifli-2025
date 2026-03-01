@@ -9,4 +9,6 @@ urlpatterns = [
     path('book/<int:id>/', book_details, name='book_details'),
     path('', index_views, name='index'),
     path('set-language/<str:language>/', set_language, name='set_language'),
+    path('set-languages/<str:language>/', set_languages, name='set_languages'),
+
 ]

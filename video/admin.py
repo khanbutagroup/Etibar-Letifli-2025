@@ -92,3 +92,11 @@ class PurchasedVideoAdmin(admin.ModelAdmin):
         return obj.video.is_active
     is_active_display.short_description = "Aktivdirmi?"
     is_active_display.boolean = True
+
+
+
+@admin.register(VideoPayment)
+class VideoPaymentAdmin(admin.ModelAdmin):
+    list_display = ("user", "video", "amount", "status", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("user__username", "video__title")

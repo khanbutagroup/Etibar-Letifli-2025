@@ -16,16 +16,34 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 
 
+
+import json
+
 def cart_detail(request):
     cart = Cart(request)
-
-    # Bütün aktiv endirimləri JS üçün
     cart_discounts = CartQuantityDiscount.objects.filter(is_active=True)
+    total_quantity = sum(item['quantity'] for item in cart)
+
+    delivery_price = 0
+    delivery_obj = DeliveryPrice.objects.filter(
+        is_active=True,
+        min_quantity__lte=total_quantity,
+        max_quantity__gte=total_quantity
+    ).first()
+    if delivery_obj:
+        delivery_price = delivery_obj.price
+
+    # JS üçün düzgün JSON
+    delivery_options_qs = DeliveryPrice.objects.filter(is_active=True).values(
+        'min_quantity', 'max_quantity', 'price', 'is_active'
+    )
+    delivery_options = json.dumps(list(delivery_options_qs))  # <- burda JSON.stringify kimi Python
 
     context = {
         'cart': cart,
         'cart_discounts': cart_discounts,
-        'delivery': {'price': 0},  # əgər real çatdırılma varsa dəyiş
+        'delivery': {'price': delivery_price},
+        'delivery_options': delivery_options,
     }
     return render(request, 'user/cart.html', context)
 
@@ -300,7 +318,7 @@ def password_reset_confirm(request, user_id):
 
 
 def return_policy_views(request):
-    return_policy = PrivacyPolicy.objects.last()
+    return_policy = ReturnPolicy.objects.last()
 
     context = {
         'return_policy': return_policy,

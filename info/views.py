@@ -177,18 +177,44 @@ def book_free_views(request):
 
 
 def test_views(request):
-    test = Test.objects.all()
+    category_id = request.GET.get('category')
+
+    test = Test.objects.select_related('category').order_by('-created_at')
+
+    if category_id:
+        test = test.filter(category_id=category_id)
+
+    categories = TestCategory.objects.all()
+
+    active_category = None
+    if category_id:
+        active_category = categories.filter(id=category_id).first()
 
     context = {
-        'test': test
+        'test': test,
+        'categories': categories,
+        'active_category': active_category,
     }
     return render(request, 'info/test.html', context)
 
 
 def expanation_views(request):
-    expanation = Expanation.objects.all()
+    category_id = request.GET.get('category')
+
+    expanation = Expanation.objects.select_related('category').order_by('-created_at')
+
+    if category_id:
+        expanation = expanation.filter(category_id=category_id)
+
+    categories = ExpanationCategory.objects.all()
+
+    active_category = None
+    if category_id:
+        active_category = categories.filter(id=category_id).first()
 
     context = {
-        'expanation': expanation
+        'expanation': expanation,
+        'categories': categories,
+        'active_category': active_category,
     }
     return render(request, 'info/expanation.html', context)

@@ -207,3 +207,35 @@ class CartQuantityDiscountAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+
+
+@admin.register(DeliveryPrice)
+class DeliveryPriceAdmin(admin.ModelAdmin):
+    list_display = (
+        "min_quantity",
+        "max_quantity",
+        "price",
+        "is_active",
+    )
+
+    list_filter = ("is_active",)
+    search_fields = ("min_quantity", "max_quantity")
+    ordering = ("min_quantity",)
+
+    list_editable = ("price", "is_active")
+
+    fieldsets = (
+        (None, {
+            "fields": ("min_quantity", "max_quantity", "price")
+        }),
+        ("Status", {
+            "fields": ("is_active",)
+        }),
+    )
+
+    def save_model(self, request, obj, form, change):
+        if obj.min_quantity > obj.max_quantity:
+            from django.core.exceptions import ValidationError
+            raise ValidationError("Minimum say maksimum saydan böyük ola bilməz.")
+        super().save_model(request, obj, form, change)

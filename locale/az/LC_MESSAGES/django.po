@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-20 15:41+0400\n"
-"PO-Revision-Date: 2026-01-20 15:45+0400\n"
+"PO-Revision-Date: 2026-01-28 10:11+0400\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -35,7 +35,7 @@ msgstr "En"
 #: templates/includes/footer.html:312
 #: video/templates/video/videoLessons.html:89
 msgid "İmtahanlar"
-msgstr "Online imtahanlar"
+msgstr "İmtahanlar"
 
 #: exam/templates/exam/exams.html:92 exam/templates/exam/info-exam.html:97
 #: exam/templates/exam/result.html:69 exam/templates/exam/startExam.html:61
@@ -76,22 +76,19 @@ msgid "Alt kateqoriyalara bax"
 msgstr "Kateqoriyalar"
 
 #: exam/templates/exam/exams.html:209 exam/templates/exam/exams.html:221
-#, fuzzy
 #| msgid "Davam edir"
 msgid "Davam et"
-msgstr "Davam edir"
+msgstr "Davam et"
 
 #: exam/templates/exam/exams.html:233
-#, fuzzy
 #| msgid "İmtahanlar"
 msgid "İmtahanlara bax"
-msgstr "Online imtahanlar"
+msgstr "İmtahanlara bax"
 
 #: exam/templates/exam/exams.html:249
-#, fuzzy
 #| msgid "İmtahana başla"
 msgid "İmtahana bax"
-msgstr "İmtahana başla"
+msgstr "İmtahana bax"
 
 #: exam/templates/exam/info-exam.html:94 exam/templates/exam/info-exam.html:99
 #: video/templates/video/info-video.html:94

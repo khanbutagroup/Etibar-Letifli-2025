@@ -98,3 +98,30 @@ class PurchasedVideo(models.Model):
     class Meta:
         verbose_name = "Alınmış video"
         verbose_name_plural = "Alınmış videolar"
+
+
+
+
+class VideoPayment(models.Model):
+
+    STATUS_CHOICES = [
+        ("PENDING", "Pending"),
+        ("SUCCESS", "Success"),
+        ("FAILED", "Failed"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+
+    order_id = models.CharField(max_length=100, unique=True)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="PENDING")
+
+    kb_order_id = models.CharField(max_length=50, null=True, blank=True)
+    kb_password = models.CharField(max_length=50, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.video.title} - {self.status}"

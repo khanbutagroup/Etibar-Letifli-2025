@@ -1,9 +1,24 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import timezone
-from django.http import HttpResponse
-from django.contrib import messages
+import uuid
+import requests
+import hmac
+import hashlib
+import base64
+import json
+
+
+
+
+from django.urls import reverse
+
 from exam.models import *
+from django.conf import settings
+from django.utils import timezone
+from django.contrib import messages
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
+
 
 def exam_list(request):
     
@@ -73,13 +88,237 @@ def exam_list(request):
 
     })
 
+import base64
+
+def kb_headers():
+    credentials = f"{settings.KB_USERNAME}:{settings.KB_PASSWORD}"
+    encoded = base64.b64encode(credentials.encode()).decode()
+
+    return {
+        "Authorization": f"Basic {encoded}",
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0"
+    }
+
 
 
 @login_required
 def buy_exam(request, exam_id):
     exam = get_object_or_404(Exam, id=exam_id)
-    PurchasedExam.objects.get_or_create(user=request.user, exam=exam)
-    return redirect('account')
+
+    if not exam.price:
+        return HttpResponse("Qiymət təyin edilməyib")
+
+    order_id = str(uuid.uuid4())
+
+    payment = Payment.objects.create(
+        user=request.user,
+        exam=exam,
+        order_id=order_id,
+        amount=exam.price
+    )
+
+    url = f"{settings.KB_BASE_URL}/order"
+
+    payload = {
+        "order": {
+            "typeRid": "Order_SMS",
+            "amount": str(float(exam.price)),  # string göndər
+            "currency": "AZN",
+            "language": "az",
+            "description": exam.title,
+            "hppRedirectUrl": request.build_absolute_uri(
+                reverse("payment_result")
+            )
+        }
+    }
+
+    response = requests.post(url, json=payload, headers=kb_headers())
+
+    print(response.status_code)
+    print(response.text)
+
+    if response.status_code != 200:
+        payment.status = "FAILED"
+        payment.save()
+        return HttpResponse(response.text)
+
+    data = response.json()["order"]
+
+    hpp_url = data["hppUrl"]
+    kb_order_id = data["id"]
+    kb_password = data["password"]
+
+    payment.kb_order_id = kb_order_id
+    payment.kb_password = kb_password
+    payment.save()
+
+    redirect_url = f"{hpp_url}?id={kb_order_id}&password={kb_password}"
+    print("REDIRECT:", redirect_url)
+    return redirect(redirect_url)
+
+
+
+
+
+
+
+
+
+
+
+# @login_required
+# def buy_exam(request, exam_id):
+#     exam = get_object_or_404(Exam, id=exam_id)
+
+#     if not exam.price:
+#         return HttpResponse("Qiymət təyin edilməyib")
+
+#     order_id = str(uuid.uuid4())
+#     idempotency_key = str(uuid.uuid4())
+
+#     payment = Payment.objects.create(
+#         user=request.user,
+#         exam=exam,
+#         order_id=order_id,
+#         amount=exam.price
+#     )
+
+#     token = get_birpay_token()
+
+#     url = f"{settings.BIRPAY_BASE_URL}/v1/payments"
+
+#     payload = {
+#         "amount": str(exam.price),
+#         "currency": "AZN",
+#         "description": f"{exam.title} imtahanı",
+#         "orderId": order_id,
+
+#         "confirmation": {
+#             "type": "REDIRECT",
+#             "returnUrl": request.build_absolute_uri("/payment/result/")
+#         },
+
+#         "callbackUrl": request.build_absolute_uri("/payment/webhook/"),
+
+#         "posDetail": {
+#             "merchantId": settings.BIRPAY_MERCHANT_ID,
+#             "terminalId": settings.BIRPAY_TERMINAL_ID
+#         }
+#     }
+
+#     headers = {
+#         "Content-Type": "application/json",
+#         "Authorization": f"Bearer {token}",
+#         "X-Idempotency-Key": idempotency_key
+#     }
+
+#     response = requests.post(url, json=payload, headers=headers)
+
+#     print(response.status_code)
+#     print(response.text)
+
+#     if response.status_code in [200, 201]:
+#         data = response.json()
+#         confirmation_url = data["confirmation"]["confirmationUrl"]
+#         return redirect(confirmation_url)
+
+#     payment.status = "FAILED"
+#     payment.save()
+
+#     return HttpResponse(f"Birpay Xəta: {response.text}")
+
+
+
+
+
+
+@csrf_exempt
+def payment_callback(request):
+    order_id = request.GET.get("orderId")
+    status = request.GET.get("status")
+
+    payment = get_object_or_404(Payment, order_id=order_id)
+
+    if status == "SUCCESS":
+        payment.status = "SUCCESS"
+        payment.save()
+
+        PurchasedExam.objects.get_or_create(
+            user=payment.user,
+            exam=payment.exam
+        )
+
+        return HttpResponse("OK")
+
+    payment.status = "FAILED"
+    payment.save()
+
+    return HttpResponse("FAILED")
+
+
+
+
+def verify_signature(payload, received_signature):
+    secret = settings.BIRPAY_WEBHOOK_SECRET.encode()
+
+    computed_hmac = hmac.new(
+        secret,
+        payload,
+        hashlib.sha256
+    ).digest()
+
+    generated_signature = base64.b64encode(computed_hmac).decode()
+
+    return hmac.compare_digest(generated_signature, received_signature)
+
+
+
+
+
+
+
+
+
+
+@csrf_exempt
+def birpay_webhook(request):
+    payload = request.body
+    signature = request.headers.get("X-Signature")
+
+    if not signature:
+        return HttpResponse("Missing signature", status=400)
+
+    if not verify_signature(payload, signature):
+        return HttpResponse("Invalid signature", status=400)
+
+    data = json.loads(payload)
+
+    event = data.get("event")
+    payment_data = data.get("payload", {})
+    order_id = payment_data.get("orderId")
+    status = payment_data.get("status")
+
+    payment = Payment.objects.filter(order_id=order_id).first()
+
+    if not payment:
+        return HttpResponse("Payment not found", status=404)
+
+    if event == "payment_succeeded":
+        payment.status = "SUCCESS"
+        payment.save()
+
+        PurchasedExam.objects.get_or_create(
+            user=payment.user,
+            exam=payment.exam
+        )
+
+    elif event in ["payment_canceled", "payment_failed"]:
+        payment.status = "FAILED"
+        payment.save()
+
+    return HttpResponse("OK")
+
 
 
 
@@ -183,7 +422,7 @@ def finish_exam(request, session_id):
     session = get_object_or_404(UserExamSession, id=session_id, user=request.user)
     request.session['last_session_id'] = session.id
     exam = session.exam
-
+    now = timezone.now()
 
     forced_finish = False
     if not session.finished_at:
@@ -326,3 +565,61 @@ def exam_detail(request, exam_id):
         'exam': exam
     }
     return render(request, 'exam/info-exam.html', context)
+
+
+from django.contrib import messages
+from django.urls import reverse
+from django.shortcuts import redirect
+
+@login_required
+def payment_result(request):
+    kb_order_id = request.GET.get("ID")
+
+    payment = Payment.objects.filter(kb_order_id=kb_order_id).first()
+
+    if not payment:
+        messages.error(request, "Ödəniş tapılmadı.")
+        return redirect("exam_list")
+
+    verify_url = f"{settings.KB_BASE_URL}/order/{kb_order_id}"
+    verify_response = requests.get(verify_url, headers=kb_headers())
+    verify_json = verify_response.json()
+
+    if "order" not in verify_json:
+        messages.error(request, "Bank cavabında xəta var.")
+        return redirect("exam_list")
+
+    real_status = verify_json["order"]["status"]
+
+    if real_status == "FullyPaid":
+        payment.status = "SUCCESS"
+        payment.save()
+
+        PurchasedExam.objects.get_or_create(
+            user=payment.user,
+            exam=payment.exam
+        )
+
+        messages.success(request, "Ödəniş uğurla tamamlandı ✅")
+
+    else:
+        payment.status = "FAILED"
+        payment.save()
+        messages.error(request, "Ödəniş uğursuz oldu ❌")
+
+    return redirect("index")
+
+def get_birpay_token():
+    url = f"{settings.BIRPAY_BASE_URL}/oauth/token"
+
+    response = requests.post(
+        url,
+        data={"grant_type": "client_credentials"},
+        auth=(settings.BIRPAY_CLIENT_ID, settings.BIRPAY_CLIENT_SECRET),
+        headers={"Content-Type": "application/x-www-form-urlencoded"}
+    )
+
+    if response.status_code != 200:
+        raise Exception(f"Token error: {response.text}")
+
+    return response.json()["access_token"]

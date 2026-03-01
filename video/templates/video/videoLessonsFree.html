@@ -113,35 +113,35 @@
           data-wow-delay="0.4s"
         >
           {% for i in free_video %}
-              <div class="grid-item">
-                <div class="common-post-card">
-                  <div
-                    class="post-image-box-wp video-layer"
-                    data-video="{{ i.video }}"
-                  >
-                    <div class="post-image pdf-image">
-                      {% if i.image %}
-                      <img
-                        src="{{ i.image.url }}"
-                        width="356"
-                        height="230"
-                        alt="Course Image"
-                      />
-                      {% endif %}
-                    </div>
-                    <div class="post-tag video-tag">
-                      <span><i class="fa fa-play"></i></span>
-                    </div>
-                  </div>
-                  <div class="common-post-content">
-                    <div class="post-content-title">
-                      <span>
-                        <h4 class="h4-title">{{ i.title }}</h4>
-                      </span>
-                    </div>
-                  </div>
+            <div class="grid-item">
+            <div class="common-post-card">
+              <div
+                class="post-image-box-wp video-layer"
+                data-video="{{ i.video }}"
+              >
+              {% if i.image %}
+                <div class="post-image pdf-image">
+                  <img
+                    src="{{ i.image.url }}"
+                    width="356"
+                    height="230"
+                    alt="Course Image"
+                  />
+                </div>
+              {% endif %}
+                <div class="post-tag video-tag">
+                  <span><i class="fa fa-play"></i></span>
                 </div>
               </div>
+              <div class="common-post-content">
+                <div class="post-content-title">
+                  <span>
+                    <h4 class="h4-title">{{ i.title }}</h4>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -149,7 +149,7 @@
     <!-- Top Course End -->
 
     <!-- Modal -->
-    <div class="video-modal-area">
+    <!-- <div class="video-modal-area">
       <div id="videoModal" class="modal">
         <span class="close">&times;</span>
         <div class="modal-content">
@@ -163,7 +163,7 @@
           ></iframe>
         </div>
       </div>
-    </div>
+    </div> -->
 
 {% endblock %}
 
@@ -208,33 +208,16 @@
     <!-- Back To Top JS Link -->
     <script src="{% static 'assets/js/back-to-top.js' %}"></script>
     <script>
-      const modal = document.getElementById('videoModal')
-      const modalVideo = document.getElementById('modalVideo')
-      const closeBtn = document.querySelector('.close')
-
-      // Bütün kartları seçirik
-      document.querySelectorAll('.post-image-box-wp').forEach(item => {
-        item.addEventListener('click', function () {
-          const videoUrl = this.getAttribute('data-video')
-          modal.style.display = 'flex'
-          modalVideo.src = videoUrl + '?autoplay=1'
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.post-image-box-wp').forEach(item => {
+            item.addEventListener('click', function () {
+                const videoUrl = this.getAttribute('data-video')
+                if (videoUrl) {
+                    window.open(videoUrl, '_blank') // 🔥 YouTube-da aç
+                }
+            })
         })
-      })
-
-      // X düyməsinə klik edəndə bağla
-      closeBtn.addEventListener('click', function () {
-        closeModal()
-      })
-
-      // Refresh zamanı modal və video sıfırlansın
-      window.addEventListener('load', () => {
-        closeModal()
-      })
-
-      // Modal bağlama funksiyası
-      function closeModal() {
-        modal.style.display = 'none'
-        modalVideo.src = '' // video linkini təmizlə
-      }
+    })
     </script>
+
 {% endblock %}

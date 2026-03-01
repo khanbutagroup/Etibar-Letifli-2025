@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-20 15:41+0400\n"
-"PO-Revision-Date: 2026-01-20 15:46+0400\n"
+"PO-Revision-Date: 2026-01-27 14:40+0400\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -35,7 +35,7 @@ msgstr "En"
 #: templates/includes/footer.html:312
 #: video/templates/video/videoLessons.html:89
 msgid "İmtahanlar"
-msgstr "Онлайн экзамены"
+msgstr "Экзамены"
 
 #: exam/templates/exam/exams.html:92 exam/templates/exam/info-exam.html:97
 #: exam/templates/exam/result.html:69 exam/templates/exam/startExam.html:61
@@ -76,16 +76,14 @@ msgid "Alt kateqoriyalara bax"
 msgstr "Категории"
 
 #: exam/templates/exam/exams.html:209 exam/templates/exam/exams.html:221
-#, fuzzy
 #| msgid "Davam edir"
 msgid "Davam et"
-msgstr " В процессе"
+msgstr "Продолжать"
 
 #: exam/templates/exam/exams.html:233
-#, fuzzy
 #| msgid "İmtahanlar"
 msgid "İmtahanlara bax"
-msgstr "Онлайн экзамены"
+msgstr "Просмотреть экзамены"
 
 #: exam/templates/exam/exams.html:249
 #, fuzzy
@@ -466,11 +464,11 @@ msgstr "Для этого экзамена пока нет отзывов."
 
 #: main/templates/main/index.html:338
 msgid "Əsas imtahanlar"
-msgstr "Экзамены"
+msgstr "Просмотреть экзамены"
 
 #: main/templates/main/index.html:339
 msgid "İmtahanlarda iştirak et"
-msgstr "Прими участие в экзамене"
+msgstr "Сдавайте экзамены"
 
 #: main/templates/main/index.html:531
 msgid "Ətraflı"
@@ -577,7 +575,7 @@ msgstr " Регистрация / Вход"
 
 #: templates/includes/header.html:184
 msgid "Online imtahanlar"
-msgstr "Онлайн экзамены"
+msgstr "Видеоуроки"
 
 #: templates/includes/header.html:258
 msgid "Ödənişsiz videolar"

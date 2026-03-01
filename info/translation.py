@@ -63,3 +63,17 @@ class BookFreeCategoryTranslationOptions(TranslationOptions):
 @register(Course)
 class CourseTranslationOptions(TranslationOptions):
     fields = ('description',)
+
+
+@register(FeatureItem)
+class FeatureItemTranslationOptions(TranslationOptions):
+    fields = ('title_1', 'title_2')
+
+
+@register(TestCategory)
+class TestCategoryTranslationOptions(TranslationOptions):
+    fields = ('title',)
+
+@register(ExpanationCategory)
+class ExpanationCategoryTranslationOptions(TranslationOptions):
+    fields = ('title',)

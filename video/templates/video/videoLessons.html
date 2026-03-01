@@ -86,23 +86,19 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="banner-content text-center">
-              <h1 class="h1-title">{% trans 'İmtahanlar' %}</h1>
+              <h1 class="h1-title">{% trans 'Video dərslər ' %}</h1>
               <div class="banner-breadcrum">
                 <ul>
                   <li><a href="{% url 'index' %}" title="Home">{% trans 'Ana səhifə' %}</a></li>
-    {% if selected_category %}
-      <li><i class="fa-solid fa-angle-right"></i></li>
-      <li><a href="{% url 'exam_list' %}?category={{ selected_category.id }}">{{ selected_category.title }}</a></li>
-    {% endif %}
+                    {% if selected_category %}
+                      <li><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="{% url 'exam_list' %}?category={{ selected_category.id }}">{{ selected_category.title }}</a></li>
+                    {% endif %}
 
-    {% if selected_subcategory %}
-      <li><i class="fa-solid fa-angle-right"></i></li>
-      <li><a href="{% url 'exam_list' %}?subcategory={{ selected_subcategory.id }}">{{ selected_subcategory.title }}</a></li>
-    {% endif %}
-
-
-
-
+                    {% if selected_subcategory %}
+                      <li><i class="fa-solid fa-angle-right"></i></li>
+                      <li><a href="{% url 'exam_list' %}?subcategory={{ selected_subcategory.id }}">{{ selected_subcategory.title }}</a></li>
+                    {% endif %}
                 </ul>
               </div>
             </div>

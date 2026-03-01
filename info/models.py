@@ -205,7 +205,26 @@ class BookFree(models.Model):
         verbose_name='Sual Kitabçaları'
         verbose_name_plural='Sual Kitabçaları'
 
+
+
+
+class TestCategory(models.Model):
+    title = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq')
+
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='Test Kateqoriyası'
+        verbose_name_plural='Test Kateqoriyaları'
+
+
+
+
+
+
 class Test(models.Model):
+    category = models.ForeignKey(TestCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Kateqoriya')
     title = models.TextField(null=True, blank=True, verbose_name='Başlıq')
     image = models.ImageField(upload_to='bookfree/', null=True, blank=True, verbose_name='Şəkil')
     pdf = models.FileField(upload_to='prf/', null=True, blank=True, verbose_name='PDF')
@@ -218,7 +237,19 @@ class Test(models.Model):
         verbose_name='Test'
         verbose_name_plural='Testlər'
 
+
+class ExpanationCategory(models.Model):
+    title = models.CharField(max_length=128, null=True, blank=True, verbose_name='Başlıq')
+
+    def __str__(self):
+        return self.title or " "
+
+    class Meta:
+        verbose_name='İzah Kateqoriyası'
+        verbose_name_plural='İzah Kateqoriyaları'
+
 class Expanation(models.Model):
+    category = models.ForeignKey(ExpanationCategory, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Kateqoriya')
     title = models.TextField(null=True, blank=True, verbose_name='Başlıq')
     image = models.ImageField(upload_to='bookfree/', null=True, blank=True, verbose_name='Şəkil')
     pdf = models.FileField(upload_to='prf/', null=True, blank=True, verbose_name='PDF')

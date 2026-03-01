@@ -177,3 +177,35 @@ def set_language(request, language):
     
     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
     return response
+
+
+
+
+def set_languages(request, language=None):
+    """
+    Dil dəyişdirir.
+    GET: /set-language/<language>/ (sayt üçün)
+    POST: {'language': 'az'/'en'/'ru'} (admin üçün form)
+    """
+    # POST ilə dil gəlibsə
+    if request.method == "POST":
+        language = request.POST.get("language")
+
+    # Əgər language düzgün deyil, default-a yönləndir
+    if language not in dict(settings.LANGUAGES):
+        referer = request.META.get("HTTP_REFERER", "/")
+        return HttpResponseRedirect(referer)
+
+    # Sayt dili üçün cookie, admin üçün sessiya
+    if request.path.startswith("/admin/"):
+        # admin paneldə sessiya
+        request.session['django_language'] = language
+    else:
+        # sayt cookie
+        response = HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+        translation.activate(language)
+        return response
+
+    # admin üçün geri yönləndirmə
+    return redirect(request.META.get("HTTP_REFERER", "/admin/"))

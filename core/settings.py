@@ -17,6 +17,7 @@ from django.utils.translation import gettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -251,3 +252,13 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 ADMIN_EMAIL = 'etibar.letifli@gmail.com'
+
+
+
+
+KB_BASE_URL = "https://txpgtst.kapitalbank.az/api"   # TEST
+# PROD → https://e-commerce.kapitalbank.az/api
+
+KB_USERNAME = "TerminalSys/kapital"
+KB_PASSWORD = "kapital123"
+

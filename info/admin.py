@@ -217,14 +217,62 @@ class BookFreeCategoryAdmin(TranslationAdmin):
 
 
 @admin.register(FeatureItem)
-class FeatureItemAdmin(admin.ModelAdmin):
+class FeatureItemAdmin(TranslationAdmin):
     list_display = ('created_at',)
     filter_horizontal = ('books', 'tests', 'explanations') 
 
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
 
+        
 @admin.register(Course)
 class CourseAdmin(TranslationAdmin):
     list_display = ('description', 'content_type')
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+
+
+@admin.register(TestCategory)
+class TestCategoryAdmin(TranslationAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
+
+    group_fieldsets = True
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+
+
+@admin.register(ExpanationCategory)
+class ExpanationCategoryAdmin(TranslationAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
 
     group_fieldsets = True
     class Media:

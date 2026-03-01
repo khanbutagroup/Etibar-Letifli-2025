@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block branding %}
+{{ block.super }}
+<div style="float: right; margin-right: 20px;">
+    <form method="post" action="{% url 'set_languages' 'az' %}" style="display:inline;">
+        {% csrf_token %}
+        <div class="language-dropdown" style="position:relative;">
+            <button type="button" style="background:none;border:none;cursor:pointer;">
+                {% if LANGUAGE_CODE == "az" %}
+                    <img src="{% static 'assets/images/flags/AZ.png' %}" alt="AZ" style="height:16px;"> Az
+                {% elif LANGUAGE_CODE == "ru" %}
+                    <img src="{% static 'assets/images/flags/RU.png' %}" alt="RU" style="height:16px;"> Ru
+                {% else %}
+                    <img src="{% static 'assets/images/flags/GB.png' %}" alt="EN" style="height:16px;"> En
+                {% endif %}
+                <i class="fa-solid fa-angle-down"></i>
+            </button>
+            <select name="language" onchange="this.form.submit()" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for code, name in LANGUAGES %}
+                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+</div>
+{% endblock %}

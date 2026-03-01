@@ -89,11 +89,7 @@ class Exam(models.Model):
     purchased_at = models.DateTimeField(auto_now_add=True, null=True, verbose_name='Alındığı tarix')
     started_at = models.DateTimeField(null=True, blank=True)  # istifadəçi imtahana başlayanda qeyd olunur
     finished_at = models.DateTimeField(null=True, blank=True) 
-    duration_minutes = models.PositiveIntegerField(
-        null=True, blank=True,
-        verbose_name='İmtahan müddəti (dəqiqə)',
-        help_text='İstifadəçi imtahana başladıqda bu müddət hesablanacaq'
-    )
+
 
     is_main = models.BooleanField(default=False, null=True, blank=True, verbose_name='Əsas imtahandır? Ana səhifədə')
 
@@ -294,3 +290,28 @@ class ExamReview(models.Model):
         verbose_name = "İmtahan rəyi"
         verbose_name_plural = "İmtahan rəyləri"
         ordering = ['-created_at']
+
+
+
+
+class Payment(models.Model):
+    STATUS_CHOICES = [
+        ("PENDING", "Pending"),
+        ("SUCCESS", "Success"),
+        ("FAILED", "Failed"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+
+    order_id = models.CharField(max_length=100, unique=True)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="PENDING")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    kb_order_id = models.CharField(max_length=50, null=True, blank=True)
+    kb_password = models.CharField(max_length=50, null=True, blank=True)
+    def __str__(self):
+        return f"{self.user} - {self.exam} - {self.status}"

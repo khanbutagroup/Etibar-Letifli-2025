@@ -168,6 +168,15 @@ class MetaTags(models.Model):
         ('video_info', 'Video Haqqında'),
         ('free_video', 'Pulsuz Videolar'),
         ('video_detail', 'Video Detalı'),
+
+        ('return_policy', 'Geri qaytarma siyasəti'),
+        ('privacy_policy', 'Məxfilik siyasəti'),
+        ('site_info', 'İstifadə qaydaları'),
+
+        ('book_free', 'Sual Kitabçaları'),
+        ('test', 'Test'),
+        ('expanation', 'İzahlar'),
+
     ]
 
     page = models.CharField(max_length=50, choices=PAGE_CHOICES, unique=True, verbose_name='Səhifə')
@@ -208,3 +217,23 @@ class CartQuantityDiscount(models.Model):
     def clean(self):
         if self.min_quantity > self.max_quantity:
             raise ValidationError("Minimum cəm say maksimumdan böyük ola bilməz")
+
+
+
+    
+class DeliveryPrice(models.Model):
+    min_quantity = models.PositiveIntegerField(verbose_name="Minimum say")
+    max_quantity = models.PositiveIntegerField(verbose_name="Maksimum say")
+    price = models.CharField(
+        max_length=10,
+        default=0,
+        verbose_name="Çatdırılma qiyməti (AZN)"
+    )
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Çatdırılma qiyməti"
+        verbose_name_plural = "Çatdırılma qiymətləri"
+
+    def __str__(self):
+        return f"{self.min_quantity}-{self.max_quantity} → {self.price}₼"

@@ -11,5 +11,7 @@ urlpatterns = [
     path('exam/<int:exam_id>/review/', exam_review, name='exam_review'),
     path('exam/<int:exam_id>/comments/', exam_comments, name='exam_comments'),
     path('exam/<int:exam_id>/', exam_detail, name='exam_detail'),
+    path("payment/webhook/", birpay_webhook, name="birpay_webhook"),
+    path("payment/result/", payment_result, name="payment_result"),
 
 ]

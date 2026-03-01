@@ -234,7 +234,7 @@
 <li class="sub-items{% if selected_category or selected_subcategory %} active{% endif %}">
     <a href="{% url 'video' %}">{% trans 'Video dərslər' %}</a>
     <ul class="sub-menu">
-        {% for cat in categories %}
+        {% for cat in categoriess %}
         <li>
             <a href="{% url 'video' %}?category={{ cat.id }}"
                class="{% if selected_category == cat.id %}active{% endif %}">
@@ -263,31 +263,55 @@
 
 
 
-                  <li class="sub-items">
-                    <a style="color: #19254b;">{% trans 'Pulsuz Resurslar' %}</a>
-                    <ul class="sub-menu">
-                      <li>
-                        <a href="{% url 'book_free' %}" title="">          {% trans 'Sual kitabçaları' %}</a>
-                        <ul class="sub-menu">
-                          {% for i in book_free_category %}
-                          <li>
-                            <a href="{% url 'book_free' %}?category={{ i.id }}" title="{{ i.title }}">
-                              {{ i.title }}
-                            </a>
-                          </li>
-                          {% endfor %}
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="{% url 'test' %}" title="">{% trans 'Testlər' %}</a>
-                      </li>
-                      <li>
-                        <a href="{% url 'expanation' %}" title="Blog Detail"
-                          >{% trans 'İzahlar' %}</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
+<li class="sub-items">
+  <a style="color: #19254b;">{% trans 'Pulsuz Resurslar' %}</a>
+  <ul class="sub-menu">
+
+    <!-- BOOK FREE -->
+    <li>
+      <a href="{% url 'book_free' %}">{% trans 'Sual kitabçaları' %}</a>
+      <ul class="sub-menu">
+        {% for i in book_free_category %}
+        <li>
+          <a href="{% url 'book_free' %}?category={{ i.id }}" title="{{ i.title }}">
+            {{ i.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <!-- TEST -->
+    <li>
+      <a href="{% url 'test' %}">{% trans 'Testlər' %}</a>
+      <ul class="sub-menu">
+        {% for i in test_categories %}
+        <li>
+          <a href="{% url 'test' %}?category={{ i.id }}" title="{{ i.title }}">
+            {{ i.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+
+    <!-- EXPANATION -->
+    <li>
+      <a href="{% url 'expanation' %}">{% trans 'İzahlar' %}</a>
+      <ul class="sub-menu">
+        {% for i in expanation_categories %}
+        <li>
+          <a href="{% url 'expanation' %}?category={{ i.id }}" title="{{ i.title }}">
+            {{ i.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+
+  </ul>
+</li>
+
 
     <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
       <a href="{% url 'about' %}">{% trans 'Haqqımızda' %}</a>
